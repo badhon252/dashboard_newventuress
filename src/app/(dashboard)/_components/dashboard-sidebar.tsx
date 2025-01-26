@@ -43,7 +43,7 @@ const DashSidebar = () => {
             ))}
           </div>
 
-          <div className="pb-[206px]">
+          <div className="">
             <div className="pl-[38px] pt-[80px]">
               <Link href="/help-support"
                 className={cn(
@@ -59,7 +59,7 @@ const DashSidebar = () => {
               </Link>
             </div>
 
-            <div className="pl-[38px] pt-[16px]">
+            <div className="pl-[38px] pt-[16px] pb-[1336px]">
               <button
                 onClick={(e) => {
                   {
