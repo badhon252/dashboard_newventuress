@@ -34,12 +34,34 @@ export const sidebarContents = [
   },
   {
     id: 3,
-    name: "Auction/listing",
-    icon: <Box className="h-[16px] w-[16px]" />,
-    href: "/vendor-dashboard/auctions",
+    name: "Category",
+    icon: <Image
+      src="/assets/img/category.png"
+      alt="category"
+      width={16}
+      height={16}
+    />,
+    href: "/category",
   },
   {
     id: 4,
+    name: "Vendor Management",
+    icon: <Image
+      src="/assets/img/vendor-management.png"
+      alt="vendor management"
+      width={16}
+      height={16}
+    />,
+    href: "/vendor-management",
+  },
+  {
+    id: 5,
+    name: "Auction/listing",
+    icon: <Box className="h-[16px] w-[16px]" />,
+    href: "/auctions-listing",
+  },
+  {
+    id: 6,
     name: "Auctions",
     // icon: Icons.hammer,
     icon: (
@@ -50,30 +72,17 @@ export const sidebarContents = [
         height={16}
       />
     ),
-    href: "/live-auctions",
+    href: "/auctions",
   },
   {
-    id: 5,
+    id: 7,
     name: "Order",
     icon: <ShoppingCart className="h-[16px] w-[16px]" />,
     href: "/orders",
   },
   {
-    id: 6,
-    name: "Cupons",
-    icon: <Gift className="h-[16px] w-[16px]" />,
-    href: "/cupons",
-  },
-  {
-    id: 7,
-    name: "Store Settings",
-    icon: <Settings className="h-[16px] w-[16px]" />,
-    href: "/settings",
-  },
-  {
-    id: 7,
+    id: 8,
     name: "Customer",
-    // icon: Icons.userI,
     icon: (
       <Image
         src="/assets/img/customer_icon.png"
@@ -85,21 +94,64 @@ export const sidebarContents = [
     href: "/customers",
   },
   {
-    id: 8,
-    name: "Refund",
-    // icon: Icons.refund,
+    id: 9,
+    name: "Store management",
     icon: (
       <Image
-        src="/assets/img/refund_icon.png"
-        alt="refund"
+        src="/assets/img/store-management.png"
+        alt="store-management"
         width={16}
         height={16}
       />
     ),
-    href: "/refund",
+    href: "/store-management",
   },
   {
-    id: 8,
+    id: 10,
+    name: "Financial Management",
+    icon: (
+      <Image
+        src="/assets/img/financial-management.png"
+        alt="financial-management"
+        width={16}
+        height={16}
+      />
+    ),
+    href: "/financial-management",
+  },
+  {
+    id: 10,
+    name: "Marketing & Promotions",
+    icon: (
+      <Image
+        src="/assets/img/marking-promotion.png"
+        alt="markeing and promotion"
+        width={16}
+        height={16}
+      />
+    ),
+    href: "/marketing-promotions",
+  },
+
+  {
+    id: 11,
+    name: "Cupons",
+    icon: <Gift className="h-[16px] w-[16px]" />,
+    href: "/cupons",
+  },
+  {
+    id: 12,
+    name: "Content Management",
+    icon: <Image
+      src="/assets/img/content-management.png"
+      alt="content management"
+      width={16}
+      height={16}
+    />,
+    href: "/content-management",
+  },
+  {
+    id: 13,
     name: "Reports",
     // icon: Icons.reports,
     icon: (
@@ -113,17 +165,26 @@ export const sidebarContents = [
     href: "/reports",
   },
   {
-    id: 9,
+    id: 14,
     name: "Reviews",
     icon: <MessageSquare className="h-[16px] w-[16px]" />,
     href: "/reviews",
   },
   {
-    id: 9,
+    id: 15,
+    name: "Settings",
+    icon: <Settings className="h-[16px] w-[16px]" />,
+    href: "/settings",
+  },
+  {
+    id: 16,
     name: "Membership",
     icon: <UserPlus className="h-[16px] w-[16px]" />,
     href: "/membership",
   },
+
+
+
 ] as SidebarContentType[];
 
 export const getCurrentTab = (
