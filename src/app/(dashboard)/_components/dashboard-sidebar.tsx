@@ -7,6 +7,7 @@ import Image from "next/image";
 import { LogOutIcon } from "lucide-react";
 import { useState } from "react";
 import LogOutModal from "@/components/shared/modal/logOutModal";
+import Link from "next/link";
 
 const DashSidebar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -42,21 +43,38 @@ const DashSidebar = () => {
             ))}
           </div>
 
-          <div className="pl-[38px] pt-[206px]">
-            <button
-              onClick={(e) => {
-                {
-                  e.preventDefault();
-                  handleLogout();
+          <div className="pb-[206px]">
+            <div className="pl-[38px] pt-[80px]">
+              <Link href="/help-support"
+                className={cn(
+                  " w-full h-[46px] rounded-[4px] pl-[16px] flex items-center gap-[12px] font-medium text-[18px] leading-[21.4px] transition-colors duration-300 bg-transparent text-[#152764] hover:text-[#152764]"
+                )}
+              >
+                <Image
+                  src="/assets/img/help.png"
+                  alt="help"
+                  width={16}
+                  height={16}
+                /> Help & Support
+              </Link>
+            </div>
 
-                }
-              }}
-              className={cn(
-                " w-full h-[46px] rounded-[4px] pl-[16px] flex items-center gap-[12px] font-medium text-[18px] leading-[21.4px] transition-colors duration-300 bg-transparent text-[#152764] hover:text-[#152764] my-[80px]"
-              )}
-            >
-              <LogOutIcon className="w-[16px] h-[16px]" /> Logout
-            </button>
+            <div className="pl-[38px] pt-[16px]">
+              <button
+                onClick={(e) => {
+                  {
+                    e.preventDefault();
+                    handleLogout();
+
+                  }
+                }}
+                className={cn(
+                  " w-full h-[46px] rounded-[4px] pl-[16px] flex items-center gap-[12px] font-medium text-[18px] leading-[21.4px] transition-colors duration-300 bg-transparent text-[#152764] hover:text-[#152764]"
+                )}
+              >
+                <LogOutIcon className="w-[16px] h-[16px]" /> Logout
+              </button>
+            </div>
           </div>
 
         </ScrollArea>
