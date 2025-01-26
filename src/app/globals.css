@@ -68,11 +68,28 @@ body {
   }
 }
 
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
+  .section {
+    @apply my-[40px] md:my-[80px];
+  }
+  .dev {
+    @apply p-2 m-5;
+  }
+
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-br from-[#121D42] via-[#152764] to-[#4857BD];
+  }
+  .heading {
+    @apply text-[25px]  md:text-[36px] font-semibold leading-[30px] md:leading-[43.2px] text-gradient;
+  }
+  
 }
