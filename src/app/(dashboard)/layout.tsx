@@ -11,6 +11,7 @@ export default async function VendorDashboardLayout({
     <div className="bg-[#E6EEF6]">
       <DashNav />
       <div className="flex items-start h-full ">
+        
         <DashSidebar />
         <div className="px-[30px] pt-[30px] w-full">{children}</div>
       </div>

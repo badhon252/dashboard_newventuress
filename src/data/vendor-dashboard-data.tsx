@@ -35,30 +35,34 @@ export const sidebarContents = [
   {
     id: 3,
     name: "Category",
-    icon: <Image
-      src="/assets/img/category.png"
-      alt="category"
-      width={16}
-      height={16}
-    />,
+    icon: (
+      <Image
+        src="/assets/img/category.png"
+        alt="category"
+        width={16}
+        height={16}
+      />
+    ),
     href: "/category",
   },
   {
     id: 4,
     name: "Vendor Management",
-    icon: <Image
-      src="/assets/img/vendor-management.png"
-      alt="vendor management"
-      width={16}
-      height={16}
-    />,
+    icon: (
+      <Image
+        src="/assets/img/vendor-management.png"
+        alt="vendor management"
+        width={16}
+        height={16}
+      />
+    ),
     href: "/vendor-management",
   },
   {
     id: 5,
     name: "Auction/listing",
     icon: <Box className="h-[16px] w-[16px]" />,
-    href: "/auctions-listing",
+    href: "/auction-listing",
   },
   {
     id: 6,
@@ -142,12 +146,14 @@ export const sidebarContents = [
   {
     id: 12,
     name: "Content Management",
-    icon: <Image
-      src="/assets/img/content-management.png"
-      alt="content management"
-      width={16}
-      height={16}
-    />,
+    icon: (
+      <Image
+        src="/assets/img/content-management.png"
+        alt="content management"
+        width={16}
+        height={16}
+      />
+    ),
     href: "/content-management",
   },
   {
@@ -182,9 +188,6 @@ export const sidebarContents = [
     icon: <UserPlus className="h-[16px] w-[16px]" />,
     href: "/membership",
   },
-
-
-
 ] as SidebarContentType[];
 
 export const getCurrentTab = (
