@@ -1,3 +1,5 @@
+"use client";
+
 import DashboardOverview from "./_components/dashBoardOverview";
 import ProfileCompletion from "./_components/ProfileCompletion";
 import GeoChart from "./_components/TopUserCountries";
