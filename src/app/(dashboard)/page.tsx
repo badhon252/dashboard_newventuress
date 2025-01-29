@@ -1,6 +1,8 @@
 "use client";
 
+import AnalyticsChart from "./_components/analytics-chart";
 import DashboardOverview from "./_components/dashBoardOverview";
+import MostSoldItems from "./_components/MostSoldItems";
 import ProfileCompletion from "./_components/ProfileCompletion";
 import GeoChart from "./_components/TopUserCountries";
 
@@ -22,6 +24,10 @@ const Dashboard = () => {
       <div className="w-full mx-auto grid grid-cols-6 gap-8 my-[30px]">
         {/* Geo Chart Component */}
         <GeoChart />
+        <div className="col-span-2">
+          <MostSoldItems />
+          <AnalyticsChart />
+        </div>
       </div>
     </div>
   );

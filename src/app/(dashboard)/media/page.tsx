@@ -4,7 +4,7 @@ import VendorMediaContainer from "./_components/vendor-media-container";
 
 const Page = () => {
   return (
-    <div className="space-y-[30px]">
+    <div className="space-y-[30px] pb-[50px]">
       <MediaHeader />
       <MediaFilter />
       <VendorMediaContainer />

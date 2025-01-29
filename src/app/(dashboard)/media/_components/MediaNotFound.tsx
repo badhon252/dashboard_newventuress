@@ -1,13 +1,12 @@
-import { Button } from '@/components/ui/button'
-import { Download } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const MediaNotFound = () => {
   return (
     <div className=" w-full h-full">
-        <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <Image
           src="/assets/img/not-found.png"
           width={618}
@@ -21,7 +20,7 @@ const MediaNotFound = () => {
           Media not Found
         </div>
         <div className="text-base md:text-xl lg:text-[25px] font-normal leading-[25px] text-[#6D6D6D] pt-[8px] pb-[16px] md:pb-[20px] text-center">
-            Ready to Start selling something awesome.
+          Ready to Start selling something awesome.
         </div>
         <div className="flex justify-center w-[500px] max-md:w-[343px] h-[48px] mx-auto gap-5">
           <Link href="/" passHref>
@@ -31,14 +30,13 @@ const MediaNotFound = () => {
           </Link>
           <Link href="/" passHref>
             <Button className=" text-white px-[24px] py-[12px] w-full text-[16px] font-medium leading-tight rounded-lg  max-md:px-5">
-              Import <Download/>
+              Import <Download />
             </Button>
           </Link>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default MediaNotFound
+export default MediaNotFound;
