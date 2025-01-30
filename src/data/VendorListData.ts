@@ -15,7 +15,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 1,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 42,
@@ -28,7 +28,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 2,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 0,
@@ -41,7 +41,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 3,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 42,
@@ -54,7 +54,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 4,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 0,
@@ -67,7 +67,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 5,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 42,
@@ -80,7 +80,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 6,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 42,
@@ -93,7 +93,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 7,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 42,
@@ -106,7 +106,7 @@ export const VendorListData: DemoTableItemsType[] = [
   {
     id: 8,
     image:
-      "https://images.pexels.com/photos/7970114/pexels-photo-7970114.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/395087/pexels-photo-395087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Elliot Anderson",
     store: "Island Guy Smokers",
     totalOder: 42,
