@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   MessageSquare,
   Settings,
+  ShieldQuestion,
   ShoppingCart,
   UserPlus,
 } from "lucide-react";
@@ -200,6 +201,12 @@ export const sidebarContents = [
     name: "Membership",
     icon: <UserPlus className="h-[16px] w-[16px]" />,
     href: "/membership",
+  },
+  {
+    id: 16,
+    name: "Help & Support",
+    icon: <ShieldQuestion className="h-[16px] w-[16px]" />,
+    href: "/help-support",
   },
 ] as SidebarContentType[];
 
