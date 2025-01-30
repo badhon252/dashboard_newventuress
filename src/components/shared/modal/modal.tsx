@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-const Modal = ({children}:{children : ReactNode}) => {
- 
+const Modal = ({ children }: { children: ReactNode }) => {
+
   return (
     <section className="fixed inset-0 w-full h-full flex justify-center items-center bg-black bg-opacity-30 backdrop-blur-sm z-50 ">
       <div className="relative w-[343px] md:w-[551px] bg-white rounded-[16px] px-[25px] pb-[25px] border border-black">
