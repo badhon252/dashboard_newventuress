@@ -146,6 +146,19 @@ export const sidebarContents = [
   },
   {
     id: 12,
+    name: "Blogs Management",
+    icon: (
+      <Image
+        src="/assets/img/blog-management.png"
+        alt="markeing and promotion"
+        width={16}
+        height={16}
+      />
+    ),
+    href: "/blogs-management",
+  },
+  {
+    id: 13,
     name: "Content Management",
     icon: (
       <Image
@@ -158,7 +171,7 @@ export const sidebarContents = [
     href: "/content-management",
   },
   {
-    id: 13,
+    id: 14,
     name: "Reports",
     // icon: Icons.reports,
     icon: (
@@ -172,19 +185,19 @@ export const sidebarContents = [
     href: "/reports",
   },
   {
-    id: 14,
+    id: 15,
     name: "Reviews",
     icon: <MessageSquare className="h-[16px] w-[16px]" />,
     href: "/reviews",
   },
   {
-    id: 15,
+    id: 16,
     name: "Settings",
     icon: <Settings className="h-[16px] w-[16px]" />,
     href: "/settings",
   },
   {
-    id: 16,
+    id: 17,
     name: "Membership",
     icon: <UserPlus className="h-[16px] w-[16px]" />,
     href: "/membership",

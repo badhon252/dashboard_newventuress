@@ -1,12 +1,12 @@
 "use client";
 import LogOutModal from "@/components/shared/modal/logOutModal";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { sidebarContents } from "@/data/vendor-dashboard-data";
 import { cn } from "@/lib/utils";
 import { LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import DashboardSidebarItem from "./dashboard-sidebar-item";
+import { ScrollArea } from "@/components/ui/SidebarScrollArea";
 
 const DashSidebar = () => {
   const [showModal, setShowModal] = useState(false);
