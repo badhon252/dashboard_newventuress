@@ -45,8 +45,8 @@ const AddBlogForm: React.FC = () => {
             </div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="flex gap-4">
-                        <div className="w-[58%] space-y-[16px] mt-[16px]">
+                    <div className="flex gap-[54px]">
+                        <div className="w-[58%] space-y-[16px] mt-[60px]">
                             <FormField
                                 control={form.control}
                                 name="title"
@@ -78,8 +78,8 @@ const AddBlogForm: React.FC = () => {
                                         <FormControl>
                                             <Textarea
                                                 placeholder="Type Description Here"
-                                                className="resize-none border-[#9C9C9C]"
-                                                rows={3}
+                                                className="resize-none border-[#9C9C9C] h-[192px]"
+                                                rows={12}
                                                 {...field}
                                             />
                                         </FormControl>
@@ -90,7 +90,7 @@ const AddBlogForm: React.FC = () => {
                             />
 
                         </div>
-                        <div className="w-[600px] h-full mt-[16px] border border-[#9C9C9C] rounded-lg  ">
+                        <div className="w-[42%] h-full mt-[16px] border border-[#9C9C9C] rounded-lg  ">
                             <BlogGallery />
                         </div>
                     </div>
