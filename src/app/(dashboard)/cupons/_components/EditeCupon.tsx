@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+import { ScrollArea } from "@/components/ui/scroll-area"
 // import { ScrollArea } from "@/components/ui/scroll-area"
 
 const formSchema = z.object({
@@ -60,7 +61,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
     setIsOpen(false)
   }
   return (
-    <div className="min-h-screen bg-gray-50 ">
+    <div className="h-auto bg-gray-50  space-y-0">
 
       <div className="mx-auto max-w-[1250px] rounded-lg bg-white shadow-sm">
 
@@ -80,8 +81,9 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
         </div>
 
         <div className="">
+        <ScrollArea className="h-[calc(100vh-12rem)] pr-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="px-[32px] pt-[40px] space-y-5 ">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="pl-[32px] pr-[20px] space-y-5 ">
 
               <FormField
                 control={form.control}
@@ -299,6 +301,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
             </form>
 
           </Form>
+          </ScrollArea>
         </div>
 
       </div>
