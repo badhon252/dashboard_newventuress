@@ -14,7 +14,8 @@ const CategoryFilter = () => {
   const [show, setShow] = useState<string>("all"); // Default to "all"
 
   return (
-    <div className="h-[60px] p-[8px] bg-white w-full flex justify-between gap-x-[12px]">
+    <div className="h-[60px] p-[8px] bg-white w-full flex justify-between items-center">
+    <div className="flex gap-x-[12px]">
       {/* Dropdown for "Show" */}
       <div className="h-full flex items-center gap-x-[9px] w-fit">
         <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
@@ -26,10 +27,16 @@ const CategoryFilter = () => {
           onValueChange={setShow}
         />
       </div>
-      {/* Dropdown for "Categories" */}
+      {/* Dropdown for "Entries" */}
+   
+    
+     
+    </div >
+    <div className="mr-2">
 
-      <Button>Bulk Delete</Button>
+    <Button className="w-[135px] h-[43px] px-[24px] py-[12px] text-[16px] font-medium leading-[19.2px] ">Bulk Delete</Button>
     </div>
+  </div>
   );
 };
 
