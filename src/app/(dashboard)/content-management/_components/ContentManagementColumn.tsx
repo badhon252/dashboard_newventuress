@@ -7,7 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 
-
+// content management column 
 
 
 export const ContentManagementColumn: ColumnDef<contentManagementDataType>[] = [
