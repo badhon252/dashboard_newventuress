@@ -1,5 +1,9 @@
+import SettingsNavbar from "./_components/SettingsNavbar";
+
 const Page = () => {
-  return <div>Vendor Settings Page</div>;
+  return <div>
+    <SettingsNavbar/>
+  </div>;
 };
 
 export default Page;
