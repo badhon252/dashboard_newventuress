@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import EditeCupon from "./EditeCupon";
-import { ScrollArea } from "@/components/ui/scroll-area"
 
 
 const AuctionsButton = ({ row }: any) => {
@@ -70,36 +69,6 @@ const AuctionsButton = ({ row }: any) => {
 
       {isOpen && (
 
-
-        // <section
-
-        //   className="fixed inset-0 flex items-center  justify-center bg-black bg-opacity-30 backdrop-blur-sm z-50"
-        //   onClick={() => setIsOpen(false)} // Close modal when clicking outside
-        // >
-
-        //   <div
-        //     style={{ boxShadow: "0px 0px 22px 8px #C1C9E4" }}
-        //     className="relative w-[343px]  md:w-[1250px]   rounded-[16px] border  overflow-hidden max-h-[90vh]"
-        //     onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-        //   >
-        //     {/* Background overlay inside modal */}
-        //     <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
-
-        //     {/* Modal content */}
-        //     {/* <div className="relative z-10">
-        //       <EditeCupon setIsOpen={setIsOpen} />
-        //     </div> */}
-        //     <div className="relative z-10">
-        //       <ScrollArea className="min-h-screen w-full">
-        //         <div className="">
-        //           <EditeCupon setIsOpen={setIsOpen} />
-        //         </div>
-        //       </ScrollArea>
-        //     </div>
-        //   </div>
-
-        // </section>
-
         <section
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm z-50"
           onClick={() => setIsOpen(false)} // Close modal when clicking outside
@@ -114,11 +83,7 @@ const AuctionsButton = ({ row }: any) => {
 
             {/* Modal content */}
             <div className="relative z-10">
-              <ScrollArea className="h-[90vh] w-full">
-                <div className="">
-                  <EditeCupon setIsOpen={setIsOpen} />
-                </div>
-              </ScrollArea>
+              <EditeCupon setIsOpen={setIsOpen} />
             </div>
           </div>
         </section>
