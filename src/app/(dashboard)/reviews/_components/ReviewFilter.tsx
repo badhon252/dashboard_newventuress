@@ -12,26 +12,16 @@ const showList = [
 ];
 
 const ChoseStoresList = [
-  { id: 1, name: "Chose stores", value: "Chose stores" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
-];
-const FilterByCtegoryList = [
-  { id: 1, name: "Filter By category", value: "Filter By category" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
-];
-const AllProductTypesList = [
-  { id: 1, name: "All Product Types", value: "All Product Types" },
+  { id: 1, name: "Chose Date Range", value: "chose date range" },
   { id: 2, name: "Sales", value: "sales" },
   { id: 3, name: "Rentals", value: "rentals" },
 ];
 
+
 export default function ReviewFilter() {
   const [show, setShow] = useState<string>("all"); // Default to "all"
           const [stores, setStores] = useState<string>("Chose stores"); // Default to "auctions"
-          const [ctegorys, setCtegorys] = useState<string>("Filter By category"); // Default to "auctions"
-          const [allProduct, setAllProduct] = useState<string>("All Product Types"); // Default to "auctions"
+        
   return (
     <div className="h-[68px] mt-[30px] p-[8px] bg-white w-full flex items-center justify-between rounded-[12px]">
       {/* Dropdown for "Show" */}
@@ -57,22 +47,8 @@ export default function ReviewFilter() {
             onValueChange={setStores}
             />
         </div>
-        <div className="h-full flex items-center gap-2">
-            
-            <PacificDropdownSelector
-            list={FilterByCtegoryList}
-            selectedValue={ctegorys}
-            onValueChange={setCtegorys}
-            />
-        </div>
-        <div className="h-full flex items-center gap-2">
-            
-            <PacificDropdownSelector
-            list={AllProductTypesList}
-            selectedValue={allProduct}
-            onValueChange={setAllProduct}
-            />
-        </div>
+       
+      
       </div>
       <div>
         <button className="px-[20px] py-[9px] bg-primary text-[#F5F5F5] rounded-lg">Bulk Delete</button>
