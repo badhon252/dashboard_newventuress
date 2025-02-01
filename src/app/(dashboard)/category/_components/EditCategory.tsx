@@ -10,7 +10,7 @@ import { Check, ImageIcon, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef } from "react";
 
-export default function AddCategoryForm() {
+export default function EditCategory() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -82,7 +82,7 @@ export default function AddCategoryForm() {
     <div className="">
       <div className="mb-6 rounded-t-lg bg-primary p-4">
         <h1 className="text-[28px] font-semibold text-white">
-          Add New Category
+          EditCategory
         </h1>
       </div>
       <Card className="">
