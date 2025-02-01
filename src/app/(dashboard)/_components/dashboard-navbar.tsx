@@ -71,7 +71,7 @@ const DashRightSide = () => {
         <MessageCircleMore className="h-[12px] w-[12px] text-white" />
       </Link>
       <Link
-        href="/"
+        href="/notifications"
         className="h-[35px] w-[35px] border-[1px] border-[#152764] ] text-[#152764] flex justify-center items-center rounded-[24px] hover:bg-white/20 transition-colors duration-300"
       >
         <Bell className="h-[12px] w-[12px]" />
