@@ -38,10 +38,9 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
         <div>
           <Image
             src={row.original.verification}
-            height={16}
-            width={16}
+            height={14}
+            width={14}
             alt="img"
-            className="w-[16px] h-[16px]"
           />
         </div>
       );
@@ -66,7 +65,7 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
               {row.original.name}
             </h4>
             <h5 className="text-base font-normal leading-[19px] text-[#3D3D3D] py-2">
-              @<span className="text-[#3D3D3D]"> {row.original.userName}</span>
+              <span className="text-[#3D3D3D]"> {row.original.userName}</span>
             </h5>
             <p className="text-base font-normal text-gradient leading-[19px] text-left">
               {row.original.userStatus}
@@ -77,17 +76,18 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     },
   },
   {
-    header: "Box",
+    accessorKey: "box",
+    header: () => <Box className="w-[16px] h-[16px]"/>,
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
-          <Box />
+          <Box className="w-[12px] h-[13px]"/>
           <div className="flex items-center">
-            <span className="text-[16px] text-[#E10E0E] font-normal flex items-center gap-2">
+            <span className="text-base text-[#E10E0E] font-normal leading-[19px]">
               {row.original.remainingBox}
             </span>{" "}
             /
-            <span className="text-[16px] text-[#444444] font-normal flex items-center gap-2">
+            <span className="text-base text-[#444444] font-normal leading-[19px]">
               {row.original.totalBox}
             </span>
           </div>
@@ -100,10 +100,10 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
-          <span className="text-[16px] text-[#E10E0E] font-normal">
+          <span className="text-base text-[#E10E0E] font-normal leading-[19px]">
             {row.original.grossSales}
           </span>
-          <span>/MB/</span>
+          <span className="text-base text-[#444444] font-normal leading-[19px]">/MB/</span>
           <ImInfinite className="text-[16px]" />
         </div>
       );
@@ -114,7 +114,7 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">
+          <span className="text-base text-[#444444] font-normal leading-[19px]">
             ${row.original.adminFees}
           </span>
         </div>
@@ -126,7 +126,7 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">
+          <span className="text-base text-[#444444] font-normal leading-[19px]">
             ${row.original.paidFees}
           </span>
         </div>
@@ -138,7 +138,7 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">
+          <span className="text-base text-[#444444] font-normal leading-[19px]">
             ${row.original.totalFees}
           </span>
         </div>
