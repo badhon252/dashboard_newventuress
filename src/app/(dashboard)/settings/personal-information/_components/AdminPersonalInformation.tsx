@@ -102,7 +102,7 @@ export default function AdminPersonalInformationForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="gap-x-[30px] flex flex-col-reverse lg:flex-row items-center p-4">
-        <div className="max-w-[900px] space-y-[24px] flex-grow">
+        <div className="max-w-[80%] space-y-[24px] flex-grow">
           <FormField
             control={form.control}
             name="fullName"
