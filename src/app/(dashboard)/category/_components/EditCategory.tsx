@@ -80,14 +80,14 @@ export default function EditCategory() {
 
   return (
     <div className="">
-      <div className="mb-6 rounded-t-lg bg-primary p-4">
+      <div className="rounded-t-lg bg-primary p-4">
         <h1 className="text-[28px] font-semibold text-white">
-          EditCategory
+          Edit Category
         </h1>
       </div>
       <Card className="">
         <CardHeader className="bg-gradient-to-r from-navy-700 to-navy-900"></CardHeader>
-        <CardContent className="p-6">
+        <CardContent className="p-6 ">
           <form className="grid gap-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
