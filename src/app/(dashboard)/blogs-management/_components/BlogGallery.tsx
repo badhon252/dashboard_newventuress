@@ -44,7 +44,7 @@ export default function BlogGallery() {
 
       {/* Dropzone */}
       <div
-        className="relative border-2 border-dashed rounded-lg p-8 mb-4"
+        className="relative border-2 border-dashed rounded-lg py-[16px]"
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
@@ -106,11 +106,11 @@ export default function BlogGallery() {
         </Button>
       </div>
 
-      <div className="flex gap-2 justify-end">
-        <Button type="button" variant="outline" className="px-8">
+      <div className="flex gap-[17px] justify-end">
+        <Button className="text-gradient border border-[#121D42] py-[12px] px-[24px] text-base font-medium leading-[19px]" type="button" variant="outline">
           Update
         </Button>
-        <Button type="button" className="px-8 bg-[#1a237e] hover:bg-[#1a237e]/90 text-white">
+        <Button type="button" className="px-[58px] py-[12px] text-base font-medium leading-[19px] bg-gradient-to-r from-[#121D42] via-[#152764] to-[#4857BD] hover:from-[#7091FF] hover:via-[#2F4697] hover:to-[#7485FB] text-white">
           Confirm
         </Button>
       </div>
