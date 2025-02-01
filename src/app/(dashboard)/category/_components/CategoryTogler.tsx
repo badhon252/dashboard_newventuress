@@ -6,13 +6,17 @@ import CategoryList from './CategoryList'
 import CategoryFilter from './category-filter'
 function CategoryTogler() {
     const [showcategory, setShowCategory] = React.useState(false)
+  
+
+
   return (
     <div className='space-y-[30px]'>
         <CategoryHeader setShowCategory={setShowCategory} showcategory={showcategory}/>
           <CategoryFilter />
         {
-            showcategory ? <AddnewCategory/> : <CategoryList/>
+            showcategory ? <AddnewCategory/> : <CategoryList />
         }
+       
     </div>
   )
 }

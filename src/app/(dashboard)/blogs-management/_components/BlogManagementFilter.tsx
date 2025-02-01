@@ -10,7 +10,7 @@ export default function BlogManagementFilter() {
       <div className="flex items-center gap-2">
         <span className="text-sm font-medium">Show</span>
         <Select defaultValue="all">
-          <SelectTrigger className="w-[66px] h-[34px] bg-primary text-white border-0 [&>svg]:text-white">
+          <SelectTrigger className="py-[9px] px-[10px] bg-primary text-white border-0 [&>svg]:text-white">
             <SelectValue placeholder="Select" />
           </SelectTrigger>
           <SelectContent>
@@ -23,7 +23,7 @@ export default function BlogManagementFilter() {
 
       <div className="flex items-center gap-2">
         <Select>
-          <SelectTrigger className="w-[78px] h-[34px] bg-primary text-white border-0  [&>svg]:text-white">
+          <SelectTrigger className="py-[9px] px-[10px] bg-primary text-white border-0  [&>svg]:text-white">
             <SelectValue placeholder="Filter" />
            
           </SelectTrigger>
