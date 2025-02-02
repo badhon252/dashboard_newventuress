@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
+import EditCategory from "./EditCategory";
 
 interface CategoryCardProps {
   title: string;
@@ -14,11 +15,16 @@ interface CategoryCardProps {
 
 export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
 
   const handleModal = () => {
-    setIsOpen(true); // Show the modal when "Log out" is clicked
+    setIsOpen(true);
   };
 
+  const handleCategoryEditModal = () => {
+    setIsOpenEditModal(true)
+  }
   return (
     <div>
       <Card className="">
@@ -35,6 +41,7 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
         </CardContent>
         <CardFooter className="grid grid-cols-2 gap-2 ">
           <Button
+            onClick={() => handleCategoryEditModal()}
             variant="default"
             className="w-full bg-[#1a237e] hover:bg-[#0d47a1]"
           >
@@ -89,6 +96,33 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
           </div>
         </Modal>
       )}
+
+
+        {/* handle edit modal  */}
+        {
+          isOpenEditModal && (
+            <section
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm z-50"
+          onClick={() => setIsOpenEditModal(false)} 
+        >
+          <div
+            style={{ boxShadow: "0px 0px 22px 8px #C1C9E4" }}
+            className="relative w-[343px] md:w-[1250px] rounded-[16px] border overflow-hidden"
+            onClick={(e) => e.stopPropagation()} 
+          >
+            
+            <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
+
+            
+            <div className="relative z-10">
+              <EditCategory />
+            </div>
+          </div>
+        </section>
+          )
+        }
+
+
     </div>
   );
 }
