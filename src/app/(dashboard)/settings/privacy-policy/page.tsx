@@ -24,7 +24,7 @@ export default function Page() {
         <CardTitle className="text-xl">Privacy Policy</CardTitle>
         <Button variant="secondary" size="sm" onClick={isEditing ? handleSave : handleEdit}>
           {isEditing ? "Save" : "Edit"}
-        </Button>
+        </Button> 
       </CardHeader>
       <CardContent className="p-0">
         <ScrollArea className="h-[1200px]">

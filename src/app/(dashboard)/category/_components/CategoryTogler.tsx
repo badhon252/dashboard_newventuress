@@ -10,7 +10,7 @@ function CategoryTogler() {
 
 
   return (
-    <div className='space-y-[30px]'>
+    <div className='space-y-[30px] mb-[30px]'>
         <CategoryHeader setShowCategory={setShowCategory} showcategory={showcategory}/>
           <CategoryFilter />
         {

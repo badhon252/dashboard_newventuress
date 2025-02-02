@@ -26,19 +26,19 @@ type MonthKey = "Nov" | "Dec" | "Jan";
 // Month data object with proper typing
 const monthData: Record<MonthKey, DataItem[]> = {
   Nov: [
-    { name: "Sales", value: 65, color: "rgb(19,34,83)" },
-    { name: "Pending", value: 15, color: "#DBB0E4" },
-    { name: "Distribute", value: 20, color: "#7ABFFF" },
+    { name: "Total Vendor", value: 65, color: "rgb(19,34,83)" },
+    { name: "Active vendor", value: 15, color: "#DBB0E4" },
+    { name: "Customer", value: 20, color: "#7ABFFF" },
   ],
   Dec: [
-    { name: "Sales", value: 50, color: "rgb(19,34,83)" },
-    { name: "Pending", value: 25, color: "#DBB0E4" },
-    { name: "Distribute", value: 25, color: "#7ABFFF" },
+    { name: "Total Vendor", value: 50, color: "rgb(19,34,83)" },
+    { name: "Active vendor", value: 25, color: "#DBB0E4" },
+    { name: "Customer", value: 25, color: "#7ABFFF" },
   ],
   Jan: [
-    { name: "Sales", value: 70, color: "rgb(19,34,83)" },
-    { name: "Pending", value: 20, color: "#DBB0E4" },
-    { name: "Distribute", value: 10, color: "#7ABFFF" },
+    { name: "Total Vendor", value: 70, color: "rgb(19,34,83)" },
+    { name: "Active vendor", value: 20, color: "#DBB0E4" },
+    { name: "Customer", value: 10, color: "#7ABFFF" },
   ],
 };
 
@@ -65,34 +65,32 @@ export default function AnalyticsChart() {
         </Select>
       </CardHeader>
       <CardContent className="flex flex-col items-center">
-        
+        <ChartContainer config={{}} className="relative h-[218px] w-[222px]">
+          <>
+            <PieChart width={222} height={218}>
+              <Pie
+                data={data}
+                cx={111}
+                cy={109}
+                innerRadius={60}
+                outerRadius={80}
+                dataKey="value"
+                startAngle={90}
+                endAngle={450}
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+            </PieChart>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-4xl font-bold">{data[0]?.value}%</span>
+              <span className="text-sm text-muted-foreground">Total sales</span>
+            </div>
+          </>
+        </ChartContainer>
 
-<ChartContainer config={{}} className="relative h-[218px] w-[222px]">
-  <>
-    <PieChart width={222} height={218}>
-      <Pie
-        data={data}
-        cx={111}
-        cy={109}
-        innerRadius={60}
-        outerRadius={80}
-        dataKey="value"
-        startAngle={90}
-        endAngle={450}
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={entry.color} />
-        ))}
-      </Pie>
-    </PieChart>
-    <div className="absolute inset-0 flex flex-col items-center justify-center">
-      <span className="text-4xl font-bold">{data[0]?.value}%</span>
-      <span className="text-sm text-muted-foreground">Total sales</span>
-    </div>
-  </>
-</ChartContainer>
-
-        <div className="mt-4 flex justify-center gap-4">
+        <div className="mt-4 flex justify-center gap-2">
           {data.map((item, index) => (
             <div key={index} className="flex items-center gap-2">
               <div

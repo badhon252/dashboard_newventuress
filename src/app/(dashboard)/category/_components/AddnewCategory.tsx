@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader,  } from "@/components/ui/card";
+import { CardContent, CardHeader,  } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -79,14 +79,14 @@ export default function AddCategoryForm() {
   };
 
   return (
-    <div className="">
+    <div className=" bg-white rounded-2xl">
       <div className="mb-6 rounded-t-lg bg-primary p-4">
         <h1 className="text-[28px] font-semibold text-white">
           Add New Category
         </h1>
       </div>
-      <Card className="">
-        <CardHeader className="bg-gradient-to-r from-navy-700 to-navy-900"></CardHeader>
+      <div className="">
+        <CardHeader className=""></CardHeader>
         <CardContent className="p-6">
           <form className="grid gap-6">
             <div className="grid md:grid-cols-2 gap-6">
@@ -174,7 +174,12 @@ export default function AddCategoryForm() {
                 {uploadProgress > 0 && (
                   <div className="flex items-center gap-4 p-4 ">
                     <div className="relative w-10 h-10 bg-gray-100 rounded">
-                      <ImageIcon className="w-6 h-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400" />
+                        <Image
+                          src={imagePreview || "/placeholder.svg"}
+                          alt="Category preview"
+                          fill
+                          className="object-cover rounded"
+                        />
                     </div>
                     <div className="flex-1">
                       <div
@@ -215,7 +220,7 @@ export default function AddCategoryForm() {
             </div>
           </form>
         </CardContent>
-      </Card>
+      </div>
     </div>
   );
 }

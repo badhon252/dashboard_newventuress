@@ -5,8 +5,8 @@ import { useState } from "react";
 
 const showList = [
   { id: 1, name: "All", value: "all" },
-  { id: 2, name: "Live", value: "live" },
-  { id: 3, name: "Expired", value: "expired" },
+  { id: 2, name: "New", value: "New" },
+  { id: 3, name: "Old", value: "Old" },
 ];
 
 const categoriesList = [
@@ -16,13 +16,13 @@ const categoriesList = [
 ];
 const typeList = [
   { id: 1, name: "All Product Types", value: "all" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
+  { id: 2, name: "CBD", value: "sales" },
+  { id: 3, name: "Recreational", value: "Recreational" },
 ];
 const storeList = [
   { id: 1, name: "Choose stores", value: "all" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
+  { id: 2, name: "CBD", value: "sales" },
+  { id: 3, name: "Recreational", value: "Recreational" },
 ];
 
 const MediaFilter = () => {
@@ -34,10 +34,10 @@ const MediaFilter = () => {
 
 
   return (
-    <div className="h-[60px] p-[8px] bg-white w-full flex justify-between items-center">
+    <div className="h-[60px] p-[8px] bg-white w-full flex justify-between items-center rounded-[12px]">
       <div className="flex gap-x-[12px]">
         {/* Dropdown for "Show" */}
-        <div className="h-full flex items-center gap-x-[9px] w-fit">
+        <div className="h-full flex items-center gap-x-[9px] w-fit ml-2">
           <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
             Show
           </span>

@@ -33,14 +33,14 @@ export function DeleteVendorModal({
         </h1>
       </div>
 
-      <div className="px-[68px]">
-        <h3 className="font-medium mb-4 text-[14px] text-muted-foreground py-4">
+      <div className="px-[68px] mt-4">
+        <h3 className="font-semibold mb-4 text-[25px] text-gradient py-4">
           Vendor Details
         </h3>
 
         <div className="">
           <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-muted-foreground font-medium ">
+            <span className="text-[#444444] font-medium ">
               User Name
             </span>
             <div className="flex items-center gap-2">
@@ -53,27 +53,27 @@ export function DeleteVendorModal({
           </div>
 
           <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-muted-foreground">Store Name</span>
-            <span className="text-gradient">{vendorDetails.storeName}</span>
+            <span className="text-[#444444]">Store Name</span>
+            <span className="text-black">{vendorDetails.storeName}</span>
           </div>
 
           <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-muted-foreground">ID</span>
-            <span className="text-gradient">{vendorDetails.id}</span>
+            <span className="text-[#444444]">ID</span>
+            <span className="text-black">{vendorDetails.id}</span>
           </div>
 
           <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-muted-foreground">Email</span>
+            <span className="text-[#444444]">Email</span>
             <span>{vendorDetails.email}</span>
           </div>
 
           <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-muted-foreground">Phone</span>
+            <span className="text-[#444444]">Phone</span>
             <span>{vendorDetails.phone}</span>
           </div>
 
           <div className="flex items-center justify-between py-4 border-y-[1px] border-[#C5C5C5]">
-            <span className="text-muted-foreground">Joining Date</span>
+            <span className="text-[#444444]">Joining Date</span>
             <span>{vendorDetails.joiningDate}</span>
           </div>
         </div>
