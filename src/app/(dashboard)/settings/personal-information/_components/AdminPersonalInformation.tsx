@@ -101,8 +101,8 @@ export default function AdminPersonalInformationForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="gap-x-[30px] flex flex-col-reverse lg:flex-row justify-between items-center p-4">
-        <div className="max-w-[554px] space-y-[24px] flex-grow">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="gap-x-[30px] flex flex-col-reverse lg:flex-row items-center p-4">
+        <div className="max-w-[80%] space-y-[24px] flex-grow">
           <FormField
             control={form.control}
             name="fullName"
@@ -235,7 +235,7 @@ export default function AdminPersonalInformationForm() {
           />
           <Button type="submit">Save Changes</Button>
         </div>
-        <div className="flex flex-col mb-[30px] lg:mb-0 justify-center items-center gap-[16px]">
+        <div className="flex flex-col mb-[30px] w-[512px] lg:mb-0 justify-center items-center gap-[16px]">
           <Image
             src={image || "/placeholder.svg"}
             alt="profile"
