@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import ProductGallery from "./ProductGallery";
+import { enUS } from "date-fns/locale";
 
 import { DateTimePicker } from "@/components/ui/datetime-picker";
 
@@ -63,6 +64,7 @@ const AddAuctionForm: React.FC = () => {
   // const [date12, setDate12] = useState<Date | undefined>(undefined);
   const [date24, setDate24] = useState<Date | undefined>(undefined);
   return (
+    <div className="pb-[32px]">
     <div className="bg-white rounded-[24px] p-[32px]">
       <div
         className={
@@ -116,49 +118,6 @@ const AddAuctionForm: React.FC = () => {
                   </FormItem>
                 )}
               />
-
-              {/* <FormField
-                control={form.control}
-                name="productType"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel>
-                      Product Type <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox
-                          id="cbd"
-                          checked={field.value?.includes("CBD")}
-                          onChange={(e) => {
-                            const value = e.target.checked
-                              ? [...field.value, "CBD"]
-                              : field.value.filter((v: string) => v !== "CBD");
-                            field.onChange(value);
-                          }}
-                        />
-                        <Label htmlFor="cbd">CBD</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox
-                          id="recreational"
-                          checked={field.value?.includes("Recreational")}
-                          onChange={(e) => {
-                            const value = e.target.checked
-                              ? [...field.value, "Recreational"]
-                              : field.value.filter(
-                                  (v: string) => v !== "Recreational"
-                                );
-                            field.onChange(value);
-                          }}
-                        />
-                        <Label htmlFor="recreational">Recreational</Label>
-                      </div>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
 
               <FormField
                 control={form.control}
@@ -259,15 +218,15 @@ const AddAuctionForm: React.FC = () => {
                       <FormItem>
                         <FormLabel>Starting Time</FormLabel>
                         <FormControl>
-                          <DateTimePicker
-                            hourCycle={24}
-                            value={date24}
-                            onChange={setDate24}
-                            locale="en-US"
-                            weekStartsOn={0}
-                            showWeekNumber={false}
-                            showOutsideDays={true}
-                          />
+                        <DateTimePicker
+                          hourCycle={24}
+                          value={date24}
+                          onChange={setDate24}
+                          locale={enUS} // ✅ Correct locale
+                          weekStartsOn={0}
+                          showWeekNumber={false}
+                          showOutsideDays={true}
+                        />
                         </FormControl>
 
                         <FormMessage />
@@ -288,7 +247,7 @@ const AddAuctionForm: React.FC = () => {
                             hourCycle={24}
                             value={date24}
                             onChange={setDate24}
-                            locale="en-US"
+                            locale={enUS} // ✅ Correct locale
                             weekStartsOn={0}
                             showWeekNumber={false}
                             showOutsideDays={true}
@@ -369,13 +328,17 @@ const AddAuctionForm: React.FC = () => {
               <ProductGallery />
             </div>
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-4">
+            <Button type="button" variant="outline" className="px-8">
+            Update
+          </Button>
             <Button type="submit" className="py-[12px] px-[24px]">
-              Submit
+              Confirm
             </Button>
           </div>
         </form>
       </Form>
+    </div>
     </div>
   );
 };

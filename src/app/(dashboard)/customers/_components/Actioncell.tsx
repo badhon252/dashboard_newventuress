@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@radix-ui/react-dropdown-menu";
 import Image from "next/image";
 import { DemoTableItemsType } from "@/data/CustomerListData";
@@ -33,13 +33,16 @@ const ActionCell: React.FC<ActionCellProps> = ({ row }) => {
 
   return (
     <div>
-      {isModalOpen && (
+      {isModalOpen &&
         <DeleteModal>
           <div className="px-[24px] ">
             <h2 className="text-center text-[32px] text-gradient font-semibold leading-[38.4px] mt-[26px]">
               Are You Sure To Delete this Store?
             </h2>
-            <div className="mt-[122px]">
+            <h2 className="text-center text-[25px] text-gradient font-semibold leading-[38.4px] mt-[26px]">
+              Customer Details
+            </h2>
+            <div className="mt-[22px]">
               <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5] px-3">
                 <p className="text-base text-[#444444] font-normal leading-[19.2px]">
                   User Name
@@ -59,39 +62,35 @@ const ActionCell: React.FC<ActionCellProps> = ({ row }) => {
               </div>
               <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5] px-3">
                 <p className="text-base text-[#444444] font-normal leading-[19.2px]">
-                 Email
+                  Email
                 </p>
                 <div className="flex items-center gap-1">
-                 
-                  <p className="text-base text-gradient font-medium leading-[19.2px]">
+                  <p className="text-base text-[#444444] font-medium leading-[19.2px]">
                     {row.original.name}
                   </p>
                 </div>
               </div>
               <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5] px-3">
                 <p className="text-base text-[#444444] font-normal leading-[19.2px]">
-               Phone
+                  Phone
                 </p>
                 <div className="flex items-center gap-1">
-                 
-                  <p className="text-base text-gradient font-medium leading-[19.2px]">
+                  <p className="text-base text-[#444444] font-medium leading-[19.2px]">
                     {row.original.name}
                   </p>
                 </div>
               </div>
               <div className="flex items-center justify-between py-4 border-t-[1px] border-b-[1px] border-[#C5C5C5] px-3">
                 <p className="text-base text-[#444444] font-normal leading-[19.2px]">
-             Joining Date
+                  Joining Date
                 </p>
                 <div className="flex items-center gap-1">
-                
-                  <p className="text-base text-gradient font-medium leading-[19.2px]">
+                  <p className="text-base text-[#444444] font-medium leading-[19.2px]">
                     {row.original.name}
                   </p>
                 </div>
               </div>
-             
-            
+
               {/* Additional modal content */}
               <div className="mt-[30px]">
                 <button
@@ -111,8 +110,7 @@ const ActionCell: React.FC<ActionCellProps> = ({ row }) => {
               </div>
             </div>
           </div>
-        </DeleteModal>
-      )}
+        </DeleteModal>}
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

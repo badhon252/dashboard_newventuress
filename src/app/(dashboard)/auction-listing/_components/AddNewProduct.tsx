@@ -12,9 +12,9 @@ import { Categories } from "./product-form/categories"
 import { Pricing } from "./product-form/pricing"
 import { InventoryDetails } from "./product-form/inventory-details"
 import { AdditionalInfo } from "./product-form/additional-info"
-import { ProductGallery } from "./product-form/product-gallery"
 
 import { type ProductFormValues, productSchema } from "./Product"
+import ProductGallery from "./product-form/product-gallery"
 
 export function AddNewProduct() {
   const form = useForm<ProductFormValues>({
@@ -81,7 +81,7 @@ export function AddNewProduct() {
                 <AdditionalInfo />
               </div>
               <div className="space-y-6">
-                <ProductGallery />
+                <ProductGallery/>
                 <div className="flex justify-end gap-4">
                   <Button type="button" variant="outline">
                     Update

@@ -12,10 +12,10 @@ export function Categories() {
         name="store"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Store *</FormLabel>
+            <FormLabel className="text-[16px] text-[#444444] font-normal">Store <span className="text-red-500">*</span></FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="border-[#B0B0B0] h-[48px]">
                   <SelectValue placeholder="Select store" />
                 </SelectTrigger>
               </FormControl>
@@ -34,10 +34,10 @@ export function Categories() {
         name="category"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Category *</FormLabel>
+            <FormLabel className="text-[16px] text-[#444444] font-normal">Category <span className="text-red-500">*</span></FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="border-[#B0B0B0] h-[48px]">
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
               </FormControl>
@@ -56,10 +56,10 @@ export function Categories() {
         name="subCategory"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Sub-Category *</FormLabel>
+            <FormLabel className="text-[16px] text-[#444444] font-normal">Sub-Category <span className="text-red-500">*</span></FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="border-[#B0B0B0] h-[48px]">
                   <SelectValue placeholder="Select sub-category" />
                 </SelectTrigger>
               </FormControl>
