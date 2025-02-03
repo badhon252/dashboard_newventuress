@@ -12,13 +12,15 @@ export function Pricing() {
         name="purchasePrice"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Purchase Price</FormLabel>
+            <FormLabel className="text-[16px] text-[#444444] font-normal">Purchase Price</FormLabel>
             <FormControl>
-              <div className="relative">
-                <span className="absolute left-3 top-2.5">$</span>
+              <div className="relative h-[45px] flex items-center">
+                <div className="absolute py-[9px] px-[17px] bg-[#E6EEF6] rounded-l-lg ml-[1px]">
+                  <span className="text-[#3053c7]">$</span>
+                </div>
                 <Input
                   type="number"
-                  className="pl-6"
+                  className="pl-14 placeholder:text-[#C5C5C5] border-[#B0B0B0] h-[45px]"
                   {...field}
                   onChange={(e) => field.onChange(Number.parseFloat(e.target.value))}
                 />
@@ -34,13 +36,15 @@ export function Pricing() {
         name="sellingPrice"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Selling Price</FormLabel>
+            <FormLabel className="text-[16px] text-[#444444] font-normal">Selling Price</FormLabel>
             <FormControl>
-              <div className="relative">
-                <span className="absolute left-3 top-2.5">$</span>
+              <div className="relative h-[45px] flex items-center">
+              <div className="absolute py-[9px] px-[17px] bg-[#E6EEF6] rounded-l-lg ml-[1px]">
+                  <span className="text-[#3053c7]">$</span>
+                </div>
                 <Input
                   type="number"
-                  className="pl-6"
+                  className="pl-14 placeholder:text-[#C5C5C5] border-[#B0B0B0] h-[45px]"
                   {...field}
                   onChange={(e) => field.onChange(Number.parseFloat(e.target.value))}
                 />
@@ -56,13 +60,15 @@ export function Pricing() {
         name="discountPrice"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Discount Price</FormLabel>
+            <FormLabel className="text-[16px] text-[#444444] font-normal">Discount Price</FormLabel>
             <FormControl>
-              <div className="relative">
-                <span className="absolute left-3 top-2.5">$</span>
+              <div className="relative h-[45px] flex items-center">
+                <div className="absolute py-[9px] px-[17px] bg-[#E6EEF6] rounded-l-lg ml-[1px]">
+                  <span className="text-[#3053c7]">$</span>
+                </div>
                 <Input
                   type="number"
-                  className="pl-6"
+                  className="pl-14 placeholder:text-[#C5C5C5] border-[#B0B0B0] h-[45px]"
                   {...field}
                   onChange={(e) => field.onChange(Number.parseFloat(e.target.value))}
                 />

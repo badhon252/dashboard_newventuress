@@ -16,14 +16,14 @@ export const NotificationColumn: ColumnDef<notificationDataTypes>[] = [
         cell: ({ row }) => {
             return (
                 <div className="">
-                    <div className="flex items-center justify-center gap-[4px]">
+                    <div className="flex items-center justify-center gap-[4px] pt-[30px] ">
                         <span className="text-base font-normal leading-[19px] text-[#444444]">Store :</span>
                         <span>
                             <Image src={row.original.img} alt="notification user img" width={17} height={18} />
                         </span>
                         <span className="text-lg font-semibold leading-[21px] text-gradient">{row.original.name}</span>
                     </div>
-                    <div className="pt-[12px]">
+                    <div className="pt-[30px] pb-[12px]">
                         <p className="text-base font-medium leading-[19px] text-[#444444]">{row.original.message}</p>
                     </div>
                 </div>
@@ -31,7 +31,9 @@ export const NotificationColumn: ColumnDef<notificationDataTypes>[] = [
         },
     },
     {
-        header: "Type",
+        id: "type",
+        header: () => <div className="ml-[-90px] ">Type</div>,
+        
         cell: ({ row }) => {
             return (
                 <div className="w-[175px] h-[38px] flex justify-center items-center bg-gradient-to-br from-[#121D42] via-[#152764] to-[#4857BD] rounded-[10px] py-[10px] px-[23px]">
@@ -41,7 +43,9 @@ export const NotificationColumn: ColumnDef<notificationDataTypes>[] = [
         },
     },
     {
-        header: "Form",
+        id: "form",
+        header: () => <div className="ml-[-70px] ">Form</div>,
+       
         cell: ({ row }) => {
             return (
                 <div className="w-[175px] h-[38px] flex items-center justify-center gap-[2px]">
@@ -51,7 +55,8 @@ export const NotificationColumn: ColumnDef<notificationDataTypes>[] = [
         },
     },
     {
-        header: "Date",
+        id: "date",
+        header: () => <div className="ml-[-90px] ">Date</div>,
         cell: ({ row }) => {
             return (
                 <div className="w-[175px] h-[38px] flex items-center justify-center gap-[2px]">
@@ -61,7 +66,9 @@ export const NotificationColumn: ColumnDef<notificationDataTypes>[] = [
         },
     },
     {
-        header: "Actions",
+        id: "actions",
+        header: () => <div className="ml-[-10px] ">Actions</div>,
+       
         cell: () => {
             return (
                 <div>

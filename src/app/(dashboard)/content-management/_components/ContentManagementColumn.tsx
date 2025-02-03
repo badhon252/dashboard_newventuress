@@ -11,17 +11,19 @@ export const ContentManagementColumn: ColumnDef<contentManagementDataType>[] = [
 
 
   {
-    header: "Tittle",
+    id: "tittle",
+    header: () => <div className="ml-[-150px] ">Tittle</div>,
     cell: ({ row }) => {
       return (
-        <div className="w-[175px] h-[38px] flex justify-center gap-[2px]">
+        <div className="w-[175px] h-[113px] flex justify-center items-center gap-[2px]">
           <span className="text-base font-medium leading-[19px] text-gradient text-center">{row.original.title}</span>
         </div>
       );
     },
   },
   {
-    header: "Status",
+    id: "status",
+    header: () => <div className="ml-[-50px] ">Status</div>,
     cell: ({ row }) => {
       return (
         <div className="w-[82px] h-[26px] py-[6px] px-[17px] bg-[#00417E] flex justify-center rounded-[4px]">

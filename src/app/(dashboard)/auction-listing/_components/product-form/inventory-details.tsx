@@ -12,9 +12,9 @@ export function InventoryDetails() {
         name="size"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Size (KG)</FormLabel>
+            <FormLabel className="text-[16px] font-normal text-[#444444]">Size (KG)</FormLabel>
             <FormControl>
-              <Input type="text" {...field} />
+              <Input type="text" {...field} className="border-[#B0B0B0] h-[48px]"/>
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -30,6 +30,7 @@ export function InventoryDetails() {
             <FormControl>
               <Input
                 type="number"
+                className="border-[#B0B0B0] h-[48px]"
                 {...field}
                 onChange={(e) => field.onChange(Number.parseInt(e.target.value))}
               />
@@ -46,7 +47,7 @@ export function InventoryDetails() {
           <FormItem>
             <FormLabel>SKU</FormLabel>
             <FormControl>
-              <Input type="text" {...field} placeholder="Fox-0369" />
+              <Input type="text" {...field} placeholder="Fox-0369" className="border-[#B0B0B0] h-[48px]"/>
             </FormControl>
             <FormMessage />
           </FormItem>

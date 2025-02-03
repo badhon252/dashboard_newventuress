@@ -1,22 +1,20 @@
 "use client";
-
 import AnalyticsChart from "../_components/analytics-chart";
 import DashboardOverview from "../_components/dashBoardOverview";
 import MostSoldItems from "../_components/MostSoldItems";
-import ProfileCompletion from "../_components/ProfileCompletion";
 import GeoChart from "../_components/TopUserCountries";
+import { SalesVolumeChart } from "./_components/totalPaymentVolume/_componenets/sales-volume-chart";
 import TotalPaymentVolume from "./_components/totalPaymentVolume/totalPaymentVolume";
 
 const Dashboard = () => {
   return (
     <div className="w-full px-5 ">
-      {/* Profile Completion Section */}
-      <ProfileCompletion />
+    
 
       {/* Dashboard Overview Section */}
       <section>
-        <h1 className="text-[#0057A8] text-[22px] font-semibold mb-[20px]">
-          Dashboard Overview
+        <h1 className="text-gradient text-[22px] font-semibold mb-[20px]">
+          Overview
         </h1>
         <DashboardOverview />
       </section>
@@ -36,7 +34,7 @@ const Dashboard = () => {
           <TotalPaymentVolume/>
         </div>
         <div className="">
-          <h1>h2</h1>
+        <SalesVolumeChart />
         </div>
       </div>
     </div>

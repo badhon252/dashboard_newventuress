@@ -12,20 +12,22 @@ export const BlogManagementColumn: ColumnDef<blogsManagementDataType>[] = [
 
 
   {
-    header: "Tittle",
+    id: "title",
+    header: () => <div className="ml-[-205px] ">Tittle</div>,
     cell: ({ row }) => {
       return (
-        <div className="w-[256px] h-[66px] flex justify-center gap-[2px]">
+        <div className="w-[256px] h-[114px] flex justify-center gap-[2px] items-center">
           <span className="text-lg font-medium leading-[21px] text-black text-center">{row.original.title}</span>
         </div>
       );
     },
   },
   {
-    header: "Author",
+    id: "author",
+    header:  () => <div className="ml-[-120px] ">Author</div>,
     cell: ({ row }) => {
       return (
-        <div className="w-[200px] h-[44px] flex justify-center gap-[2px]">
+        <div className="w-[200px]  h-[114px] flex justify-center gap-[2px] items-center">
           <span className="text-base font-normal leading-[19px] text-[#444444] text-center">{row.original.auctor}</span>
         </div>
       );
@@ -36,7 +38,7 @@ export const BlogManagementColumn: ColumnDef<blogsManagementDataType>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex justify-center gap-[2px]">
-          <span className="text-base font-normal leading-[19px] text-[#444444] text-center">{row.original.date}</span>
+          <span className="text-base font-normal leading-[19px] text-[#444444] text-center items-center">{row.original.date}</span>
         </div>
       );
     },
@@ -46,7 +48,7 @@ export const BlogManagementColumn: ColumnDef<blogsManagementDataType>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex justify-center gap-[2px]">
-          <span className="text-base font-normal leading-[19px] text-[#444444] text-center">{row.original.view}</span>
+          <span className="text-base font-normal leading-[19px] text-[#444444] text-center items-center">{row.original.view}</span>
         </div>
       );
     },
@@ -56,7 +58,7 @@ export const BlogManagementColumn: ColumnDef<blogsManagementDataType>[] = [
     cell: ({ row }) => {
 
       return (
-        <div className=" w-[90px]">
+        <div className=" w-[90px] ">
           
           <AuctionsButton row={ row }/>
         </div>

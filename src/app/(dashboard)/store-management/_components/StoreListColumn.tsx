@@ -32,7 +32,9 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     enableHiding: false,
   },
   {
-    header: "Verification",
+    id: "verification",
+    header: () => <div className="ml-[-20px] ">Verification</div>,
+ 
     cell: ({ row }) => {
       return (
         <div>
@@ -47,7 +49,8 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     },
   },
   {
-    header: "Profile",
+    id: "profile",
+    header: () => <div className="ml-[-180px] ">Profile</div>,
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-[8px]">
@@ -57,7 +60,7 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
               height={142}
               width={110}
               alt="img"
-              className="rounded-[8px]"
+              className="rounded-[8px] py-[15px]"
             />
           </div>
           <div className="w-[250px] flex flex-col items-start">
@@ -77,7 +80,7 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
   },
   {
     accessorKey: "box",
-    header: () => <Box className="w-[16px] h-[16px]"/>,
+    header: () => <Box className="w-[16px] h-[16px] ml-[20px]"/>,
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
@@ -96,7 +99,9 @@ export const StoreListColumn: ColumnDef<DemoTableItemsType>[] = [
     },
   },
   {
-    header: "Gross Sales",
+    id: "gross Sales",
+    header: () => <div className="ml-[-55px] ">Gross Sales</div>,
+   
     cell: ({ row }) => {
       return (
         <div className="flex items-center">

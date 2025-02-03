@@ -14,13 +14,13 @@ async function MostSoldItems() {
       <div className="space-y-4 text-[#000000] font-semibold">
         {items.map((item) => (
           <div key={item.name}>
-            <div className="flex justify-between mb-2">
+            <div className="flex justify-between mb-2 ">
               <span>{item.name}</span>
               <span>{item.percentage}%</span>
             </div>
-            <div className="h-2 bg-gray-100 rounded-full">
+            <div className="h-4 bg-gray-100 rounded-full">
               <div
-                className="h-full bg-[#1a237e] rounded-full transition-all"
+                className="h-4 bg-[#1a237e] rounded-full transition-all "
                 style={{ width: `${item.percentage}%` }}
               />
             </div>
