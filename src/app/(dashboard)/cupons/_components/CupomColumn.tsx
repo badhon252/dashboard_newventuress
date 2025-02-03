@@ -14,8 +14,8 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     header: "Code",
     cell: ({ row }) => {
       return (
-        <div className="w-[149px] h-[38px]" >
-          <span className="text-[16px] text-gradient font-mediuml ">{row.original.code}</span>
+        <div className="w-[149px] py-[19px] " >
+          <span className="text-[16px] text-gradient font-mediuml  ">{row.original.code}</span>
         </div>
       );
     },

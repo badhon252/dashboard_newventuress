@@ -102,7 +102,7 @@ export default function AdminPersonalInformationForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="gap-x-[30px] flex flex-col-reverse lg:flex-row items-center p-4">
-        <div className="max-w-[80%] space-y-[24px] flex-grow">
+        <div className="max-w-[80%] space-y-[24px] flex-row ">
           <FormField
             control={form.control}
             name="fullName"
@@ -276,7 +276,7 @@ export default function AdminPersonalInformationForm() {
             type="button"
             onClick={() => document.getElementById("fileInput")?.click()}
           >
-            Upload Image
+            Chose Image
           </Button>
         </div>
       </form>

@@ -49,7 +49,7 @@ const TableContainer = ({
   });
   return (
     <>
-      <DataTable table={table} columns={columns} title="All Auctions" />
+      <DataTable table={table} columns={columns} title="Coupons" />
     </>
   );
 };

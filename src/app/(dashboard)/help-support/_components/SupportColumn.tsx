@@ -115,9 +115,11 @@ export const SupportColumn: ColumnDef<DemoTableItemsType>[] = [
           const status = (row.original.Status || "").toLowerCase() as StatusType;
     
           return (
-            <button className={`text-[16px] font-normal pb-1 ${styles[status] || ""}`}>
+            <div className="py-[23px]">
+               <button className={`text-[16px] font-normal pb-1 ${styles[status] || ""}`}>
               {row.original.Status}
             </button>
+            </div>
           );
         },
       },
