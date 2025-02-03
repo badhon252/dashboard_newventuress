@@ -38,23 +38,37 @@ export const MediaColumns: ColumnDef<DemoTableItemsType>[] = [
     header: "Image",
     cell: ({ row }) => {
       return (
-        <Image
-          src={row.original.image}
-          height={70}
-          width={94}
-          alt="img"
-          className="rounded-[8px]"
-        />
+        <div className="flex justify-center">
+          <Image
+            src={row.original.image}
+            height={70}
+            width={94}
+            alt="img"
+            className="rounded-[8px]"
+          />
+        </div>
       );
     },
   },
   {
-    accessorKey: "Associate",
     header: "Associate",
+    cell: ({ row }) => {
+      return (
+        <div>
+          <p>{row.original.Associate}</p>
+        </div>
+      );
+    },
   },
   {
-    accessorKey: "Store",
     header: "Store",
+    cell: ({ row }) => {
+      return (
+        <div>
+          <p className="text-gradient">{row.original.Store}</p>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "Size",
@@ -75,7 +89,8 @@ export const MediaColumns: ColumnDef<DemoTableItemsType>[] = [
       };
 
       return (
-        <TableCell className="text-right ">
+        <div className="flex justify-center">
+          <TableCell className="text-right ">
           <DropdownMenu>
             <DropdownMenuTrigger className=" w-8 p-0">
               <span className="sr-only">Open menu</span>
@@ -87,6 +102,7 @@ export const MediaColumns: ColumnDef<DemoTableItemsType>[] = [
             </DropdownMenuContent>
           </DropdownMenu>
         </TableCell>
+        </div>
       );
     },
     enableSorting: false, // Disable sorting for the actions column

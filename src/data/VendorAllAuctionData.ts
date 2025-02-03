@@ -2,86 +2,80 @@ export interface DemoTableItemsType {
   image: string;
   id: number;
   name: string;
-  stock: number;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  quantity: number;
-  variant: string;
-  variantPrice: number;
+  stock: string;
+  SKU: number;
+  Status: string;
+  Price: number;
+  Date: string;
+
 }
 
 export const VendorAllAuctionData: DemoTableItemsType[] = [
   {
-    image: "/assets/img/prodDetails.png",
+    image: "/assets/img/reviewProduct.png",
     id: 1,
     name: "Purple Bong 50k",
-    stock: 55,
-    price: 500.0,
-    createdAt: "8 Sep, 2020",
-    updatedAt: "8 Sep, 2020",
-    quantity: 7,
-    variant: "Aves Romix",
-    variantPrice: 700.0,
+    stock: "Island Guy Smokers",
+    SKU: 489,
+    Status: "Auction Expired",
+    Price: 165,
+    Date: "8 Sep, 2020",
+
   },
   {
-    image: "/assets/img/prodDetails.png",
+    image: "/assets/img/reviewProduct.png",
     id: 2,
     name: "Purple Bong 50k",
-    stock: 55,
-    price: 500.0,
-    createdAt: "8 Sep, 2020",
-    updatedAt: "8 Sep, 2020",
-    quantity: 7,
-    variant: "Aves Romix",
-    variantPrice: 700.0,
+    stock: "Island Guy Smokers",
+    SKU: 489,
+    Status: "Auction Expired",
+    Price: 165,
+    Date: "8 Sep, 2020",
+
   },
   {
-    image: "/assets/img/prodDetails.png",
+    image: "/assets/img/reviewProduct.png",
     id: 3,
     name: "Purple Bong 50k",
-    stock: 55,
-    price: 500.0,
-    createdAt: "8 Sep, 2020",
-    updatedAt: "8 Sep, 2020",
-    quantity: 7,
-    variant: "Aves Romix",
-    variantPrice: 700.0,
+    stock: "Island Guy Smokers",
+    SKU: 489,
+    Status: "Auction Expired",
+    Price: 165,
+    Date: "8 Sep, 2020",
+
   },
   {
-    image: "/assets/img/prodDetails.png",
+    image: "/assets/img/reviewProduct.png",
     id: 4,
     name: "Purple Bong 50k",
-    stock: 55,
-    price: 500.0,
-    createdAt: "8 Sep, 2020",
-    updatedAt: "8 Sep, 2020",
-    quantity: 7,
-    variant: "Aves Romix",
-    variantPrice: 700.0,
+    stock: "Island Guy Smokers",
+    SKU: 489,
+    Status: "Auction Expired",
+    Price: 165,
+    Date: "8 Sep, 2020",
+
   },
   {
-    image: "/assets/img/prodDetails.png",
+    image: "/assets/img/reviewProduct.png",
     id: 5,
     name: "Purple Bong 50k",
-    stock: 55,
-    price: 500.0,
-    createdAt: "8 Sep, 2020",
-    updatedAt: "8 Sep, 2020",
-    quantity: 7,
-    variant: "Aves Romix",
-    variantPrice: 700.0,
+    stock: "Island Guy Smokers",
+    SKU: 489,
+    Status: "Auction Expired",
+    Price: 165,
+    Date: "8 Sep, 2020",
+
   },
   {
-    image: "/assets/img/prodDetails.png",
+    image: "/assets/img/reviewProduct.png",
     id: 6,
     name: "Purple Bong 50k",
-    stock: 55,
-    price: 500.0,
-    createdAt: "8 Sep, 2020",
-    updatedAt: "8 Sep, 2020",
-    quantity: 7,
-    variant: "Aves Romix",
-    variantPrice: 700.0,
+    stock: "Island Guy Smokers",
+    SKU: 489,
+    Status: "Auction Expired",
+    Price: 165,
+    Date: "8 Sep, 2020",
+
   },
+
 ];

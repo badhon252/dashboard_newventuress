@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { ArrowRight } from 'lucide-react'
+import { CircleUser } from 'lucide-react'
 import { useState, useEffect } from "react"
 
 interface ProfileData {
@@ -21,7 +21,7 @@ export default function ProfileCompletion() {
     // This would typically be an API call
     const loadProfileData = () => {
       setProfileData({
-        completionPercentage: 70,
+        completionPercentage: 60,
         domain: "www.staging-Thailand-Pasific fuision"
       })
     }
@@ -32,7 +32,7 @@ export default function ProfileCompletion() {
   return (
   <div className="w-full h-[173px] bg-white rounded-[12px] p-[24px] my-[30px]">
       <div className="w-full max-w-2xl   space-y-2">
-      <h1 className="text-[22px] font-semibold text-blue-700">
+      <h1 className="text-[22px] font-semibold text-gradient">
         Welcome to the {profileData.domain}
       </h1>
       
@@ -52,7 +52,7 @@ export default function ProfileCompletion() {
         onClick={() => console.log("Navigating to profile...")}
       >
         Go To Customer Profile
-        <ArrowRight className="ml-2 h-4 w-4" />
+        <CircleUser className="ml-1 h-4 w-4" />
       </Button>
     </div>
   </div>

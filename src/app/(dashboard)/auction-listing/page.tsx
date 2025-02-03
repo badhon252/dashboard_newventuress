@@ -1,13 +1,9 @@
-import AuctionFilter from "./_components/AuctionFilter";
-import AuctionHeader from "./_components/AuctionHeader";
-import VendorAuctionContainer from "./_components/VendorAuctionContainer";
+
+import ProductTogler from "./_components/ProductTogler";
 
 const Page = () => {
-  return <div className="space-y-[30px]">
-    
-  <AuctionHeader/>
-  <AuctionFilter/>
-  <VendorAuctionContainer/>
+  return <div>
+    <ProductTogler/>
 </div>;
 };
 

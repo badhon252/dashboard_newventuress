@@ -19,7 +19,7 @@ Sharing Information with Third Parties:
 PACIFIC RIM FUSION does not sell, rent or lease its customer lists to third parties. PACIFIC RIM FUSION may share data with trusted partners to help perform statistical analysis, send you email or postal mail, provide customer support, or arrange for deliveries. All such third parties are prohibited from using your personal information except to provide these services to PACIFIC RIM FUSION, and they are required to maintain the confidentiality of your information.  We use your business license information to also verify your eligibility.
 
 PACIFIC RIM FUSION may disclose your personal information, without notice, if required to do so by law or in the good faith belief that such action is necessary to: (a) conform to the edicts of the law or comply with legal process served on PACIFIC RIM FUSION or the site; (b) protect and defend the rights or property of PACIFIC RIM FUSION; and/or (c) act under exigent circumstances to protect the personal safety of users of PACIFIC RIM FUSION, or the public.
-
+ 
 Tracking User Behavior:
 
 PACIFIC RIM FUSION may keep track of the websites and pages our users visit within PACIFIC RIM FUSION, in order to determine what PACIFIC RIM FUSION services are the most popular. This data is used to deliver customized content and advertising within PACIFIC RIM FUSION to customers whose behavior indicates that they are interested in a particular subject area.

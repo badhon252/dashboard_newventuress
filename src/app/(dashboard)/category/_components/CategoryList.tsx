@@ -58,41 +58,44 @@ const categories = [
 export default function CategoryList() {
   const [currentPage, setCurrentPage] = useState(1);
   return (
-    <div className="min-h-screen max-w-[max-w-[1506px]]  p-4 md:p-6">
-      <div className="mx-auto ">
-        <div className="mb-6 rounded-t-lg bg-primary p-4">
-          <h1 className="text-[28px] font-semibold text-white">
-            Category List
-          </h1>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
-          {categories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              title={category.title}
-              imageUrl={category.imageUrl}
-              onEdit={() => console.log(`Edit ${category.title}`)}
-              onDelete={() => console.log(`Delete ${category.title}`)}
-            />
-          ))}
-        </div>
-        <div>
-          <div />
+    <div>
+      <div className="min-h-screen max-w-[max-w-[1506px]]  p-4 md:p-6 bg-white rounded-[12px]">
+        <div className="mx-auto ">
+          <div className="mb-6 rounded-t-lg bg-primary p-4">
+            <h1 className="text-[28px] font-semibold text-white">
+              Category List
+            </h1>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
+            {categories.map((category) => (
+              <CategoryCard
+                key={category.id}
+                title={category.title}
+                imageUrl={category.imageUrl}
+                onEdit={() => console.log(`Edit ${category.title}`)}
+                onDelete={() => console.log(`Delete ${category.title}`)}
+              />
+            ))}
+          </div>
           <div>
             <div />
-            <div className="mt-[40px] flex justify-between">
-              <div className="text-[#444444] font-normal text-[16px]">
-                Showing 1 to 25 in first entries
-              </div>
-              <div className=" w-[400px]">
-                <PacificPagination
-                  currentPage={currentPage}
-                  onPageChange={(page) => setCurrentPage(page)}
-                  totalPages={10}
-                />
-              </div>
+            <div>
+              <div />
+              
             </div>
           </div>
+        </div>
+      </div>
+      <div className="mt-[40px] flex justify-between">
+        <div className="text-[#444444] font-normal text-[16px]">
+          Showing 1 to 25 in first entries
+        </div>
+        <div className=" w-[400px]">
+          <PacificPagination
+            currentPage={currentPage}
+            onPageChange={(page) => setCurrentPage(page)}
+            totalPages={10}
+          />
         </div>
       </div>
     </div>
