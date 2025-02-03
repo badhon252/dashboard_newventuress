@@ -1,9 +1,7 @@
 "use client";
-
 import AnalyticsChart from "../_components/analytics-chart";
 import DashboardOverview from "../_components/dashBoardOverview";
 import MostSoldItems from "../_components/MostSoldItems";
-import ProfileCompletion from "../_components/ProfileCompletion";
 import GeoChart from "../_components/TopUserCountries";
 import { SalesVolumeChart } from "./_components/totalPaymentVolume/_componenets/sales-volume-chart";
 import TotalPaymentVolume from "./_components/totalPaymentVolume/totalPaymentVolume";
