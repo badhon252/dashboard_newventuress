@@ -105,15 +105,6 @@ export default function ProductGallery() {
           <Plus className="h-5 w-5" />
         </Button>
       </div>
-
-      <div className="flex gap-2 justify-end">
-        <Button type="button" variant="outline" className="px-8">
-          Update
-        </Button>
-        <Button type="button" className="px-8 bg-[#1a237e] hover:bg-[#1a237e]/90 text-white">
-          Confirm
-        </Button>
-      </div>
     </div>
   );
 }

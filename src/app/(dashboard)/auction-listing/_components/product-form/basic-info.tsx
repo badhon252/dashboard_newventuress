@@ -23,7 +23,7 @@ export function BasicInfo() {
               Title <span className="text-red-500">*</span>
             </FormLabel>
             <FormControl>
-              <Input {...field} className="h-[51px] border-[#9C9C9C]" />
+              <Input {...field} className="h-[51px] border-[#B0B0B0]" />
             </FormControl>
             <FormMessage />
           </FormItem>}
