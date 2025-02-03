@@ -276,7 +276,7 @@ export default function AdminPersonalInformationForm() {
             type="button"
             onClick={() => document.getElementById("fileInput")?.click()}
           >
-            Upload Image
+            Chose Image
           </Button>
         </div>
       </form>

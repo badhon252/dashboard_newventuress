@@ -35,7 +35,7 @@ const AddBlogForm: React.FC = () => {
         console.log(data);
     };
     return (
-        <div className="bg-white rounded-[24px] p-[32px]">
+        <div className="bg-white rounded-[24px] p-[32px] mb-[60px] ">
             <div
                 className={
                     "bg-primary px-4 py-3 mb- rounded-t-lg text-white text-[32px] leading-[38px] font-semibold"
@@ -94,8 +94,8 @@ const AddBlogForm: React.FC = () => {
                             <BlogGallery />
                         </div>
                     </div>
-                    <div className="flex justify-end pt-[60px]">
-                        <Button type="submit" className="py-[12px] px-[24px]">
+                    <div className="flex justify-end pt-[60px] ">
+                        <Button type="submit" className="py-[12px] px-[24px] ">
                             Post
                         </Button>
                     </div>

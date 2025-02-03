@@ -73,13 +73,13 @@ export function DeleteStoreModal({
                 <div className="mt-6 space-y-3">
                     <Button
                         variant="outline"
-                        className="w-full border-gradient text-gradient  hover:text-blue-500 border-[#121D42] cursor-pointer py-[18px]"
+                        className="w-full h-[56px] border-gradient text-gradient  hover:text-blue-500 border-[#121D42] cursor-pointer py-[18px]"
                         onClick={() => setIsOpen(false)}
                     >
                         Yes
                     </Button>
                     <Button
-                        className="w-full bg-[#1a237e] hover:bg-[#1a237e]/90 py-[18px]"
+                        className="w-full h-[56px] bg-primary   py-[18px]"
                         onClick={() => setIsOpen(false)}
                     >
                         No

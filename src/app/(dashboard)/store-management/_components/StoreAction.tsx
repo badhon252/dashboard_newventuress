@@ -44,7 +44,7 @@ const StoreAction = ({ row }: any) => {
           className="bg-white h-auto w-[110px] rounded-lg shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]"
         >
           <DropdownMenuItem className=" text-left p-[8px] hover:bg-[#E6EEF6] cursor-default focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0">
-          Details
+            Details
           </DropdownMenuItem>
 
           <DropdownMenuItem
