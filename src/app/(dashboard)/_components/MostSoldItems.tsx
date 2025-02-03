@@ -10,8 +10,8 @@ const items = [
 async function MostSoldItems() {
   return (
     <div className="bg-white rounded-[8px] p-6 w-full  mb-[30px]">
-      <h2 className="text-2xl font-semibold mb-6">Most Sold Items</h2>
-      <div className="space-y-4">
+      <h2 className="text-2xl text-[#494949] font-medium mb-6">Most Sold Items</h2>
+      <div className="space-y-4 text-[#000000] font-semibold">
         {items.map((item) => (
           <div key={item.name}>
             <div className="flex justify-between mb-2">

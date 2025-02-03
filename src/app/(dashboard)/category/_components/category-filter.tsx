@@ -14,11 +14,11 @@ const CategoryFilter = () => {
   const [show, setShow] = useState<string>("all"); // Default to "all"
 
   return (
-    <div className="h-[60px] p-[8px] bg-white w-full flex justify-between items-center">
+    <div className="h-[60px] p-[8px] bg-white w-full flex justify-between items-center rounded-lg">
     <div className="flex gap-x-[12px]">
       {/* Dropdown for "Show" */}
       <div className="h-full flex items-center gap-x-[9px] w-fit">
-        <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
+        <span className="text-[16px] font-medium leading-[19.2px] text-[#444444] ml-2">
           Show
         </span>
         <PacificDropdownSelector

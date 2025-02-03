@@ -1,7 +1,9 @@
-"use client";
+"use client"
 
+import { useState } from "react"
+import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import PacificDropdownSelector from "@/components/ui/PacificDropdownSelector";
-import { useState } from "react";
 
 // Demo lists for the dropdowns
 const showList = [
@@ -10,21 +12,20 @@ const showList = [
   { id: 3, name: "Expired", value: "expired" },
 ];
 
-const ChoseStoresList = [
-  { id: 1, name: "Chose stores", value: "Chose stores" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
-];
-const FilterByCtegoryList = [
-  { id: 1, name: "Chose Date Range", value: "Filter By category" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
-];
+
+
 
 function CustomerFilter() {
   const [show, setShow] = useState<string>("all"); // Default to "all"
-  const [stores, setStores] = useState<string>("Chose stores"); // Default to "auctions"
-  const [ctegorys, setCtegorys] = useState<string>("Filter By category"); // Default to "auctions"
+  const [searchQuery, setSearchQuery] = useState("")
+  const [showSuggestions, setShowSuggestions] = useState(false)
+
+  // This is a mock list of suggestions. In a real application, you'd fetch these from your backend or generate them based on your data.
+  const suggestions = ["Store 1", "Store 2", "Store 3", "Product A", "Product B", "Category X", "Category Y"]
+
+  const filteredSuggestions = suggestions.filter((suggestion) =>
+    suggestion.toLowerCase().includes(searchQuery.toLowerCase()),
+  )
 
   return (
     <div className="my-[30px] flex h-[60px] w-full items-center justify-between rounded-[12px] bg-white p-[8px]">
@@ -42,21 +43,42 @@ function CustomerFilter() {
         </div>
         {/* Dropdown for "Categories" */}
         <div className="flex h-full items-center gap-2">
-          <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
-            Entries
-          </span>
-          <PacificDropdownSelector
-            list={ChoseStoresList}
-            selectedValue={stores}
-            onValueChange={setStores}
-          />
-        </div>
-        <div className="flex h-full items-center gap-2">
-          <PacificDropdownSelector
-            list={FilterByCtegoryList}
-            selectedValue={ctegorys}
-            onValueChange={setCtegorys}
-          />
+          <span className="text-sm">Entries</span>
+
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <Popover open={showSuggestions && filteredSuggestions.length > 0} onOpenChange={setShowSuggestions}>
+                <PopoverTrigger asChild>
+                  <Input
+                    type="search"
+                    placeholder="Search..."
+                    className="w-[200px]"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value)
+                      setShowSuggestions(true)
+                    }}
+                  />
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <ul className="max-h-[200px] overflow-auto">
+                    {filteredSuggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => {
+                          setSearchQuery(suggestion)
+                          setShowSuggestions(false)
+                        }}
+                      >
+                        {suggestion}
+                      </li>
+                    ))}
+                  </ul>
+                </PopoverContent>
+              </Popover>
+            </div>
+          </div>
         </div>
       </div>
       <div>
