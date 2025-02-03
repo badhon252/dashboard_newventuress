@@ -64,10 +64,10 @@ export function AddNewProduct() {
   }
 
   return (
-    <div className="w-full mx-auto p-6">
-      <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
-        <div className="flex flex-col space-y-1.5 p-6 bg-[#1a237e] text-white rounded-t-lg">
-          <h3 className="text-2xl font-semibold">Add New Product</h3>
+    <div className="w-full mx-auto">
+      <div className="rounded-2xl border bg-card shadow-sm p-[32px] text-[#444444] text-[16px]">
+        <div className="flex flex-col space-y-1.5 p-5 bg-[#1a237e] text-white rounded-t-3xl h-[78px]">
+          <h3 className="text-[32px] font-semibold">Add New Product</h3>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-6">
