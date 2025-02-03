@@ -43,7 +43,7 @@ export default function SocialMediaSettings() {
   }
 
   return (
-    <Card className="w-full mx-auto">
+    <Card className="w-full mx-auto mb-[60px]">
       <CardHeader>
         <div className="mb-6 rounded-t-lg bg-primary p-4">
           <h1 className="text-[28px] font-semibold text-white">Social Media Settings</h1>

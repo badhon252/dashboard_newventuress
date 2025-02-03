@@ -5,6 +5,7 @@ import DashboardOverview from "../_components/dashBoardOverview";
 import MostSoldItems from "../_components/MostSoldItems";
 import ProfileCompletion from "../_components/ProfileCompletion";
 import GeoChart from "../_components/TopUserCountries";
+import { SalesVolumeChart } from "./_components/totalPaymentVolume/_componenets/sales-volume-chart";
 import TotalPaymentVolume from "./_components/totalPaymentVolume/totalPaymentVolume";
 
 const Dashboard = () => {
@@ -36,7 +37,7 @@ const Dashboard = () => {
           <TotalPaymentVolume/>
         </div>
         <div className="">
-          <h1>h2</h1>
+        <SalesVolumeChart />
         </div>
       </div>
     </div>
