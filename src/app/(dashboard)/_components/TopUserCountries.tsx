@@ -125,7 +125,7 @@ export default function GeoChart() {
       <CardContent>
         <div className="relative">
           <div id="geo-chart" className="w-full h-[576px]" />
-          <div className="absolute bottom-4">
+          <div className="absolute">
             <Button variant="secondary" size="icon" 
               onClick={() => {
                 setZoom((prev) => Math.min(prev + 0.5, 4));
@@ -147,7 +147,7 @@ export default function GeoChart() {
           </div>
         </div>
 
-        <div className="mt-3 space-y-4">
+        <div className="mt-16 space-y-4">
           {countryDataByYear[year].map(({ country, percentage, flag }) => (
             <div key={country} className="flex items-center gap-2">
               <Image src={flag} alt={`${country} flag`} width={24} height={18} className="w-8 h-auto rounded-sm" />

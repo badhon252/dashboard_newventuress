@@ -1,8 +1,12 @@
-"use client";
+"use client"
 
-import PacificDropdownSelector from "@/components/ui/PacificDropdownSelector";
-import { useState } from "react";
-
+import { useState, useEffect } from "react"
+import PacificDropdownSelector from "@/components/ui/PacificDropdownSelector"
+import DateRangePicker from "./Store-date-range"
+import { Button } from "@/components/ui/button"
+import { ChevronDown } from "lucide-react"
+import { format } from "date-fns"
+import type { DateRange } from "react-day-picker"
 // Demo lists for the dropdowns
 const showList = [
   { id: 1, name: "All", value: "all" },
@@ -15,16 +19,31 @@ const ChoseStoresList = [
   { id: 2, name: "Sales", value: "sales" },
   { id: 3, name: "Rentals", value: "rentals" },
 ];
-const FilterByCtegoryList = [
-  { id: 1, name: "Chose Date Range", value: "Filter By category" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
-];
+
 
 function StoreFilter() {
   const [show, setShow] = useState<string>("all"); // Default to "all"
   const [stores, setStores] = useState<string>("Chose stores"); // Default to "auctions"
-  const [ctegorys, setCtegorys] = useState<string>("Filter By category"); // Default to "auctions"
+  const [date, setDate] = useState<DateRange | undefined>()
+
+  useEffect(() => {
+    if (date) {
+      console.log("Date Range Changed:", {
+        from: date.from ? format(date.from, "yyyy-MM-dd") : undefined,
+        to: date.to ? format(date.to, "yyyy-MM-dd") : undefined,
+      })
+    }
+  }, [date])
+  
+  const formatDateRange = (range: DateRange | undefined) => {
+    if (range?.from) {
+      if (range.to) {
+        return `${format(range.from, "LLL dd, y")} - ${format(range.to, "LLL dd, y")}`
+      }
+      return format(range.from, "LLL dd, y")
+    }
+    return "Pick a date range"
+  }
 
   return (
     <div className="h-[60px] p-[8px] bg-white w-full flex items-center justify-between rounded-[12px]">
@@ -52,10 +71,21 @@ function StoreFilter() {
           />
         </div>
         <div className="h-full flex items-center gap-2">
-          <PacificDropdownSelector
-            list={FilterByCtegoryList}
-            selectedValue={ctegorys}
-            onValueChange={setCtegorys}
+        <DateRangePicker
+            date={date}
+            onDateChange={(newDate) => {
+              setDate(newDate)
+              console.log("Date Range Selected:", {
+                from: newDate?.from ? format(newDate.from, "yyyy-MM-dd") : undefined,
+                to: newDate?.to ? format(newDate.to, "yyyy-MM-dd") : undefined,
+              })
+            }}
+            trigger={
+              <Button variant="outline" className="w-auto justify-start text-left font-normal bg-primary text-[#F5F5F5] hover:text-[#F5F5F5]">
+                {formatDateRange(date)}
+                <ChevronDown />
+              </Button>
+            }
           />
         </div>
       </div>
