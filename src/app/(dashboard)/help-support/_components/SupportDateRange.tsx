@@ -35,7 +35,7 @@ export default function DateRangePicker({
     <div className={cn("grid gap-2", className)}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild onClick={() => setOpen(true)}>{trigger}</PopoverTrigger>
-        <PopoverContent className="w-[600px] mt-1 2xl:w-[666px] bg-[#E6EEF6] p-[12px]" align="start">
+        <PopoverContent className="w-[600px] 2xl:w-[666px] bg-[#E6EEF6] p-[12px]" align="start">
           <div className="flex items-center justify-between text-[#444444] mb-3">
             <h4 className="text-sm font-normal">Please Select A Date Range</h4>
             <Button

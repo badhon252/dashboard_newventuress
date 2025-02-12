@@ -8,9 +8,6 @@ import TableAndAddFromToggler from "./_components/TableAndAddFromToggler";
 const page = () => {
   return (
     <div>
-      {/* <CuponHeader/>
-      <CuponFilter />
-      <CuponContainer /> */}
       <TableAndAddFromToggler/>
     </div>
   );

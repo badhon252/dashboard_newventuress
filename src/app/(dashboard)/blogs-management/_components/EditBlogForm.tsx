@@ -34,7 +34,7 @@ const EditBlogForm: React.FC = () => {
         console.log(data);
     };
     return (
-        <div className="bg-white rounded-[24px] p-[32px]">
+        <div className="bg-white rounded-[24px]">
             <div
                 className={
                     "flex justify-start items-center bg-primary px-4 py-3 mb- rounded-t-lg text-white text-[32px] leading-[38px] font-semibold"
@@ -43,9 +43,9 @@ const EditBlogForm: React.FC = () => {
                 Edit Blogs
             </div>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-[30px]">
                     <div className="flex gap-[54px]">
-                        <div className="w-[58%] space-y-[16px] mt-[60px]">
+                        <div className="w-[58%] space-y-[16px] ">
                             <FormField
                                 control={form.control}
                                 name="title"

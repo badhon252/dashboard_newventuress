@@ -57,7 +57,7 @@ function CustomerFilter() {
   return (
     <div className="mb-[30px] flex h-[60px] w-full items-center justify-between rounded-[12px] bg-white p-[8px]">
       {/* Dropdown for "Show" */}
-      <div className="flex gap-x-[28px]">
+      <div className="flex gap-x-2 2xl:gap-x-[28px]">
         <div className="flex h-full w-fit items-center gap-x-[9px]">
           <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
             Show

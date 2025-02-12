@@ -63,7 +63,7 @@ export default function AnalyticsChart() {
   return (
     <Card className="w-full max-w-md bg-white rounded-xl shadow-sm">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
-        <CardTitle className="text-[28px] font-semibold text-gray-900">Analytics</CardTitle>
+        <CardTitle className="text-[28px] font-semibold text-[#494949]">Analytics</CardTitle>
         <Select value={month} onValueChange={(value) => setMonth(value as MonthKey)}>
           <SelectTrigger className="w-[90px] bg-primary text-primary-foreground focus:ring-0">
             <SelectValue />
@@ -106,11 +106,11 @@ export default function AnalyticsChart() {
           </div>
         </ChartContainer>
 
-        <div className="mt-6 flex justify-center gap-6">
+        <div className="mt-6 flex justify-center gap-1 2xl:gap-6">
           {data.map((item, index) => (
             <div key={index} className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
-              <span className="text-sm whitespace-nowrap">{item.name}</span>
+              <div className="h-3 w-4 2xl:w-3 rounded-full" style={{ backgroundColor: item.color }} />
+              <span className="text-sm ">{item.name}</span>
             </div>
           ))}
         </div>

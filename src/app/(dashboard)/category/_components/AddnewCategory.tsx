@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CardContent, CardHeader,  } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -80,53 +80,52 @@ export default function AddCategoryForm() {
 
   return (
     <div className=" bg-white rounded-2xl">
-      <div className="mb-6 rounded-t-lg bg-primary p-4">
+      <div className="rounded-t-3xl bg-primary px-[32px]  py-4">
         <h1 className="text-[28px] font-semibold text-white">
           Add New Category
         </h1>
       </div>
-      <div className="">
-        <CardHeader className=""></CardHeader>
+      <div className="mt-4">
         <CardContent className="p-6">
           <form className="grid gap-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="space-y-2 ">
-                  <Label htmlFor="category-name " className="text-[#444444]">
+                  <Label htmlFor="category-name" className="text-[#444444] text-[16px] font-normal">
                     Category Name <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="category-name" required />
+                  <Input id="category-name" required  className="h-[51px] border border-[#B0B0B0]"/>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="sub-category" className="text-[#444444]">
+                  <Label htmlFor="sub-category" className="text-[#444444] text-[16px] font-normal">
                     Sub-category <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="sub-category" required />
+                  <Input id="sub-category" required  className="h-[51px] border border-[#B0B0B0]"/>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="description" className="text-[#444444]">
+                  <Label htmlFor="description" className="text-[#9C9C9C] text-[16px] font-normal">
                     Short Description
                   </Label>
                   <Textarea
                     id="description"
                     placeholder="Type Description here"
-                    className="min-h-[100px]"
+                    className="min-h-[91px] border border-[#B0B0B0]"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="slug" className="text-[#444444]">
+                  <Label htmlFor="slug" className="text-[#444444] text-[16px] font-normal">
                     Slug <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="slug" required />
+                  <Input id="slug" required  className="h-[51px] border border-[#B0B0B0]"/>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <Label className="text-[#444444]">Category Image</Label>
+                  <Label className="text-[#232321] text-[16px] font-normal">Category Image</Label>
                   <div
                     className={`mt-2 border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors
                     ${
@@ -203,7 +202,7 @@ export default function AddCategoryForm() {
                     </button>
                   </div>
                   <div className="flex justify-end gap-2 mt-4">
-                    <Button variant="outline">Update</Button>
+                    <Button variant="outline" className=" border border-[#121d42b2]">Update</Button>
                     <Button className="bg-primary hover:bg-navy-900 ">
                       Confirm
                     </Button>
@@ -214,7 +213,7 @@ export default function AddCategoryForm() {
 
             <div className="flex items-center space-x-2">
               <Checkbox id="save-info" />
-              <Label htmlFor="save-info" className="text-sm text-[#444444]">
+              <Label htmlFor="save-info" className="text-[12px] font-normal text-[#919792]">
                 Save this information for faster Adding Products
               </Label>
             </div>

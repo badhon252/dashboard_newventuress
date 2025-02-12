@@ -8,7 +8,7 @@ import { getSalesData, type SalesData } from "./get-sales-data"
 import { YearSelector } from "./year-selector"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function SalesVolumeChart() {
+export function   SalesVolumeChart() {
   const [data, setData] = useState<SalesData[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedYear, setSelectedYear] = useState(2024)
@@ -67,13 +67,13 @@ export function SalesVolumeChart() {
               color: "#1A237E",
             },
           }}
-          className="pb-[10px] "
+          className=" pb-[10px]"
         >
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" >
             <BarChart
               data={filteredData}
               margin={{ top: 5, right: 5, left: 1, bottom: 5 }}
-              className="transition-opacity duration-300"
+              className="transition-opacity duration-300 min-h-[400px] 2xl:min-h-[0]"
               barGap={5} // Add gap between bars
             >
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
@@ -91,6 +91,7 @@ export function SalesVolumeChart() {
                 fill="var(--color-volume)"
                 radius={[4, 4, 0, 0]}
                 barSize={20} // Set bar width to 20px
+                
                 animationDuration={300}
               />
             </BarChart>

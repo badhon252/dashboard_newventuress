@@ -8,7 +8,7 @@ import TotalPaymentVolume from "./_components/totalPaymentVolume/totalPaymentVol
 
 const Dashboard = () => {
   return (
-    <div className="w-full px-5 ">
+    <div className="w-full">
     
 
       {/* Dashboard Overview Section */}
@@ -28,7 +28,7 @@ const Dashboard = () => {
           <AnalyticsChart />
         </div>
       </div>
-      <div className="w-full mx-auto grid grid-cols-2 gap-8 my-[30px]">
+      <div className="w-full grid grid-cols-2 gap-4 2xl:gap-8 my-[30px]">
         {/* Geo Chart Component */}
         <div>
           <TotalPaymentVolume/>

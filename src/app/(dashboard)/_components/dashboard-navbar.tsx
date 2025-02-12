@@ -20,11 +20,11 @@ const DashNav = () => {
     <div style={{
       backgroundImage: "url('/assets/img/dashboard_nav_bg.svg')",
     }}  className="bg-cover bg-center bg-no-repeat w-full h-[94px] bg-white flex items-center px-[38px]">
-      <div className="ml-[336px] flex justify-between w-full">
+      <div className="ml-[230px] 2xl:ml-[336px] flex justify-between w-full">
         <div className="flex items-center gap-x-[16px]">
           <div
             className={cn(
-              "w-full h-[46px] rounded-[4px] pl-[16px] flex items-center gap-[12px] font-medium text-[18px] leading-[21.4px] transition-colors duration-300 bg-transparent text-[#152764] "
+              "w-full h-[46px] rounded-[4px] pl-[16px] flex items-center gap-[12px] font-medium text-[16px] 2xl:text-[18px] leading-[21.4px] transition-colors duration-300 bg-transparent text-[#152764] "
             )}
           >
             {currentTab?.icon} {currentTab?.name}

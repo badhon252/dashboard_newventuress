@@ -73,7 +73,7 @@ export default function OrderDetails({
           </div>
         </DialogHeader>
 
-        <ScrollArea className="p-6 max-h-[700px]">
+        <ScrollArea className="p-6 max-h-[600px] 2xl:max-h-[700px]">
           <div className="flex flex-wrap gap-8">
             <div className="relative flex flex-wrap shrink items-start bg-white rounded-xl border border-solid border-stone-300">
               <AddressCard
