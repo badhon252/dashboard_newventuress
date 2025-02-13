@@ -89,7 +89,7 @@ export const MediaColumns: ColumnDef<ReviewdemoTableItemsType>[] = [
           </div>
           
           {/* Tooltip */}
-          <div className="absolute left-0 top-full mt-1 w-max max-w-xs bg-primary z-20 text-white p-4 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="absolute left-[-200px] 2xl:left-0 top-full mt-1 w-max max-w-xs bg-primary z-20 text-white p-4 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             {row.original.Comments}
           </div>
         </div>

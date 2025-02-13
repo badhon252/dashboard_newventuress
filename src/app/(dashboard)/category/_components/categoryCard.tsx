@@ -16,7 +16,6 @@ interface CategoryCardProps {
 export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
-
   const handleModal = () => {
     setIsOpen(true);
   };
@@ -111,7 +110,7 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
 
             <div className="relative z-10">
-              <EditCategory />
+              <EditCategory title={title} imageUrl={imageUrl} />
             </div>
           </div>
         </section>}
