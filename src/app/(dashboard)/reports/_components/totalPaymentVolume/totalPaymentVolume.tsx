@@ -10,14 +10,14 @@ import { paymentVolumeData } from "./_componenets/data"
 function TotalPaymentVolume() {
   const [selectedYear, setSelectedYear] = useState("2024")
   return (
-    <Card className="w-full">
+    <Card className=" w-[460px] 2xl:w-full">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-lg font-medium">Total Payment Volume</CardTitle>
         <Select value={selectedYear} onValueChange={setSelectedYear}>
           <SelectTrigger className="w-[80px]">
             <SelectValue placeholder="Year" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="">
             <SelectItem value="2024">2024</SelectItem>
             <SelectItem value="2023">2023</SelectItem>
             <SelectItem value="2022">2022</SelectItem>
@@ -32,7 +32,7 @@ function TotalPaymentVolume() {
               color: "hsl(var(--primary))",
             },
           }}
-          className="h-[350px]"
+          className="h-[350px] w-[420px] 2xl:w-full"
         >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={paymentVolumeData[selectedYear]}>

@@ -34,7 +34,7 @@ export function DataTable<TData, TValue>({
       <div
         className={cn(
           titleClass,
-          "bg-primary px-[32px] font-semibold py-3 mx-[32px] rounded-t-lg text-white text-[28px]"
+          "bg-primary px-[32px] font-semibold py-3 mx-[32px] rounded-t-3xl text-white text-[28px]"
         )}
       >
         {title}

@@ -51,13 +51,13 @@ export default function BlogGallery() {
             {files.map((file, index) => {
               const imageUrl = URL.createObjectURL(file);
               return (
-                <div key={index} className="relative group w-[500px]">
+                <div key={index} className="relative group w-[370px] 2xl:w-[470px]">
                   <Image
                     src={imageUrl}
                     alt={file.name}
                     width={100}
                     height={100}
-                    className="!w-full h-24 object-cover rounded-lg"
+                    className="w-full h-24 object-cover rounded-lg"
                   />
                   <button
                     className="absolute top-1 right-1 bg-white p-1 rounded-full shadow-sm z-10"

@@ -15,7 +15,7 @@ export default function ProductReview({
 }: ProductReviewProps) {
   return (
     <div className="flex items-center gap-4 p-4 rounded-lg max-w-md">
-      <div className="relative w-[142px] h-[110px] shrink-0">
+      <div className="relative w-[100px] h-[80px] 2xl:w-[142px] 2xl:h-[110px] shrink-0">
         <Image
           src="/assets/img/reviewProduct.png"
           alt={title}
@@ -28,7 +28,7 @@ export default function ProductReview({
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={`w-5 h-5 ${
+              className={`w-4 h-4 ${
                 i < rating
                   ? "fill-[#FF8A00] text-[#FF8A00]"
                   : "fill-[#CCCCCC] text-[#CCCCCC]"

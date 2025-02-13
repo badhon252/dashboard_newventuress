@@ -24,14 +24,22 @@ const ChoseStoresList = [
 
 const ChosebyStatusList = [
   { id: 1, name: "Chose by Status", value: "Chose by Status" },
-  { id: 2, name: "Sales", value: "sales" },
-  { id: 3, name: "Rentals", value: "rentals" },
+  { id: 2, name: "Pending", value: "Pending" },
+  { id: 3, name: "Completed", value: "Completed" },
+  { id: 4, name: "Processing", value: "Processing" },
+]
+const ChosebyPriceList = [
+  { id: 1, name: "Chose price", value: "Chose Price" },
+  { id: 2, name: "Default", value: "Default" },
+  { id: 3, name: "Price (Low>High)", value: "Price (Low>High)" },
+  { id: 4, name: "Price (High>Low)", value: "Price (High>Low)" },
 ]
 
 function OrderFilter() {
   const [show, setShow] = useState<string>("all")
   const [stores, setStores] = useState<string>("Chose stores")
   const [chosebyStatus, setChosebyStatus] = useState<string>("Chose by Status")
+  const [chosebyPrice, setChosebyPrice] = useState<string>("Chose Price")
   const [date, setDate] = useState<DateRange | undefined>()
 
   // Log date changes
@@ -55,11 +63,11 @@ function OrderFilter() {
   }
 
   return (
-    <div className="h-[68px] mt-[30px] p-[8px] bg-white w-full flex items-center justify-between rounded-[12px]">
-      <div className="flex gap-x-[28px]">
+    <div className="h-[68px] mt-[30px] py-[8px] px-[16px] bg-white w-full flex items-center justify-between rounded-[12px]">
+      <div className="flex gap-x-4 2xl:gap-x-[28px]">
         <div className="h-full flex items-center gap-x-[9px] w-fit">
           <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">Show</span>
-          <PacificDropdownSelector list={showList} selectedValue={show} onValueChange={setShow} />
+          <PacificDropdownSelector list={showList} selectedValue={show} onValueChange={setShow}/>
         </div>
         <div className="h-full flex items-center gap-2">
           <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">Entries</span>
@@ -88,6 +96,13 @@ function OrderFilter() {
             list={ChosebyStatusList}
             selectedValue={chosebyStatus}
             onValueChange={setChosebyStatus}
+          />
+        </div>
+        <div className="h-full flex items-center gap-2">
+          <PacificDropdownSelector
+            list={ChosebyPriceList}
+            selectedValue={chosebyPrice}
+            onValueChange={setChosebyPrice}
           />
         </div>
       </div>
