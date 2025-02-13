@@ -61,7 +61,7 @@ export default function CategoryList() {
     <div>
       <div className="min-h-screen max-w-[max-w-[1506px]]  p-4 md:p-6 bg-white rounded-[12px]">
         <div className="mx-auto ">
-          <div className="mb-6 rounded-t-lg bg-primary p-4">
+          <div className="mb-6 rounded-t-3xl bg-primary p-4">
             <h1 className="text-[28px] font-semibold text-white">
               Category List
             </h1>
@@ -76,13 +76,6 @@ export default function CategoryList() {
                 onDelete={() => console.log(`Delete ${category.title}`)}
               />
             ))}
-          </div>
-          <div>
-            <div />
-            <div>
-              <div />
-              
-            </div>
           </div>
         </div>
       </div>

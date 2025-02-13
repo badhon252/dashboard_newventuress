@@ -24,10 +24,10 @@ export const CustomerListColumn: ColumnDef<DemoTableItemsType>[] = [
             <h4 className="text-gradient text-[18px] font-semibold">
               {row.original.name}
             </h4>
-            <h5 className="text-gradient py-2 text-[16px] font-normal">
-              <span className="text-[#3D3D3D]"> {row.original.userEmail}</span>
+            <h5 className="py-2 text-[16px] font-normal">
+              <span className="text-[#444444]"> {row.original.userEmail}</span>
             </h5>
-            <p className="text-wrap text-[16px] font-normal">
+            <p className="text-[16px] font-normal text-[#444444]">
               {row.original.userInfo}
             </p>
           </div>

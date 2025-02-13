@@ -11,7 +11,7 @@ import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
 
 const Dashboard = () => {
   return (
-    <div className="w-full px-5 ">
+    <div className="w-full">
       {/* Profile Completion Section */}
       <ProfileCompletion />
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
       </section>
 
       {/* Main Content Grid */}
-      <div className="w-full mx-auto grid grid-cols-6 gap-8 my-[30px] mt-10">
+      <div className="w-full mx-auto grid grid-cols-6 gap-4 2xl:gap-8 my-[30px] mt-10">
         {/* Geo Chart Component */}
         <GeoChart />
         <div className="col-span-2">

@@ -7,11 +7,19 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { ImageIcon, X } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function SocialMediaSettings() {
   const [facebookImagePreview, setFacebookImagePreview] = useState<string | null>(null)
   const [instagramImagePreview, setInstagramImagePreview] = useState<string | null>(null)
+
+  // Cleanup function for object URLs
+  useEffect(() => {
+    return () => {
+      if (facebookImagePreview) URL.revokeObjectURL(facebookImagePreview)
+      if (instagramImagePreview) URL.revokeObjectURL(instagramImagePreview)
+    }
+  }, [facebookImagePreview, instagramImagePreview])
 
   // Reusable delete handler
   const handleDeleteImage = (inputId: string, setImagePreview: React.Dispatch<React.SetStateAction<string | null>>) => {
@@ -20,25 +28,19 @@ export default function SocialMediaSettings() {
     if (fileInput) fileInput.value = ""
   }
 
-  const handleFacebookImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setImagePreview: React.Dispatch<React.SetStateAction<string | null>>,
+  ) => {
     const file = e.target.files?.[0]
     if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setFacebookImagePreview(reader.result as string)
+      try {
+        const objectUrl = URL.createObjectURL(file)
+        setImagePreview(objectUrl)
+      } catch (error) {
+        console.error("Error creating object URL:", error)
+        alert("Failed to load the image. Please try again.")
       }
-      reader.readAsDataURL(file)
-    }
-  }
-
-  const handleInstagramImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setInstagramImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
     }
   }
 
@@ -70,15 +72,16 @@ export default function SocialMediaSettings() {
                   accept="image/jpeg,image/png"
                   className="hidden"
                   id="facebook-image"
-                  onChange={handleFacebookImage}
+                  onChange={(e) => handleImageUpload(e, setFacebookImagePreview)}
                 />
                 <label htmlFor="facebook-image" className="cursor-pointer">
                   {facebookImagePreview ? (
                     <div className="relative w-full h-48">
                       <Image
-                        src={facebookImagePreview}
+                        src={facebookImagePreview || "/placeholder.svg"}
                         alt="Facebook preview"
-                        className="rounded-lg object-cover w-full h-full"
+                        className="rounded-lg object-cover"
+                        fill
                       />
                       {/* Delete icon */}
                       <button
@@ -113,6 +116,12 @@ export default function SocialMediaSettings() {
               <Textarea id="instagram-description" />
             </div>
             <div className="space-y-2">
+              <Label htmlFor="instagram-description" className="text-base text-[#444444]">
+                Instagram Description
+              </Label>
+              <Textarea id="instagram-description" />
+            </div>
+            <div className="space-y-2">
               <Label className="text-base text-[#444444]">Instagram Image</Label>
               <div className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50 transition-colors">
                 <Input
@@ -120,15 +129,16 @@ export default function SocialMediaSettings() {
                   accept="image/jpeg,image/png"
                   className="hidden"
                   id="instagram-image"
-                  onChange={handleInstagramImage}
+                  onChange={(e) => handleImageUpload(e, setInstagramImagePreview)}
                 />
                 <label htmlFor="instagram-image" className="cursor-pointer">
                   {instagramImagePreview ? (
                     <div className="relative w-full h-48">
                       <Image
-                        src={instagramImagePreview}
+                        src={instagramImagePreview || "/placeholder.svg"}
                         alt="Instagram preview"
-                        className="rounded-lg object-cover w-full h-full"
+                        className="rounded-lg object-cover"
+                        fill
                       />
                       {/* Delete icon */}
                       <button

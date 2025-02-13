@@ -65,10 +65,10 @@ const AddAuctionForm: React.FC = () => {
   const [date24, setDate24] = useState<Date | undefined>(undefined);
   return (
     <div className="pb-[32px]">
-    <div className="bg-white rounded-[24px] p-[32px]">
+    <div className="bg-white rounded-[24px] p-[30px]">
       <div
         className={
-          "bg-primary px-4 py-3 mb- rounded-t-lg text-white text-[32px] leading-[38px] font-semibold"
+          "bg-primary px-[32px] py-3 mb- rounded-t-3xl text-white text-[32px] leading-[38px] font-semibold"
         }
       >
         Add Auction
@@ -76,13 +76,13 @@ const AddAuctionForm: React.FC = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex gap-4">
-            <div className="w-[58%] space-y-[16px] mt-[16px]">
+            <div className="w-[58%] space-y-[16px] mt-[30px]">
               <FormField
                 control={form.control}
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="text-[#444444] text-[16px] font-normal">
                       Title<span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
@@ -104,7 +104,7 @@ const AddAuctionForm: React.FC = () => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Short Description</FormLabel>
+                    <FormLabel className="text-[#9C9C9C] text-[16px] font-normal">Short Description</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Type Description Here"
@@ -124,7 +124,7 @@ const AddAuctionForm: React.FC = () => {
                 name="productType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="text-[#9C9C9C] text-[16px] font-normal">
                       Product Type<span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
@@ -150,7 +150,7 @@ const AddAuctionForm: React.FC = () => {
                               }}
                               className="h-4 w-4 border-[#9C9C9C]"
                             />
-                            <label className="text-sm text-gray-700">
+                            <label className="text-sm text-[#9C9C9C]">
                               {type}
                             </label>
                           </div>
@@ -166,7 +166,7 @@ const AddAuctionForm: React.FC = () => {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="text-[#444444] text-[16px] font-normal">
                       Category<span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
@@ -188,7 +188,7 @@ const AddAuctionForm: React.FC = () => {
                 name="startingPrice"
                 render={({ field }) => (
                   <FormItem className="flex flex-col ">
-                    <FormLabel className=" leading-tight text-[#444444] text-[14px] font-semibold">
+                    <FormLabel className=" leading-tight text-[#444444] text-[14px] font-normal">
                       Starting Price
                     </FormLabel>
                     <div className="flex justify-between mt-2 w-full whitespace-nowrap rounded-md border border-solid border-neutral-400 h-[51px]">
@@ -216,7 +216,7 @@ const AddAuctionForm: React.FC = () => {
                     name="startingTime"
                     render={({}) => (
                       <FormItem>
-                        <FormLabel>Starting Time</FormLabel>
+                        <FormLabel className="text-[#444444] text-[16px] font-normal">Starting Time</FormLabel>
                         <FormControl>
                         <DateTimePicker
                           hourCycle={24}
@@ -241,7 +241,7 @@ const AddAuctionForm: React.FC = () => {
                     name="endingTime"
                     render={({}) => (
                       <FormItem>
-                        <FormLabel>Ending Time</FormLabel>
+                        <FormLabel className="text-[#444444] text-[16px] font-normal">Ending Time</FormLabel>
                         <FormControl>
                           <DateTimePicker
                             hourCycle={24}
@@ -268,7 +268,7 @@ const AddAuctionForm: React.FC = () => {
                     name="sku"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>SKU</FormLabel>
+                        <FormLabel className="text-[#444444] text-[16px] font-normal">SKU</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Fox-0369"
@@ -290,7 +290,7 @@ const AddAuctionForm: React.FC = () => {
                     name="stockQuantity"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Stock Quantity</FormLabel>
+                        <FormLabel className="text-[#444444] text-[16px] font-normal">Stock Quantity</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="123"

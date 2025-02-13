@@ -2,18 +2,21 @@
 
 import { Button } from "@/components/ui/button"
 import { Box } from "lucide-react"
-import { useState } from "react"
-import { BidsModal } from "./bids-modal"
-import type React from "react" // Added import for React
+import type React from "react"
 
 interface AuctionsHeaderProps {
   showAddAuction: boolean
   setShowAddAuction: React.Dispatch<React.SetStateAction<boolean>>
+  showAddBids: boolean
+  setShowAddBids: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AuctionsHeader: React.FC<AuctionsHeaderProps> = ({ showAddAuction, setShowAddAuction }) => {
-  const [showBidsModal, setShowBidsModal] = useState(false)
-
+const AuctionsHeader: React.FC<AuctionsHeaderProps> = ({
+  showAddAuction,
+  setShowAddAuction,
+  showAddBids,
+  setShowAddBids,
+}) => {
   return (
     <>
       <div className="h-[80px] w-full bg-white p-[8px] rounded-[12px] flex items-center justify-between">
@@ -25,8 +28,8 @@ const AuctionsHeader: React.FC<AuctionsHeaderProps> = ({ showAddAuction, setShow
         </div>
         <div className="flex gap-4">
           <div>
-            <Button onClick={() => setShowBidsModal(true)}>
-              Bids Settings <Box className="ml-2 h-4 w-4" />
+            <Button onClick={() => setShowAddBids((prev) => !prev)}>
+              {showAddBids ? "Bids Settings" : "Save Settings"} <Box className="ml-2 h-4 w-4" />
             </Button>
           </div>
           <div>
@@ -36,8 +39,6 @@ const AuctionsHeader: React.FC<AuctionsHeaderProps> = ({ showAddAuction, setShow
           </div>
         </div>
       </div>
-
-      <BidsModal isOpen={showBidsModal} onClose={() => setShowBidsModal(false)} />
     </>
   )
 }

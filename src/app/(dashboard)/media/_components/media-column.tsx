@@ -3,7 +3,7 @@
 import { DemoTableItemsType } from "@/data/demo";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-import { MoreHorizontal } from "lucide-react"; // Make sure to import the MoreHorizontal icon from lucide-react
+import { ImagePlus, MoreHorizontal } from "lucide-react"; // Make sure to import the MoreHorizontal icon from lucide-react
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"; // Import your dropdown components
 import { Checkbox } from "@/components/ui/checkbox";
 // This type is used to define the shape of our data.
@@ -32,12 +32,17 @@ export const MediaColumns: ColumnDef<DemoTableItemsType>[] = [
     enableSorting: false,
     enableHiding: false,
   },
- 
   {
-    header: "Image",
+    accessorKey: "image",
+    header: () => (
+      <div className="flex items-center justify-center gap-2">
+        <ImagePlus className="w-[16px] h-[16px]" />
+        <span>Image</span>
+      </div>
+    ),
     cell: ({ row }) => {
       return (
-        <div className="flex justify-center">
+        <div className="flex items-center gap-2 justify-center">
           <Image
             src={row.original.image}
             height={70}
@@ -48,7 +53,7 @@ export const MediaColumns: ColumnDef<DemoTableItemsType>[] = [
         </div>
       );
     },
-  },
+  },  
   {
     header: "Associate",
     cell: ({ row }) => {

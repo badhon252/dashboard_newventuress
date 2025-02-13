@@ -9,7 +9,7 @@ const CustomerContainer = () => {
   
   return (
     <section className="w-full">
-      <div className="h-auto w-full rounded-[24px] bg-white shadow-[0px_0px_22px_8px_#C1C9E4]">
+      <div className="h-auto w-full rounded-[24px] bg-white shadow-[0px_0px_22px_8px_#C1C9E4] customer-table">
         <TableContainer data={CustomerListData} columns={CustomerListColumn} />
       </div>
       <div className="my-[40px] flex w-full justify-between">
@@ -49,7 +49,7 @@ const TableContainer = ({
   });
   return (
     <>
-      <DataTable table={table} columns={columns} title="Customer Lists" />
+      <DataTable  table={table} columns={columns} title="Customer Lists" />
     </>
   );
 };

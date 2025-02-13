@@ -51,7 +51,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
           </div>
           <div>
             <h4 className="text-[18px] text-gradient font-semibold">{row.original.name}</h4>
-            <div className="flex items-center w-[110px] h-[22px] text-[12px] mt-3 p-[10px] border border-[#9E9E9E] rounded-[24px] shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]">
+            <div className="flex items-center w-[90px] h-[22px] text-[12px] mt-3 p-[10px] border border-[#9E9E9E] rounded-[24px] shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]">
               <Check className="w-[12px] h-[12px] text-[#6E6E6E] mr-2" /> 
               In stock 
             </div>

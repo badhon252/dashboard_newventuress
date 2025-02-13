@@ -40,7 +40,7 @@ export default function ProductGallery() {
 
   return (
     <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-sm">
-      <h2 className="text-lg font-medium mb-4">Product Gallery</h2>
+      <h2 className="text-[#444444] text-[16px] font-normal mb-4">Product Gallery</h2>
 
       {/* Dropzone */}
       <div

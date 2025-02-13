@@ -75,13 +75,30 @@ export const MediaColumns: ColumnDef<ReviewdemoTableItemsType>[] = [
     header: "Comments",
     cell: ({ row }) => {
       return (
-        <div className="w-[518px] text-start" title={row.original.Comments}>
-          {row.original.Comments}
+        <div className="relative group 2xl:w-[518px] text-start">
+          <div 
+            className="overflow-hidden text-ellipsis cursor-pointer"
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              overflow: "hidden",
+            }}
+          >
+            {row.original.Comments}
+          </div>
+          
+          {/* Tooltip */}
+          <div className="absolute left-[-200px] 2xl:left-0 top-full mt-1 w-max max-w-xs bg-primary z-20 text-white p-4 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            {row.original.Comments}
+          </div>
         </div>
-      )
+      );
     },
-    size: 600, // Optional: Set a fixed width for this column
-  },
+    size: 600,
+  }
+  
+  
   
 ];
 
