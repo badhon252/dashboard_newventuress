@@ -1,20 +1,23 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Trash2, Plus, ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function ProductGallery() {
-  const [files, setFiles] = useState<File[]>([]);
+interface ProductGalleryProps {
+  files: File[];
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+}
+
+export default function ProductGallery({ files, setFiles }: ProductGalleryProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const droppedFiles = Array.from(e.dataTransfer.files);
     const imageFiles = droppedFiles.filter(
-      (file) =>
-        file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
+      (file) => file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
     );
     setFiles((prev) => [...prev, ...imageFiles]);
   };
@@ -23,8 +26,7 @@ export default function ProductGallery() {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
       const imageFiles = selectedFiles.filter(
-        (file) =>
-          file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
+        (file) => file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
       );
       setFiles((prev) => [...prev, ...imageFiles]);
     }
@@ -75,6 +77,7 @@ export default function ProductGallery() {
                 width={200}
                 height={200}
                 className="w-full h-32 object-cover rounded-lg"
+                onLoad={() => URL.revokeObjectURL(imageUrl)} // Avoid memory leaks
               />
               <button
                 className="absolute top-1 right-1 bg-white p-1 rounded-full shadow-sm opacity-0 group-hover:opacity-100"

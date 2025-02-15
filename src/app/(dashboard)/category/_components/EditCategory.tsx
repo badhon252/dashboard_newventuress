@@ -1,21 +1,20 @@
-"use client";
-
-import { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageIcon } from "lucide-react";
 import Image from "next/image";
+import { TiEdit } from "react-icons/ti";
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface CategoryCardProps {
   title: string;
   imageUrl: string;
 }
 
-export default function EditCategory({ title }: CategoryCardProps) {
+export default function EditCategory({ title, imageUrl }: CategoryCardProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -27,6 +26,8 @@ export default function EditCategory({ title }: CategoryCardProps) {
     description: "",
     slug: "",
   });
+
+  const [fileName, setFileName] = useState<string | null>(null);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -67,28 +68,18 @@ export default function EditCategory({ title }: CategoryCardProps) {
     };
     reader.onload = (e) => {
       setImagePreview(e.target?.result as string);
+      setFileName(file.name); // Capture the file name
       setUploadProgress(100);
     };
     reader.readAsDataURL(file);
   };
 
-  // const handleDelete = (e: React.MouseEvent) => {
-  //   e.preventDefault();
-  //   setImagePreview(null);
-  //   setUploadProgress(0);
-  //   if (fileInputRef.current) {
-  //     fileInputRef.current.value = "";
-  //   }
-  // };
-
-  const openFileDialog = () => {
-    if (!imagePreview) {
-      fileInputRef.current?.click();
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+  const handleButtonClick = (e: React.MouseEvent, buttonType: "update" | "confirm") => {
+    e.preventDefault();
+    console.log(buttonType, {
+      ...formData,
+      image: fileName, // Log the file name (or file path if you had it available)
+    });
   };
 
   return (
@@ -104,22 +95,22 @@ export default function EditCategory({ title }: CategoryCardProps) {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="categoryName">Category Name <span className="text-red-500">*</span></Label>
-                  <Input id="categoryName" value={title} onChange={handleChange} required className="h-[51px] border border-[#B0B0B0]" />
+                  <Input id="categoryName" value={title} onChange={(e) => setFormData({ ...formData, categoryName: e.target.value })} required className="h-[51px] border border-[#B0B0B0]" />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="subCategory">Sub-category <span className="text-red-500">*</span></Label>
-                  <Input id="subCategory" value={formData.subCategory} onChange={handleChange} required className="h-[51px] border border-[#B0B0B0]" />
+                  <Input id="subCategory" value={formData.subCategory} onChange={(e) => setFormData({ ...formData, subCategory: e.target.value })} required className="h-[51px] border border-[#B0B0B0]" />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="description">Short Description</Label>
-                  <Textarea id="description" value={formData.description} onChange={handleChange} placeholder="Type Description here" className="min-h-[91px] border border-[#B0B0B0]" />
+                  <Textarea id="description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Type Description here" className="min-h-[91px] border border-[#B0B0B0]" />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="slug">Slug <span className="text-red-500">*</span></Label>
-                  <Input id="slug" value={formData.slug} onChange={handleChange} required className="h-[51px] border border-[#B0B0B0]" />
+                  <Input id="slug" value={formData.slug} onChange={(e) => setFormData({ ...formData, slug: e.target.value })} required className="h-[51px] border border-[#B0B0B0]" />
                 </div>
               </div>
 
@@ -129,17 +120,36 @@ export default function EditCategory({ title }: CategoryCardProps) {
                   <Label>Category Image</Label>
                   <div
                     className={`mt-2 border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors
-                    ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"} ${imagePreview ? "p-2" : "p-6"}`}
+                    ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"} ${imagePreview || imageUrl ? "p-2" : "p-6"}`}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
-                    onClick={openFileDialog}
+                    onClick={() => fileInputRef.current?.click()}
                   >
-                    <Input type="file" ref={fileInputRef} className="hidden" accept="image/jpeg,image/png" onChange={handleFileInput} />
-
-                    {imagePreview ? (
+                    <Input
+                      type="file"
+                      ref={fileInputRef}
+                      className="hidden"
+                      accept="image/jpeg,image/png"
+                      onChange={handleFileInput}
+                    />
+                    {imagePreview || imageUrl ? (
                       <div className="relative aspect-video w-full h-[257px]">
-                        <Image src={imagePreview} alt="Category preview" fill className="object-cover rounded" />
+                        <Image
+                          src={imagePreview || imageUrl}
+                          alt="Category preview"
+                          fill
+                          className="object-cover rounded"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            fileInputRef.current?.click();
+                          }}
+                          className="absolute top-2 right-2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 transition"
+                        >
+                          <TiEdit size={20} />
+                        </button>
                       </div>
                     ) : (
                       <div className="flex flex-col items-center gap-2 h-[193px]">
@@ -162,8 +172,10 @@ export default function EditCategory({ title }: CategoryCardProps) {
                   </div>
                 )}
 
-                <Button variant="outline">Update</Button>
-                <Button className="bg-primary hover:bg-navy-900">Confirm</Button>
+                <div className="flex justify-end space-x-4">
+                  <Button variant="outline" onClick={(e) => handleButtonClick(e, "update")}>Update</Button>
+                  <Button className="bg-primary hover:bg-navy-900" onClick={(e) => handleButtonClick(e, "confirm")}>Confirm</Button>
+                </div>
               </div>
             </div>
 

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@/components/ui/button"
-import {Form} from "@/components/ui/form"
+import { Form } from "@/components/ui/form"
 
 import { BasicInfo } from "./product-form/basic-info"
 import { ProductClassification } from "./product-form/product-classification"
@@ -15,8 +15,12 @@ import { AdditionalInfo } from "./product-form/additional-info"
 
 import { type ProductFormValues, productSchema } from "./Product"
 import ProductGallery from "./product-form/product-gallery"
+import { useState } from "react"
 
 export function AddNewProduct() {
+  const [tags, setTags] = useState<string[]>([])
+  const [images, setImages] = useState<File[]>([])
+
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -37,30 +41,29 @@ export function AddNewProduct() {
 
   async function onSubmit(data: ProductFormValues) {
     try {
-      console.log('Form Data:', data)
-
-      console.log('\nPricing Summary:')
-      console.table({
-        Purchase: `$${data.purchasePrice}`,
-        Selling: `$${data.sellingPrice}`,
-        Discount: `$${data.discountPrice}`,
-        Margin: `$${data.sellingPrice - data.purchasePrice}`
-      })
-
-      console.log('\nInventory Status:')
-      console.table({
-        SKU: data.sku,
-        Quantity: data.quantity,
-        Status: data.stockStatus,
-        Size: data.size
-      })
+      const formDataWithImagesAndTags = {
+        ...data,
+        tags,
+        images: images.map((file) => file.name),
+      }
+      console.log("Form Data:", formDataWithImagesAndTags)
 
       // You can add your API call here
-      // await addProduct(data)
-      
+      // await addProduct(formDataWithImagesAndTags)
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error("Error submitting form:", error)
     }
+  }
+
+  const handleUpdate = () => {
+    const currentData = form.getValues()
+    const currentDataWithImagesAndTags = {
+      ...currentData,
+      tags,
+      images: images.map((file) => file.name),
+    }
+    console.log("Current Form Data:", currentDataWithImagesAndTags)
+
   }
 
   return (
@@ -78,12 +81,12 @@ export function AddNewProduct() {
                 <Categories />
                 <Pricing />
                 <InventoryDetails />
-                <AdditionalInfo />
+                <AdditionalInfo tags={tags} setTags={setTags} />
               </div>
               <div className="space-y-6">
-                <ProductGallery/>
+                <ProductGallery files={images} setFiles={setImages} />
                 <div className="flex justify-end gap-4">
-                  <Button type="button" variant="outline">
+                  <Button type="button" variant="outline" onClick={handleUpdate}>
                     Update
                   </Button>
                   <Button type="submit">Confirm</Button>
