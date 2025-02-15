@@ -9,25 +9,21 @@ import EditCategory from "./EditCategory";
 interface CategoryCardProps {
   title: string;
   imageUrl: string;
-  onEdit: () => void;
-  onDelete: () => void;
+  onDelete: () => void; // Accept delete function
 }
 
-export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
+export function CategoryCard({ title, imageUrl, onDelete }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
-  const handleModal = () => {
-    setIsOpen(true);
-  };
 
-  const handleCategoryEditModal = () => {
-    setIsOpenEditModal(true);
-  };
+  const handleModal = () => setIsOpen(true);
+  const handleCategoryEditModal = () => setIsOpenEditModal(true);
+
   return (
     <div>
-      <Card className="">
-        <CardContent className=" pt-4 ">
-          <div className="aspect-square relative mb-3 ">
+      <Card>
+        <CardContent className="pt-4">
+          <div className="aspect-square relative mb-3">
             <Image
               src={imageUrl || "/placeholder.svg"}
               alt={title}
@@ -35,25 +31,18 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
               className="object-cover w-[306px] h-[270px]"
             />
           </div>
-          <h3 className="text-center text-lg font-medium">
-            {title}
-          </h3>
+          <h3 className="text-center text-lg font-medium">{title}</h3>
         </CardContent>
-        <CardFooter className="grid grid-cols-2 gap-2 ">
+        <CardFooter className="grid grid-cols-2 gap-2">
           <Button
-            onClick={() => handleCategoryEditModal()}
+            onClick={handleCategoryEditModal}
             variant="default"
             className="w-full bg-[#1a237e] hover:bg-[#0d47a1]"
           >
             Edit
           </Button>
-
           <Button
-            onClick={() => {
-              {
-                handleModal();
-              }
-            }}
+            onClick={handleModal}
             variant="outline"
             className="w-full"
           >
@@ -61,7 +50,9 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
           </Button>
         </CardFooter>
       </Card>
-      {isOpen &&
+
+      {/* Delete Confirmation Modal */}
+      {isOpen && (
         <Modal>
           <div className="flex justify-center pt-[24px]">
             <Image
@@ -69,35 +60,42 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
               alt="Modal"
               width={205}
               height={205}
-              className=" object-cover"
+              className="object-cover"
             />
           </div>
-          <h2 className="text-[36px] text-[#333333]  font-bold text-center mt-3">
+          <h2 className="text-[36px] text-[#333333] font-bold text-center mt-3">
             PACIFIC RIM FUSION
           </h2>
-          <h3 className="text-[32px]  text-gradient  font-bold text-center leading-[38.4px] mt-3">
+          <h3 className="text-[32px] text-gradient font-bold text-center mt-3">
             Are You Sure To Delete this Category?
           </h3>
           <p className="text-[26px] text-[#102011] font-normal text-center mt-3">
             Keep shopping with Rim Fusion.
           </p>
           <div className="flex justify-center mt-[50px]">
-            <button className="w-full border-[1px] border-[#4857BD] py-[18px] text-base text-gradient font-semibold rounded-[8px] ">
+            <button
+              onClick={() => {
+                onDelete(); // Call delete function
+                setIsOpen(false);
+              }}
+              className="w-full border-[1px] border-[#4857BD] py-[18px] text-base text-gradient font-semibold rounded-[8px]"
+            >
               Yes
             </button>
           </div>
           <div className="mt-[20px]">
             <button
               onClick={() => setIsOpen(false)}
-              className="w-full bg-primary border-[1px]  py-[18px] text-base text-[#FFFFFF] font-semibold rounded-[8px]  "
+              className="w-full bg-primary border-[1px] py-[18px] text-base text-[#FFFFFF] font-semibold rounded-[8px]"
             >
               NO
             </button>
           </div>
-        </Modal>}
+        </Modal>
+      )}
 
-      {/* handle edit modal  */}
-      {isOpenEditModal &&
+      {/* Edit Category Modal */}
+      {isOpenEditModal && (
         <section
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm z-50"
           onClick={() => setIsOpenEditModal(false)}
@@ -105,15 +103,16 @@ export function CategoryCard({ title, imageUrl }: CategoryCardProps) {
           <div
             style={{ boxShadow: "0px 0px 22px 8px #C1C9E4" }}
             className="relative w-[343px] md:w-[1250px] rounded-3xl border overflow-hidden"
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
-
             <div className="relative z-10">
               <EditCategory title={title} imageUrl={imageUrl} />
             </div>
           </div>
-        </section>}
+        </section>
+      )}
     </div>
   );
 }
+
