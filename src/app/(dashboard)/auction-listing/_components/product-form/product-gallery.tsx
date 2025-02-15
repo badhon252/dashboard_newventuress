@@ -1,42 +1,46 @@
-"use client";
+"use client"
 
-import { useRef, useState } from "react";
-import { Trash2, Plus, ImageIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import type React from "react"
 
-export default function ProductGallery() {
-  const [files, setFiles] = useState<File[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+import { useRef } from "react"
+import { Trash2, Plus, ImageIcon } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+
+interface ProductGalleryProps {
+  files: File[]
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>
+}
+
+export default function ProductGallery({ files, setFiles }: ProductGalleryProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    const droppedFiles = Array.from(e.dataTransfer.files);
+    e.preventDefault()
+    const droppedFiles = Array.from(e.dataTransfer.files)
     const imageFiles = droppedFiles.filter(
-      (file) =>
-        file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
-    );
-    setFiles((prev) => [...prev, ...imageFiles]);
-  };
+      (file) => file.type.startsWith("image/jpeg") || file.type.startsWith("image/png"),
+    )
+    setFiles((prev) => [...prev, ...imageFiles])
+  }
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
+      const selectedFiles = Array.from(e.target.files)
       const imageFiles = selectedFiles.filter(
-        (file) =>
-          file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
-      );
-      setFiles((prev) => [...prev, ...imageFiles]);
+        (file) => file.type.startsWith("image/jpeg") || file.type.startsWith("image/png"),
+      )
+      setFiles((prev) => [...prev, ...imageFiles])
     }
-  };
+  }
 
   const removeImage = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-  };
+    setFiles((prev) => prev.filter((_, i) => i !== index))
+  }
 
   const handlePlusClick = () => {
-    fileInputRef.current?.click();
-  };
+    fileInputRef.current?.click()
+  }
 
   return (
     <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-sm border border-[#C1C9E4]">
@@ -66,11 +70,11 @@ export default function ProductGallery() {
       {/* Uploaded Images */}
       <div className="grid grid-cols-3 gap-4 mb-4">
         {files.map((file, index) => {
-          const imageUrl = URL.createObjectURL(file);
+          const imageUrl = URL.createObjectURL(file)
           return (
             <div key={index} className="relative group">
               <Image
-                src={imageUrl}
+                src={imageUrl || "/placeholder.svg"}
                 alt={file.name}
                 width={200}
                 height={200}
@@ -83,17 +87,12 @@ export default function ProductGallery() {
                 <Trash2 className="h-4 w-4 text-gray-600" />
               </button>
             </div>
-          );
+          )
         })}
       </div>
 
       <div className="flex items-center justify-between mb-4">
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="text-gray-500 hover:text-gray-700"
-        >
+        <Button type="button" variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
           <Trash2 className="h-5 w-5" />
         </Button>
         <Button
@@ -106,5 +105,6 @@ export default function ProductGallery() {
         </Button>
       </div>
     </div>
-  );
+  )
 }
+

@@ -33,6 +33,7 @@ const formSchema = z.object({
   stockQuantity: z.string().optional(),
   tags: z.array(z.string()).min(1, "At least one tag is required"),
   productType: z.array(z.string()).optional(),
+  images: z.array(z.any()).optional(), // Add this line to the schema
 });
 
 const AddAuctionForm: React.FC = () => {
@@ -49,19 +50,23 @@ const AddAuctionForm: React.FC = () => {
       stockQuantity: "",
       tags: [],
       productType: [],
+      images: [], // Set default value for images
     },
   });
 
   const [tags, setTags] = React.useState<string[]>([]);
+
+  const [images, setImages] = useState<File[]>([]);
+
   useEffect(() => {
     form.setValue("tags", tags); // Update the 'tags' field in the form
     form.trigger("tags");
   }, [tags, form, form.trigger]);
+
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     console.log(data);
   };
 
-  // const [date12, setDate12] = useState<Date | undefined>(undefined);
   const [date24, setDate24] = useState<Date | undefined>(undefined);
   return (
     <div className="pb-[32px]">
@@ -325,7 +330,7 @@ const AddAuctionForm: React.FC = () => {
               </div>
             </div>
             <div className="w-[600px] h-full mt-[16px] border border-[#9C9C9C] rounded-lg  ">
-              <ProductGallery />
+              <ProductGallery files={images} setFiles={setImages}/>
             </div>
           </div>
           <div className="flex justify-end gap-4">
