@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import BlogGallery from "./BlogGallery";
+import { useState } from "react";
 
 const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -30,10 +31,18 @@ const AddBlogForm: React.FC = () => {
         },
     });
 
+    // Add a state to handle the file names
+    const [fileNames, setFileNames] = useState<string[]>([]);
 
     const onSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data);
+        // Combine the form data and the file names (paths)
+        const formData = {
+            ...data,
+            images: fileNames,  // Pass the file names (path names) as part of the form data
+        };
+        console.log(formData);  // Log the complete data, including file names (path names)
     };
+
     return (
         <div className="bg-white rounded-[24px] p-[32px] mb-[60px] ">
             <div
@@ -57,8 +66,7 @@ const AddBlogForm: React.FC = () => {
                                         </FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder=""
-                                                type=""
+                                                placeholder="Enter blog title"
                                                 className="h-[51px] border-[#9C9C9C]"
                                                 {...field}
                                             />
@@ -88,10 +96,9 @@ const AddBlogForm: React.FC = () => {
                                     </FormItem>
                                 )}
                             />
-
                         </div>
-                        <div className="w-[42%] h-full mt-[16px] border border-[#9C9C9C] rounded-lg  ">
-                            <BlogGallery />
+                        <div className="w-[42%] h-full mt-[16px] border border-[#9C9C9C] rounded-lg">
+                            <BlogGallery setFiles={setFileNames} />
                         </div>
                     </div>
                     <div className="flex justify-end pt-[60px] ">

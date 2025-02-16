@@ -14,25 +14,38 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import BlogGallery from "./BlogGallery";
+import { useState } from "react";
 
 const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
     description: z.string(),
 });
 
-const EditBlogForm: React.FC = () => {
+interface EditBlogProps {
+    setIsOpen: (open: boolean) => void;
+    blogData: any; // Add couponData prop
+}
+
+const EditBlogForm: React.FC<EditBlogProps> = ({ blogData }) => {
+    const [fileNames, setFileNames] = useState<string[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: "",
-            description: "",
+            title: blogData?.title || "",
+            description: blogData?.description || "",
         },
     });
 
-
+    
     const onSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data);
+        const formData = {
+            ...data,
+            images: fileNames,  // Pass the file names (path names) as part of the form data
+        };
+        console.log(formData);
     };
+
+
     return (
         <div className="bg-white rounded-[24px]">
             <div
@@ -90,7 +103,7 @@ const EditBlogForm: React.FC = () => {
 
                         </div>
                         <div className="w-[42%] h-full mt-[16px] border border-[#9C9C9C] rounded-lg  ">
-                            <BlogGallery />
+                            <BlogGallery  setFiles={setFileNames}/>
                         </div>
                     </div>
                     <div className="flex justify-end pt-[60px]">

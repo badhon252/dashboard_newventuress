@@ -1,40 +1,56 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Trash2,  ImageIcon } from "lucide-react";
+import { Trash2, ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function BlogGallery() {
-  const [files, setFiles] = useState<File[]>([]);
+type BlogGalleryProps = {
+  setFiles: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+export default function BlogGallery({ setFiles }: BlogGalleryProps) {
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [filePreview, setFilePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    const imageFiles = droppedFiles.filter(
-      (file) =>
-        file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
-    );
-    setFiles((prev) => [...prev, ...imageFiles]);
-  };
+    const droppedFile = Array.from(e.dataTransfer.files)[0]; // Get only the first file
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
-      const imageFiles = selectedFiles.filter(
-        (file) =>
-          file.type.startsWith("image/jpeg") || file.type.startsWith("image/png")
-      );
-      setFiles((prev) => [...prev, ...imageFiles]);
+    if (
+      droppedFile &&
+      (droppedFile.type.startsWith("image/jpeg") || droppedFile.type.startsWith("image/png"))
+    ) {
+      const previewURL = URL.createObjectURL(droppedFile);
+      setFileName(droppedFile.name);
+      setFilePreview(previewURL);
+      setFiles([droppedFile.name]);
+      console.log(fileName) // Replace instead of append
     }
   };
 
-  const removeImage = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.length) {
+      const selectedFile = e.target.files[0];
+
+      if (
+        selectedFile &&
+        (selectedFile.type.startsWith("image/jpeg") || selectedFile.type.startsWith("image/png"))
+      ) {
+        const previewURL = URL.createObjectURL(selectedFile);
+        setFileName(selectedFile.name);
+        setFilePreview(previewURL);
+        setFiles([selectedFile.name]); // Replace instead of append
+      }
+    }
   };
 
-  
+  const removeImage = () => {
+    setFileName(null);
+    setFilePreview(null);
+    setFiles([]);
+  };
 
   return (
     <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-sm">
@@ -46,34 +62,29 @@ export default function BlogGallery() {
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
-        {files.length > 0 ? (
-          <div className="grid grid-cols-3 gap-2 w-full">
-            {files.map((file, index) => {
-              const imageUrl = URL.createObjectURL(file);
-              return (
-                <div key={index} className="relative group w-[370px] 2xl:w-[470px]">
-                  <Image
-                    src={imageUrl}
-                    alt={file.name}
-                    width={100}
-                    height={100}
-                    className="w-full h-24 object-cover rounded-lg"
-                  />
-                  <button
-                    className="absolute top-1 right-1 bg-white p-1 rounded-full shadow-sm z-10"
-                    onClick={() => removeImage(index)}
-                  >
-                    <Trash2 className="h-4 w-4 text-gray-600" />
-                  </button>
-                </div>
-              );
-            })}
+        {filePreview ? (
+          <div className="relative group w-[270px] 2xl:w-[470px]">
+            <div className="w-[270px] 2xl:w-full h-24 bg-gray-300 flex items-center justify-center rounded-lg">
+              <Image
+                src={filePreview}
+                alt="Preview"
+                width={100}
+                height={100}
+                className="object-cover rounded-lg"
+              />
+            </div>
+            <button
+              className="absolute top-1 right-1 bg-white p-1 rounded-full shadow-sm z-10"
+              onClick={removeImage}
+            >
+              <Trash2 className="h-4 w-4 text-gray-600" />
+            </button>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-2">
             <ImageIcon className="w-12 h-12 text-gray-400" />
             <p className="text-sm text-gray-600">
-              Drop your images here, or browse
+              Drop your image here, or browse
             </p>
             <p className="text-sm text-gray-500">Jpeg, png are allowed</p>
           </div>
@@ -83,12 +94,11 @@ export default function BlogGallery() {
           accept=".jpg,.jpeg,.png"
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           onChange={handleFileSelect}
-          multiple
           ref={fileInputRef}
         />
       </div>
 
-      {/* Buttons Below the Drop Zone (Always Visible) */}
+      {/* Buttons Below the Drop Zone */}
       <div className="flex gap-4 justify-end mt-4">
         <Button
           className="text-gradient border border-[#121D42] py-2 px-6 text-base font-medium leading-5"
