@@ -1,28 +1,25 @@
-
-"use client"
-import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+"use client";
+import React, { useEffect, useState } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
 import EditeCupon from "./EditeCupon";
 
-
 const AuctionsButton = ({ row }: any) => {
-  //   const [showModal, setShowModal] = useState(false); // Modal visibility state
-  const [isOpen, setIsOpen] = useState(false)
-  console.log(row);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<any>(null); // Store the selected row data
 
-
-
-  const handleLogout = () => {
-    setIsOpen(true); // Show the modal when "Log out" is clicked
+  const handleEdit = () => {
+    setSelectedRow(row); // Set the row data when the edit button is clicked
+    setIsOpen(true); // Show the modal
   };
+
+  useEffect(() => {
+    if (selectedRow) {
+      console.log(selectedRow);
+    }
+  }, [selectedRow]); 
+
   return (
     <div>
       <DropdownMenu>
@@ -39,60 +36,38 @@ const AuctionsButton = ({ row }: any) => {
           className="bg-white h-auto w-[110px] rounded-lg shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]"
         >
           <DropdownMenuItem
-            //   onClick={handleEdit}
-
-            onClick={() => {
-              {
-                //   e.preventDefault(); // Prevent navigation for "Log out"
-                handleLogout(); // Handle logout logic
-              }
-            }}
-
-            className="p-[8px] hover:bg-[#E6EEF6] cursor-pointer  focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+            onClick={handleEdit} // Open modal on click
+            className="p-[8px] hover:bg-[#E6EEF6] cursor-pointer"
           >
             Edit
-
-            {/* /////////////////////////// */}
-
-
           </DropdownMenuItem>
-
-
-          <DropdownMenuItem
-            //   onClick={handleDelete}s
-            className="p-[8px] text-red-600 cursor-pointer hover:bg-[#E6EEF6] rounded-b-[8px] focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-          >
+          <DropdownMenuItem className="p-[8px] text-red-600 cursor-pointer hover:bg-[#E6EEF6] rounded-b-[8px]">
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       {isOpen && (
-
         <section
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm z-50"
-          onClick={() => setIsOpen(false)} // Close modal when clicking outside
+          onClick={() => setIsOpen(false)}
         >
           <div
             style={{ boxShadow: "0px 0px 22px 8px #C1C9E4" }}
             className="relative w-[343px] md:w-[1250px] rounded-[16px] border overflow-hidden"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Background overlay inside modal */}
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
-
-            {/* Modal content */}
             <div className="relative z-10">
-              <EditeCupon setIsOpen={setIsOpen} />
+              {/* Pass selectedRow data to EditeCupon */}
+              <EditeCupon setIsOpen={setIsOpen} couponData={selectedRow} />
             </div>
           </div>
         </section>
-
-      )
-      }
-
-    </div >
+      )}
+    </div>
   );
 };
+
 
 export default AuctionsButton;

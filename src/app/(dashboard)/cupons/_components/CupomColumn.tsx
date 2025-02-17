@@ -6,10 +6,7 @@ import AuctionsButton from "./AuctionsButton";
 
 
 
-
-
 export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
- 
   {
     header: "Code",
     cell: ({ row }) => {
@@ -78,7 +75,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div className="w-[149px]">
-          <span className="text-[14px] 2xl:text-[16px] w-[149px] text-[#444444] font-mediuml">{row.original.expiredDate}</span>  <br />
+          <span className="text-[14px] 2xl:text-[16px] w-[149px] text-[#444444] font-mediuml">{row.original.expireDate}</span>  <br />
           <span className="text-[16px]  text-center  text-[#444444] font-mediuml">{row.original.time}</span>
         </div>
       );
