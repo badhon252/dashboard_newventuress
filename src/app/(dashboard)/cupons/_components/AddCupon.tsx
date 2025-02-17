@@ -53,7 +53,7 @@ export default function AddCupon({ setIsOpen }: EditCouponProps) {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        console.log("Form Data:", values)
         setIsOpen(false)
     }
 

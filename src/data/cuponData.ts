@@ -5,7 +5,7 @@ export interface CuponTableItemsType {
   amount: number
   store: string
   limit: number
-  expiredDate: string
+  expireDate: string
   time: string
 }
 
@@ -17,7 +17,7 @@ export const CuponData: CuponTableItemsType[] = [
     amount: 25,
     store: "Island Guy Smokes",
     limit: 7,
-    expiredDate: "2 October 2024 ",
+    expireDate: "2 October 2024 ",
     time: "16:43"
 
   },
@@ -28,7 +28,7 @@ export const CuponData: CuponTableItemsType[] = [
     amount: 25,
     store: "Island Guy Smokes",
     limit: 3,
-    expiredDate: "2 October 2024 ",
+    expireDate: "2 October 2024 ",
     time: "16:43"
   },
   {
@@ -38,7 +38,7 @@ export const CuponData: CuponTableItemsType[] = [
     amount: 25,
     store: "Island Guy Smokes",
     limit: 7,
-    expiredDate: "2 October 2024 ",
+    expireDate: "2 October 2024 ",
     time: "16:43"
 
   },
@@ -49,7 +49,7 @@ export const CuponData: CuponTableItemsType[] = [
     amount: 25,
     store: "Island Guy Smokes",
     limit: 3,
-    expiredDate: "2 October 2024 ",
+    expireDate: "2 October 2024 ",
     time: "16:43"
   },
   {
@@ -59,7 +59,7 @@ export const CuponData: CuponTableItemsType[] = [
     amount: 25,
     store: "Island Guy Smokes",
     limit: 7,
-    expiredDate: "2 October 2024 ",
+    expireDate: "2 October 2024 ",
     time: "16:43"
 
   },
@@ -70,7 +70,7 @@ export const CuponData: CuponTableItemsType[] = [
     amount: 25,
     store: "Island Guy Smokes",
     limit: 3,
-    expiredDate: "2 October 2024 ",
+    expireDate: "2 October 2024 ",
     time: "16:43"
   },
 ];
