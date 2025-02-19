@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import AppProvider from "@/provider/AppProvider";
 import NProgress from "@/provider/NProgress";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
@@ -25,16 +26,18 @@ export default async function RootLayout({
   console.log(session);
   return (
     <SessionProvider session={session}>
-      <html lang="en">
-        <body className={` ${inter.className} antialiased`}>
-          <main>
-            <div>{children}</div>
-            <div>
-              <NProgress />
-            </div>
-          </main>
-        </body>
-      </html>
+      <AppProvider>
+        <html lang="en">
+          <body className={` ${inter.className} antialiased`}>
+            <main>
+              <div>{children}</div>
+              <div>
+                <NProgress />
+              </div>
+            </main>
+          </body>
+        </html>
+      </AppProvider>
     </SessionProvider>
   );
 }
