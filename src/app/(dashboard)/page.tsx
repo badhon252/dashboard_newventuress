@@ -1,15 +1,17 @@
-
-
+import { auth } from "@/auth";
+import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
+import ReadyAprovalContainer from "@/components/shared/ReadyFOrAproval.tsx/ReadyAprovalContainer";
 import TopVendorContainer from "@/components/shared/TopVendors/TopVendorContainer";
 import AnalyticsChart from "./_components/analytics-chart";
 import DashboardOverview from "./_components/dashBoardOverview";
 import MostSoldItems from "./_components/MostSoldItems";
 import ProfileCompletion from "./_components/ProfileCompletion";
 import GeoChart from "./_components/TopUserCountries";
-import ReadyAprovalContainer from "@/components/shared/ReadyFOrAproval.tsx/ReadyAprovalContainer";
-import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  const session = await auth();
+
+  console.log(session);
   return (
     <div className="w-full">
       {/* Profile Completion Section */}
@@ -34,15 +36,14 @@ const Dashboard = () => {
       </div>
       <div className="flex justify-between">
         <div className="w-[49%]">
-          <TopVendorContainer/>
+          <TopVendorContainer />
         </div>
         <div className="w-[49%]">
-          <ReadyAprovalContainer/>
+          <ReadyAprovalContainer />
         </div>
       </div>
       <div className="mt-10">
-
-      <OngoingContainer/>
+        <OngoingContainer />
       </div>
     </div>
   );
