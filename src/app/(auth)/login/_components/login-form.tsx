@@ -3,8 +3,10 @@
 // Packages
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 // Local imports
@@ -20,8 +22,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
-import { toast } from "sonner";
 
 export const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -37,7 +37,6 @@ export default function LoginForm() {
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
-  const callback = useSearchParams().get("callback") || "/";
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -58,7 +57,7 @@ export default function LoginForm() {
               richColors: true,
             });
 
-            router.push(callback);
+            router.push("/");
 
             router.refresh();
           } else {
