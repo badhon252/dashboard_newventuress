@@ -1,6 +1,6 @@
 
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,13 +15,19 @@ import EditBlogForm from "./EditBlogForm";
 
 const AuctionsButton = ({ row }: any) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedRow, setSelectedRow] = useState<any>(null);
   console.log(row);
 
-
-
-  const handleLogout = () => {
-    setIsOpen(true); 
+  const handleEdit = () => {
+    setSelectedRow(row); // Set the row data when the edit button is clicked
+    setIsOpen(true); // Show the modal
   };
+
+  useEffect(() => {
+    if (selectedRow) {
+      console.log(selectedRow);
+    }
+  }, [selectedRow]); 
   return (
     <div>
       <DropdownMenu>
@@ -39,12 +45,7 @@ const AuctionsButton = ({ row }: any) => {
         >
           <DropdownMenuItem
 
-            onClick={() => {
-              {
-                
-                handleLogout(); 
-              }
-            }}
+            onClick={handleEdit}
 
             className="p-[8px] hover:bg-[#E6EEF6] cursor-pointer  focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
           >
@@ -78,7 +79,7 @@ const AuctionsButton = ({ row }: any) => {
 
             
             <div className="relative z-10">
-              <EditBlogForm />
+              <EditBlogForm setIsOpen={setIsOpen} blogData={selectedRow}/>
             </div>
           </div>
         </section>
