@@ -7,8 +7,13 @@ const LoginForm = dynamic(() => import("./_components/login-form"), {
 
 const Page = () => {
   return (
-    <AuthUIProvider sidebarImage="https://i.ibb.co.com/jPFh8S6d/image-5.png">
-      <LoginForm />
+    <AuthUIProvider
+      sidebarImage="https://i.ibb.co.com/jPFh8S6d/image-5.png"
+      fullWidth
+    >
+      <div className="max-w-[500px] mx-auto">
+        <LoginForm />
+      </div>
     </AuthUIProvider>
   );
 };
