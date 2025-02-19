@@ -2,11 +2,16 @@ import { auth } from "@/auth";
 import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
 import ReadyAprovalContainer from "@/components/shared/ReadyFOrAproval.tsx/ReadyAprovalContainer";
 import TopVendorContainer from "@/components/shared/TopVendors/TopVendorContainer";
-import AnalyticsChart from "./_components/analytics-chart";
+import dynamic from "next/dynamic";
 import DashboardOverview from "./_components/dashBoardOverview";
 import MostSoldItems from "./_components/MostSoldItems";
 import ProfileCompletion from "./_components/ProfileCompletion";
-import GeoChart from "./_components/TopUserCountries";
+const GeoChart = dynamic(() => import("./_components/TopUserCountries"), {
+  ssr: false,
+});
+const AnalyticsChart = dynamic(() => import("./_components/analytics-chart"), {
+  ssr: false,
+});
 
 const Dashboard = async () => {
   const session = await auth();
