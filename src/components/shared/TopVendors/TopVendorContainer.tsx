@@ -41,7 +41,7 @@ const TableContainer = ({
   });
   return (
     <>
-      <DataTable table={table} columns={columns} title="Membership List" />
+      <DataTable table={table} columns={columns} title="Top Vendors" />
     </>
   );
 };

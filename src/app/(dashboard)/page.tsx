@@ -1,30 +1,37 @@
-
-
+import { auth } from "@/auth";
+import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
+import ReadyAprovalContainer from "@/components/shared/ReadyFOrAproval.tsx/ReadyAprovalContainer";
 import TopVendorContainer from "@/components/shared/TopVendors/TopVendorContainer";
-import AnalyticsChart from "./_components/analytics-chart";
+import dynamic from "next/dynamic";
 import DashboardOverview from "./_components/dashBoardOverview";
 import MostSoldItems from "./_components/MostSoldItems";
 import ProfileCompletion from "./_components/ProfileCompletion";
-import GeoChart from "./_components/TopUserCountries";
-import ReadyAprovalContainer from "@/components/shared/ReadyFOrAproval.tsx/ReadyAprovalContainer";
-import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
+const GeoChart = dynamic(() => import("./_components/TopUserCountries"), {
+  ssr: false,
+});
+const AnalyticsChart = dynamic(() => import("./_components/analytics-chart"), {
+  ssr: false,
+});
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  const session = await auth();
+
+  console.log(session);
   return (
-    <div className="w-full px-5 ">
+    <div className="w-full">
       {/* Profile Completion Section */}
       <ProfileCompletion />
 
       {/* Dashboard Overview Section */}
       <section>
-        <h1 className="text-[#0057A8] text-[22px] font-semibold mb-[20px]">
-          Dashboard Overview
+        <h1 className="text-gradient text-[22px] font-semibold mb-[20px]">
+          Overview
         </h1>
         <DashboardOverview />
       </section>
 
       {/* Main Content Grid */}
-      <div className="w-full mx-auto grid grid-cols-6 gap-8 my-[30px] mt-10">
+      <div className="w-full mx-auto grid grid-cols-6 gap-4 2xl:gap-8 my-[30px] mt-10">
         {/* Geo Chart Component */}
         <GeoChart />
         <div className="col-span-2">
@@ -34,15 +41,14 @@ const Dashboard = () => {
       </div>
       <div className="flex justify-between">
         <div className="w-[49%]">
-          <TopVendorContainer/>
+          <TopVendorContainer />
         </div>
         <div className="w-[49%]">
-          <ReadyAprovalContainer/>
+          <ReadyAprovalContainer />
         </div>
       </div>
       <div className="mt-10">
-
-      <OngoingContainer/>
+        <OngoingContainer />
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ export const AuctionListingColumns: ColumnDef<AuctionsListingDataType>[] = [
     enableHiding: false,
   },
   {
-    header: "Name",
+    header: "Product",
     cell: ({ row }) => (
       <div>
         <div className="flex  items-center gap-x-[8px] w-fit max-w-[360px]">
@@ -59,7 +59,7 @@ export const AuctionListingColumns: ColumnDef<AuctionsListingDataType>[] = [
     ),
   },
   {
-    header: "SKU",
+    header: "Starting Price",
     cell: ({ row }) => (
       <div className="text-[#444444] font-normal text-[16px] leading-[19.2px] ">
         {row.original.sku}
@@ -67,7 +67,15 @@ export const AuctionListingColumns: ColumnDef<AuctionsListingDataType>[] = [
     ),
   },
   {
-    header: "Store",
+    header: "Start Date",
+    accessorKey: "date",
+  },
+  {
+    header: "End Date",
+    accessorKey: "date",
+  },
+  {
+    header: "Bid",
     cell: ({ row }) => (
       <h4 className="max-w-[137px] text-gradient font-semibold text-[18px] leading-[21.6px] ">
         {row.original.store}
@@ -75,17 +83,14 @@ export const AuctionListingColumns: ColumnDef<AuctionsListingDataType>[] = [
     ),
   },
   {
-    header: "Status",
+    header: "Last Bid",
     cell: ({ row }) => (
       <h5 className="max-w-[137px] font-normal text-[16px] leading-[19.2px] text-[#E10E0E]">
         {row.original.status}
       </h5>
     ),
   },
-  {
-    header: "Date",
-    accessorKey: "date",
-  },
+  
   {
     header: "Actions",
     cell: () => <AuctionListingAuction />,

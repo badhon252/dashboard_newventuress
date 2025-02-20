@@ -27,10 +27,14 @@ const PacificDropdownSelector = ({
       <SelectTrigger className="bg-primary  rounded-[8px] text-[#fff]">
         <SelectValue placeholder={placeholderText ?? selectedValue} />
       </SelectTrigger>
-      <SelectContent className="w-fit">
-        <SelectGroup>
+      <SelectContent className="w-fit *:p-0">
+        <SelectGroup className="">
           {list.map((item) => (
-            <SelectItem key={item.id} value={item.value}>
+            <SelectItem 
+              key={item.id} 
+              value={item.value}
+              className="text-[#444444] font-normal text-[16px] hover:!bg-[#E6EEF6]"
+            >
               {item.name}
             </SelectItem>
           ))}

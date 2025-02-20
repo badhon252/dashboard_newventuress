@@ -12,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { DemoTableItemsType } from "./data"; // Import this if not already imported
 import type { AddressInfo, OrderDetails as OrderDetailsType } from "./types";
 
@@ -50,7 +51,7 @@ export default function OrderDetails({
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
-        className="max-w-[1250px] max-h-[1043px] p-0"
+        className="max-w-[1250px] p-0"
         style={{ boxShadow: "0px 0px 22px 8px #C1C9E4" }}
       >
         <DialogHeader className=" bg-[#1a237e] text-white p-4 rounded-t-lg">
@@ -63,7 +64,7 @@ export default function OrderDetails({
             <div className="bg-white rounded-lg">
               <Button
                 variant="ghost"
-                className="text-gradient w-[146px] h-[40px"
+                className="text-gradient w-[146px] h-[40px]"
                 onClick={onClose}
               >
                 Back to List <GoArrowRight className="text-[#121D42]" />
@@ -72,33 +73,33 @@ export default function OrderDetails({
           </div>
         </DialogHeader>
 
-        <div className="p-6 ">
-          <div className="flex flex-wrap  gap-8 ">
-            <div className="relative flex flex-wrap  shrink items-start bg-white rounded-xl border border-solid border-stone-300">
+        <ScrollArea className="p-6 max-h-[600px] 2xl:max-h-[700px]">
+          <div className="flex flex-wrap gap-8">
+            <div className="relative flex flex-wrap shrink items-start bg-white rounded-xl border border-solid border-stone-300">
               <AddressCard
                 title="Billing Address"
                 info={addressInfo}
                 className="flex flex-col min-w-[417px]"
               />
               <div className="shrink-0 border-l border-stone-300 h-[295px] hidden md:block" />
-              <div className="">
+              <div>
                 <AddressCard
                   title="Shipping Address"
                   info={addressInfo}
-                  className="flex flex-col min-w-[417px] "
+                  className="flex flex-col min-w-[417px]"
                 />
               </div>
             </div>
 
             <OrderSummary orderDetails={orderDetails} />
           </div>
-          <div className="pt-10 pb-10 ">
+          <div className="pt-10 pb-10">
             <OrderProgress className="max-w-[1024px]" />
           </div>
           <div className="max-w-[1250px]">
             <OrderDetailsTable className="max-w-full" />
           </div>
-        </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );

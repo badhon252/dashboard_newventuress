@@ -11,7 +11,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ScrollArea } from "@/components/ui/scroll-area"
-// import { ScrollArea } from "@/components/ui/scroll-area"
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -30,61 +29,57 @@ const formSchema = z.object({
 })
 
 interface EditCouponProps {
-  setIsOpen: (open: boolean) => void
+  setIsOpen: (open: boolean) => void;
+  couponData: any; // Add couponData prop
 }
-export default function EditeCupon({ setIsOpen }: EditCouponProps) {
+
+export default function EditeCupon({ setIsOpen, couponData }: EditCouponProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      discountType: "",
-      amount: "",
-      startDate: "",
-      expireDate: "",
-      emailRestrictions: "",
-      usageLimit: "",
-      usageLimitPerUser: "",
-      product: "",
-      category: "",
-      subCategory: "",
-      saveInfo: false,
+      title: couponData?.original?.code || "",
+      description: couponData?.original?.description || "",
+      discountType: couponData?.original?.type || "",
+      amount: couponData?.original?.amount || "",
+      startDate: couponData?.original?.startDate || "",
+      expireDate: couponData?.original?.expireDate || "",
+      emailRestrictions: couponData?.original?.emailRestrictions || "",
+      usageLimit: couponData?.original?.limit || "",
+      usageLimitPerUser: couponData?.original?.usageLimitPerUser || "",
+      product: couponData?.original?.product || "",
+      category: couponData?.original?.category || "",
+      subCategory: couponData?.original?.subCategory || "",
+      saveInfo: couponData?.original?.saveInfo || false,
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    setIsOpen(false)
+    console.log(values);
+    setIsOpen(false);
   }
 
   function onBack() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
+
   return (
-    <div className="h-auto bg-gray-50  space-y-0">
-
+    <div className="h-auto bg-gray-50 space-y-0">
       <div className="mx-auto max-w-[1250px] rounded-lg bg-white shadow-sm">
-
         <div className="bg-gradient-to-r from-[#121D42] via-[#152764] to-[#4857BD] flex justify-between items-center rounded-t-[8px] py-[20px] px-[32px]">
-          <h1 className="text-2xl font-semibold text-white text-left">Add Coupons</h1>
-          <div className="">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onBack()}
-              className="py-[10px] px-[12px]"
-            >
-
-              Back to List <ArrowRight className="mr-2 h-4 w-4" />
-            </Button>
-          </div>
+          <h1 className="text-2xl font-semibold text-white text-left">Edit Coupons</h1>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => onBack()}
+            className="py-[10px] px-[12px]"
+          >
+            Back to List <ArrowRight className="mr-2 h-4 w-4" />
+          </Button>
         </div>
 
-        <div className="">
         <ScrollArea className="h-[calc(100vh-12rem)] pr-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="pl-[32px] pr-[20px] space-y-5 ">
-
+            <form onSubmit={form.handleSubmit(onSubmit)} className="pl-[32px] pr-[20px] space-y-5">
               <FormField
                 control={form.control}
                 name="title"
@@ -94,7 +89,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                       Title <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input className="h-[51px] border-[1px] border-[#B0B0B0] rounded-[8px]" {...field} />
+                      <Input className="h-[51px] border-[1px] border-[#B0B0B0] rounded-[8px] px-4" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -121,7 +116,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                   <FormItem>
                     <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Discount Type</FormLabel>
                     <FormControl>
-                      <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]" placeholder="Percentage discount" {...field} />
+                      <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" placeholder="Percentage discount" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -134,17 +129,13 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                   <FormItem>
                     <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Amount</FormLabel>
                     <FormControl>
-                      <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]"  placeholder="Percentage discount" {...field} />
+                      <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" placeholder="Percentage discount" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
               />
 
-              <div className="grid  md:grid-cols-2 gap-[30px]">
-
-
-
-
+              <div className="grid md:grid-cols-2 gap-[30px]">
                 <FormField
                   control={form.control}
                   name="startDate"
@@ -152,7 +143,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                     <FormItem>
                       <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Start Date</FormLabel>
                       <FormControl>
-                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]"  type="text" placeholder="Porcentage discount" {...field} />
+                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" type="text" {...field} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -165,7 +156,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                     <FormItem>
                       <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Expire Date</FormLabel>
                       <FormControl>
-                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]"  type="text" placeholder="Porcentage discount" {...field} />
+                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" type="text" {...field} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -179,7 +170,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                   <FormItem>
                     <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Email Restrictions</FormLabel>
                     <FormControl>
-                      <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]"  placeholder="Percentage discount" {...field} />
+                      <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -193,7 +184,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                     <FormItem>
                       <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Usage Limit</FormLabel>
                       <FormControl>
-                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]"  placeholder="Percentage discount" {...field} />
+                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" {...field} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -206,7 +197,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                     <FormItem>
                       <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Usage limit per user</FormLabel>
                       <FormControl>
-                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px]"  placeholder="Percentage discount" {...field} />
+                        <Input className="h-[51px] border-[1px] border-[#9E9E9E] rounded-[8px] px-4" {...field} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -219,7 +210,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Product</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value || ""}>
                       <FormControl className="h-[48px] border-[1px] border-[#B0B0B0] rounded-[8px]">
                         <SelectTrigger className="">
                           <SelectValue placeholder="Select product" />
@@ -241,7 +232,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Category</FormLabel>
-                      <Select  onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value || ""}>
                         <FormControl className="h-[48px] border-[1px] border-[#B0B0B0] rounded-[8px]" >
                           <SelectTrigger>
                             <SelectValue placeholder="Select category" />
@@ -262,7 +253,7 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="w-full flex justify-start text-base font-normal leading-[19px] text-[#444444]">Sub-Category</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value || ""}>
                         <FormControl className="h-[48px] border-[1px] border-[#B0B0B0] rounded-[8px]">
                           <SelectTrigger>
                             <SelectValue placeholder="Select sub-category" />
@@ -287,25 +278,23 @@ export default function EditeCupon({ setIsOpen }: EditCouponProps) {
                       <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                     </FormControl>
                     <div className="space-y-1 leading-none">
-                      <FormLabel className="text-xs font-normal leading-[14px] text-[#919792]">Save this information for faster Adding Products</FormLabel>
+                      <FormLabel className="text-xs font-normal leading-[14px] text-[#919792]">
+                        Save this information for faster Adding Products
+                      </FormLabel>
                     </div>
                   </FormItem>
                 )}
               />
 
-              <div className=" flex justify-end pb-[32px]">
+              <div className="flex justify-end pb-[32px]">
                 <Button type="submit" className="w-[138px] h-[44px] py-[12px] px-[41px] bg-[#1e2875] hover:bg-[#3c3c8f]">
                   Submit
                 </Button>
               </div>
             </form>
-
           </Form>
-          </ScrollArea>
-        </div>
-
+        </ScrollArea>
       </div>
     </div>
-  )
+  );
 }
-

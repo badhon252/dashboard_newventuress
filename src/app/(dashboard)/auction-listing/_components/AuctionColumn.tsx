@@ -36,7 +36,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     enableHiding: false,
   },
   {
-    header: "Product",
+    header: "Name",
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-4">
@@ -51,10 +51,9 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
           </div>
           <div>
             <h4 className="text-[18px] text-gradient font-semibold">{row.original.name}</h4>
-            <div className="flex items-center w-[110px] h-[22px] text-[12px] mt-3 p-[10px] border border-[#9E9E9E] rounded-[24px] shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]">
+            <div className="flex items-center w-[90px] h-[22px] text-[12px] mt-3 p-[10px] border border-[#9E9E9E] rounded-[24px] shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]">
               <Check className="w-[12px] h-[12px] text-[#6E6E6E] mr-2" /> 
               In stock 
-              <span>({row.original.stock})</span>
             </div>
           </div>
         </div>
@@ -62,54 +61,51 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     },
   },
   {
-    header: "Starting Price",
+    header: "SKU",
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">${row.original.price}</span>
+          <span className="text-[16px] text-[#444444] font-normal">#{row.original.SKU}</span>
         </div>
       );
     },
   },
   {
-    header: "Start Date",
+    header: "Store",
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">{row.original.createdAt}</span>
+          <span className="text-[16px] text-[#444444] font-normal">{row.original.stock}</span>
         </div>
       );
     },
   },
   {
-    header: "End Date",
+    header: "Status",
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">{row.original.createdAt}</span>
+          <span className="text-[16px] text-[#E10E0E] font-normal">{row.original.Status}</span>
         </div>
       );
     },
   },
   {
-    header: "Bid",
+    header: "Price",
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">{row.original.quantity}</span>
+          <span className="text-[16px] text-[#444444] font-normal">${row.original.Price}</span>
         </div>
       );
     },
   },
   {
-    header: "Last Bid", 
+    header: "Date", 
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">{row.original.variant}</span>
-          <div>
-            <span className="text-[16px] text-[#444444] font-normal">${row.original.variantPrice}(Win)</span>
-          </div>
+          <span className="text-[16px] text-[#444444] font-normal">{row.original.Date}</span>
         </div>
       );
     },

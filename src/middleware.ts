@@ -1,14 +1,12 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
-import { apiAuthPrefix, authRoutes, DEFAULT_LOGIN_REDIRECT } from "./routes";
+import { authRoutes, DEFAULT_LOGIN_REDIRECT } from "./routes";
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedin = !!req.auth;
 
-  return NextResponse.next();
-
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isApiAuthRoute = nextUrl.pathname.startsWith("/api/auth");
 
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 

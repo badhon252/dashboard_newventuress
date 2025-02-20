@@ -8,7 +8,7 @@ export default function DashboardOverview() {
   // This could come from an API or database
   const metrics = [
     {
-      title: "Total Earnings",
+      title: "Active users",
       amount: 300000.0,
       icon :"/assets/img/Icon1.png",
     },
@@ -18,19 +18,19 @@ export default function DashboardOverview() {
       icon :"/assets/img/Icon4.png",
     },
     {
-      title: "Total Provider",
+      title: "Sales",
       amount: 4000.0,
       icon :"/assets/img/Icon3.png",
     },
     {
-      title: "Total Admin Fees",
+      title: "Revenue",
       amount: 900000.0,
       icon :"/assets/img/Icon2.png",
     },
   ]
 
   return (
-    <div className="flex   gap-[30px]">
+    <div className="flex gap-[20px]  2xl:gap-[30px]">
       {metrics.map((metric) => (
         <OverViewCard 
         key={metric.title}

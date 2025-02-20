@@ -13,7 +13,7 @@ export type AuctionsListingDataType = {
 export const auctionsListingData = [
   {
     id: 1,
-    name: "Wireless Headphones",
+    name: "Purple Bong 50k",
     image: "https://images.pexels.com/photos/3389513/pexels-photo-3389513.jpeg",
     stock: 50,
     sku: "WH12345",

@@ -1,139 +1,183 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader,  } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Check, ImageIcon, Trash2 } from "lucide-react";
-import Image from "next/image";
-import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button"
+import { CardContent } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Check, ImageIcon, Trash2 } from "lucide-react"
+import Image from "next/image"
+import { useState, useRef } from "react"
 
 export default function AddCategoryForm() {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const [formData, setFormData] = useState({
+    categoryName: "",
+    subCategory: "",
+    description: "",
+    slug: "",
+  })
 
   const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
+    e.preventDefault()
+    setIsDragging(true)
+  }
 
   const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
+    e.preventDefault()
+    setIsDragging(false)
+  }
 
   const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const file = e.dataTransfer.files[0];
-    handleFile(file);
-  };
+    e.preventDefault()
+    setIsDragging(false)
+    const file = e.dataTransfer.files[0]
+    handleFile(file)
+  }
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0]
     if (file) {
-      handleFile(file);
+      handleFile(file)
     }
-  };
+  }
 
   const handleFile = (file: File) => {
     if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onloadstart = () => {
-        setUploadProgress(0);
-      };
+        setUploadProgress(0)
+      }
 
       reader.onprogress = (e) => {
         if (e.lengthComputable) {
-          const progress = (e.loaded / e.total) * 100;
-          setUploadProgress(progress);
+          const progress = (e.loaded / e.total) * 100
+          setUploadProgress(progress)
         }
-      };
+      }
 
       reader.onload = (e) => {
-        setImagePreview(e.target?.result as string);
-        setUploadProgress(100);
-      };
+        setImagePreview(e.target?.result as string)
+        setUploadProgress(100)
+      }
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
     } else {
-      alert("Please select a JPEG or PNG file");
+      alert("Please select a JPEG or PNG file")
     }
-  };
+  }
   const handleDelete = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setImagePreview(null);
-    setUploadProgress(0);
+    e.preventDefault()
+    e.stopPropagation()
+    setImagePreview(null)
+    setUploadProgress(0)
     if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+      fileInputRef.current.value = ""
     }
-  };
+  }
 
   const openFileDialog = () => {
-    fileInputRef.current?.click();
-  };
+    fileInputRef.current?.click()
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log({
+      ...formData,
+      imagePreview,
+      saveInfo: (document.getElementById("save-info") as HTMLInputElement).checked,
+    })
+  }
 
   return (
-    <div className="">
-      <div className="mb-6 rounded-t-lg bg-primary p-4">
-        <h1 className="text-[28px] font-semibold text-white">
-          Add New Category
-        </h1>
+    <div className=" bg-white rounded-2xl">
+      <div className="rounded-t-3xl bg-primary px-[32px]  py-4">
+        <h1 className="text-[28px] font-semibold text-white">Add New Category</h1>
       </div>
-      <Card className="">
-        <CardHeader className="bg-gradient-to-r from-navy-700 to-navy-900"></CardHeader>
+      <div className="mt-4">
         <CardContent className="p-6">
-          <form className="grid gap-6">
+          <form className="grid gap-6" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div className="space-y-2 ">
-                  <Label htmlFor="category-name " className="text-[#444444]">
+                <div className="space-y-2">
+                  <Label htmlFor="categoryName" className="text-[#444444] text-[16px] font-normal">
                     Category Name <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="category-name" required />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="sub-category" className="text-[#444444]">
-                    Sub-category <span className="text-red-500">*</span>
-                  </Label>
-                  <Input id="sub-category" required />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="description" className="text-[#444444]">
-                    Short Description
-                  </Label>
-                  <Textarea
-                    id="description"
-                    placeholder="Type Description here"
-                    className="min-h-[100px]"
+                  <Input
+                    id="categoryName"
+                    name="categoryName"
+                    required
+                    className="h-[51px] border border-[#B0B0B0] focus:border-primary focus:ring-2 focus:ring-primary"
+                    value={formData.categoryName}
+                    onChange={handleInputChange}
+                    placeholder="Enter category name"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="slug" className="text-[#444444]">
+                  <Label htmlFor="subCategory" className="text-[#444444] text-[16px] font-normal">
+                    Sub-category <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="subCategory"
+                    name="subCategory"
+                    required
+                    className="h-[51px] border border-[#B0B0B0] focus:border-primary focus:ring-2 focus:ring-primary"
+                    value={formData.subCategory}
+                    onChange={handleInputChange}
+                    placeholder="Enter sub-category"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="description" className="text-[#9C9C9C] text-[16px] font-normal">
+                    Short Description
+                  </Label>
+                  <Textarea
+                    id="description"
+                    name="description"
+                    placeholder="Enter a short description"
+                    className="min-h-[91px] border border-[#B0B0B0] focus:border-primary focus:ring-2 focus:ring-primary"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="slug" className="text-[#444444] text-[16px] font-normal">
                     Slug <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="slug" required />
+                  <Input
+                    id="slug"
+                    name="slug"
+                    required
+                    className="h-[51px] border border-[#B0B0B0] focus:border-primary focus:ring-2 focus:ring-primary"
+                    value={formData.slug}
+                    onChange={handleInputChange}
+                    placeholder="Enter slug"
+                  />
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <Label className="text-[#444444]">Category Image</Label>
+                  <Label className="text-[#232321] text-[16px] font-normal">Category Image</Label>
                   <div
                     className={`mt-2 border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors
-                    ${
-                      isDragging
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-300"
-                    }
+                    ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"}
                     ${imagePreview ? "p-2" : "p-6"}`}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
@@ -160,12 +204,8 @@ export default function AddCategoryForm() {
                     ) : (
                       <div className="flex flex-col items-center gap-2 h-[193px] ">
                         <ImageIcon className="w-12 h-12 text-gray-400 mt-10 " />
-                        <p className="text-sm text-gray-600">
-                          Drop your image here, or browse
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          Jpeg, png are allowed
-                        </p>
+                        <p className="text-sm text-gray-600">Drop your image here, or browse</p>
+                        <p className="text-xs text-gray-500">Jpeg, png are allowed</p>
                       </div>
                     )}
                   </div>
@@ -174,7 +214,12 @@ export default function AddCategoryForm() {
                 {uploadProgress > 0 && (
                   <div className="flex items-center gap-4 p-4 ">
                     <div className="relative w-10 h-10 bg-gray-100 rounded">
-                      <ImageIcon className="w-6 h-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400" />
+                      <Image
+                        src={imagePreview || "/placeholder.svg"}
+                        alt="Category preview"
+                        fill
+                        className="object-cover rounded"
+                      />
                     </div>
                     <div className="flex-1">
                       <div
@@ -182,9 +227,7 @@ export default function AddCategoryForm() {
                         style={{ width: `${uploadProgress}%` }}
                       />
                     </div>
-                    {uploadProgress === 100 && (
-                      <Check className="w-5 h-5 text-white bg-blue-600 rounded-full " />
-                    )}
+                    {uploadProgress === 100 && <Check className="w-5 h-5 text-white bg-blue-600 rounded-full " />}
                   </div>
                 )}
                 <div className="flex justify-between items-center">
@@ -198,8 +241,7 @@ export default function AddCategoryForm() {
                     </button>
                   </div>
                   <div className="flex justify-end gap-2 mt-4">
-                    <Button variant="outline">Update</Button>
-                    <Button className="bg-primary hover:bg-navy-900 ">
+                    <Button type="submit" className="bg-primary hover:bg-navy-900 ">
                       Confirm
                     </Button>
                   </div>
@@ -209,13 +251,14 @@ export default function AddCategoryForm() {
 
             <div className="flex items-center space-x-2">
               <Checkbox id="save-info" />
-              <Label htmlFor="save-info" className="text-sm text-[#444444]">
+              <Label htmlFor="save-info" className="text-[12px] font-normal text-[#919792]">
                 Save this information for faster Adding Products
               </Label>
             </div>
           </form>
         </CardContent>
-      </Card>
+      </div>
     </div>
-  );
+  )
 }
+

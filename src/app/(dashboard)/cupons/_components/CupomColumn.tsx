@@ -6,16 +6,13 @@ import AuctionsButton from "./AuctionsButton";
 
 
 
-
-
 export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
- 
   {
     header: "Code",
     cell: ({ row }) => {
       return (
-        <div className="w-[149px] h-[38px]" >
-          <span className="text-[16px] text-gradient font-mediuml ">{row.original.code}</span>
+        <div className=" py-[19px] " >
+          <span className="text-[14px] 2xl:text-[16px] text-gradient font-mediuml  ">{row.original.code}</span>
         </div>
       );
     },
@@ -24,8 +21,8 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     header: "Type",
     cell: ({ row }) => {
       return (
-        <div className="w-[149px]">
-          <span className="text-[12px] text-white bg-primary py-[5px] pl-[10px] pr-[20px] rounded-[10px] font-normal">{row.original.type}</span>
+        <div className="w-[120px] 2xl:w-[149px]">
+          <span className="text-[9px] 2xl:text-[12px] text-white bg-primary py-[5px] pl-[10px] pr-[20px] rounded-[10px] font-normal">{row.original.type}</span>
         </div>
       );
     },
@@ -34,7 +31,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     header: "Amount",
     cell: ({ row }) => {
       return (
-        <div className=" w-[50px]">
+        <div className="">
           <span className="text-[16px] text-[#444444] font-mediuml">{row.original.amount}</span>
         </div>
       );
@@ -45,7 +42,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div className="">
-          <span className="text-[16px] text-[#444444] font-mediuml">{row.original.store}</span>
+          <span className=" text-[14px] 2xl:text-[16px] text-[#444444] font-mediuml">{row.original.store}</span>
         </div>
       );
     },
@@ -54,7 +51,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     header: "Usage Limits", 
     cell: ({ row }) => {
       return (
-        <div className=" w-[90px]">
+        <div className="">
           <span className="text-[16px] text-[#444444] font-mediuml">Limit-{row.original.limit}</span>
           
         </div>
@@ -65,7 +62,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     header: "Permission", 
     cell: () => {
       return (
-        <div className=" w-[90px]">
+        <div className="">
 
           <Toggle/>
           
@@ -78,7 +75,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div className="w-[149px]">
-          <span className="text-[16px] w-[149px] text-[#444444] font-mediuml">{row.original.expiredDate}</span>  <br />
+          <span className="text-[14px] 2xl:text-[16px] w-[149px] text-[#444444] font-mediuml">{row.original.expireDate}</span>  <br />
           <span className="text-[16px]  text-center  text-[#444444] font-mediuml">{row.original.time}</span>
         </div>
       );
@@ -89,8 +86,7 @@ export const CupomColumn: ColumnDef<CuponTableItemsType>[] = [
     cell: ({ row }) => {
 
       return (
-        <div className=" w-[90px]">
-          
+        <div className="">
           <AuctionsButton row={ row }/>
         </div>
       );
