@@ -13,13 +13,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { DemoTableItemsType } from "./data"; // Import this if not already imported
+import { orderDataType } from "./data"; // Import this if not already imported
 import type { AddressInfo, OrderDetails as OrderDetailsType } from "./types";
 
 interface OrderDetailsProps {
   isOpen: boolean;
   onClose: () => void;
-  rowData: DemoTableItemsType | null;
+  rowData: orderDataType | null;
 }
 
 export default function OrderDetails({
