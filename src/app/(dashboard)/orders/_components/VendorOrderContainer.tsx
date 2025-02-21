@@ -72,7 +72,7 @@ function VendorOrderContainer() {
       </div>
     );
   } else if (isError) {
-    content = <p>Error:</p>;
+    content = <p>Error: somthing is wrong</p>;
   } else if (data && data.data && data.data.length === 0) {
     content = (
       <div className="mt-7">
