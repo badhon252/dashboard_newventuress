@@ -5,6 +5,7 @@ import { CategoryCard } from "./categoryCard";
 import { categoryDataResponse } from "@/data/categoryDatatype";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import NotFound from "@/components/shared/NotFound/NotFound";
 
 
 
@@ -36,7 +37,14 @@ export default function CategoryList() {
     );
   } else if (isError) {
     content = <p>Error:</p>;
-  } else {
+  } else if (data && data.data && data.data.length === 0) {
+    content = (
+      <div className="mt-7">
+        <NotFound message="No found your data" />
+      </div>
+    )
+  }
+  else {
     content = (
      
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

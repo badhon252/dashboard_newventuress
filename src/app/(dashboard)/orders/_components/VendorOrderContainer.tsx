@@ -11,7 +11,7 @@ function VendorOrderContainer() {
   const session = useSession();
   const token = session.data?.user?.token;
 
-  const { data, isLoading, isError } = useQuery<orderDataResponse>({
+  const { data, isLoading, isError, } = useQuery<orderDataResponse>({
     queryKey: ["order"],
     queryFn: async (): Promise<orderDataResponse> =>
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders`, {
@@ -64,22 +64,23 @@ function VendorOrderContainer() {
     setIsDeleteModalOpen(false);
   }
 
-
- 
-  
-  
-
   let content;
   if (isLoading) {
     content = (
-      <div className="w-full h-[400px] flex justify-center items-center flex-col">
-        <Loader2 className="animate-spin opacity-80" />
-        <p>Loading your data...</p>
+      <div>
+        <TableSkeletonWrapper count={5} width="97%" height="100px" className="bg-[#444444]/10 m-5 px-5 "  />
       </div>
     );
   } else if (isError) {
     content = <p>Error:</p>;
-  } else {
+  } else if (data && data.data && data.data.length === 0) {
+    content = (
+      <div className="mt-7">
+        <NotFound message ="No found your data"/>
+      </div>
+    )
+  }
+   else {
     content = (
       <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto  rounded-[24px] bg-white">
         <TableContainer
@@ -144,8 +145,9 @@ import { useState } from "react";
 import OrderDetials from "./OrderDetials";
 import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import { Loader2 } from "lucide-react";
 import Modal from "@/components/shared/modal/modal";
+import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
+import NotFound from "@/components/shared/NotFound/NotFound";
 
 
 const TableContainer = ({
