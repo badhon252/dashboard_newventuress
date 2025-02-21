@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"; // ✅ Correct import for ShadCN
+} from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { orderDataType } from "./data";
@@ -49,7 +49,7 @@ export const OrderColumn = ({
       cell: ({ row }) => (
         <div>
           <span className="text-[16px] text-[#444444] font-normal">
-            {row.original.country} {/* ✅ Removed `${}` */}
+            {row.original.country}
           </span>
         </div>
       ),
@@ -60,7 +60,7 @@ export const OrderColumn = ({
         <div className="">
           <div>
             <span className="text-[16px] text-[#444444] font-normal">
-              {row.original.apartment} {/* ✅ Removed `${}` */}
+              {row.original.apartment}
             </span>
           </div>
         </div>
@@ -139,18 +139,17 @@ export const OrderColumn = ({
                 <DropdownMenuItem
                   className="p-[8px] hover:bg-[#E6EEF6] rounded-t-[8px] focus:outline-none cursor-pointer"
                   onClick={() => {
-                    setSelectedRow(row.original); // ✅ Set the selected row
-                    setIsOpen(true); // ✅ Open the modal
+                    setSelectedRow(row.original);
+                    setIsOpen(true);
                   }}
                 >
                   Details
                 </DropdownMenuItem>
                 <DropdownMenuItem
+                  onClick={() => deleteOrder(row.original._id ?? "")}
                   className="p-[8px] text-red-600 hover:bg-[#E6EEF6] rounded-b-[8px] focus:outline-none cursor-pointer"
-                >
-                  <button onClick={() => deleteOrder(row.original._id ?? "")}>
+                >    
                     Delete
-                  </button> {/* ✅ Handle potential undefined `_id` */}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
