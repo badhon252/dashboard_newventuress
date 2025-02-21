@@ -6,27 +6,30 @@ import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
 import EditCategory from "./EditCategory";
 
+
 interface CategoryCardProps {
+  // id: number;
   title: string;
   imageUrl: string;
-  onDelete: () => void; // Accept delete function
+  // onDelete: () => void; // Accept delete function
 }
 
-export function CategoryCard({ title, imageUrl, onDelete }: CategoryCardProps) {
+export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   const handleModal = () => setIsOpen(true);
   const handleCategoryEditModal = () => setIsOpenEditModal(true);
-
+  console.log(imageUrl);
+  
   return (
     <div>
       <Card>
         <CardContent className="pt-4">
           <div className="aspect-square relative mb-3">
             <Image
-              src={imageUrl || "/placeholder.svg"}
-              alt={title}
+              src={  "/assets/img/canbis.png"}
+              alt={imageUrl}
               fill
               className="object-cover w-[306px] h-[270px]"
             />
@@ -75,7 +78,7 @@ export function CategoryCard({ title, imageUrl, onDelete }: CategoryCardProps) {
           <div className="flex justify-center mt-[50px]">
             <button
               onClick={() => {
-                onDelete(); // Call delete function
+                // onDelete(); // Call delete function
                 setIsOpen(false);
               }}
               className="w-full border-[1px] border-[#4857BD] py-[18px] text-base text-gradient font-semibold rounded-[8px]"
