@@ -1,16 +1,16 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 
-interface SkeletonWrapperProps {
+interface TableSkeletonWrapperProps {
   width?: string;
   height?: string;
   className?: string;
   count?: number;
 }
 
-const SkeletonWrapper: React.FC<SkeletonWrapperProps> = ({
+const TableSkeletonWrapper: React.FC<TableSkeletonWrapperProps> = ({
   width = "100%", 
-  height = "200px", 
+  height = "120px", 
   className = "", 
   count = 1
 }) => {
@@ -19,7 +19,7 @@ const SkeletonWrapper: React.FC<SkeletonWrapperProps> = ({
       {[...Array(count)].map((_, index) => (
         <Skeleton 
           key={index} 
-          className={`rounded-lg bg-white ${className}`} 
+          className={`rounded-lg ${className}`} 
           style={{ width, height }} 
         />
       ))}
@@ -27,4 +27,4 @@ const SkeletonWrapper: React.FC<SkeletonWrapperProps> = ({
   );
 };
 
-export default SkeletonWrapper;
+export default TableSkeletonWrapper;
