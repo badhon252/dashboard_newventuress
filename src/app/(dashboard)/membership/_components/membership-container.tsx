@@ -1,22 +1,22 @@
 "use client";
 // Packages
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import {
   ColumnDef,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
 
 // Local imports
 import { DataTable } from "@/components/ui/data-table";
 import PacificPagination from "@/components/ui/PacificPagination";
 import { MembershipColumns } from "./membership-column";
-import { useSession } from "next-auth/react";
-import { useQuery } from "@tanstack/react-query";
 import { MembershipPlan, MembershipResponse } from "@/types/membership";
 import NotFound from "@/components/shared/NotFound/NotFound";
-import SkeletonWrapper from "@/components/shared/SkeletonWrapper/SkeletonWrapper";
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
+import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
 
 const MembershipContainer = () => {
   const [currentPage, setCurrentpage] = useState(1);
@@ -44,7 +44,7 @@ const MembershipContainer = () => {
   if (isLoading) {
     content = (
       <div className="w-full">
-        <SkeletonWrapper count={5} width="100%" height="120px" />
+        <TableSkeletonWrapper count={5} width="100%" height="120px" className="bg-white"/>
       </div>
     );
   } else if (isError) {
@@ -53,9 +53,7 @@ const MembershipContainer = () => {
         <ErrorContainer message={error?.message || "Something went Wrong"} />
       </div>
     );
-  }
-
-  else if (data && data.data && data.data.length === 0) {
+  } else if (data && data.data && data.data.length === 0) {
     content = (
       <NotFound message="Oops! No data available. Modify your filters or check your internet connection." />
     );
@@ -64,7 +62,6 @@ const MembershipContainer = () => {
   }
   return (
     <div>
-      {/* <TableContainer columns={MembershipColumns} data={membershipList} /> */}
       <div>{content}</div>
 
       <div className="w-full flex justify-between py-[40px]">
