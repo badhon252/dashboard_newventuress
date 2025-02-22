@@ -2,26 +2,66 @@
 import { useState } from "react";
 import PacificPagination from "@/components/ui/PacificPagination";
 import { CategoryCard } from "./categoryCard";
+import { categoryDataResponse } from "@/data/categoryDatatype";
+import { useQuery } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
+import NotFound from "@/components/shared/NotFound/NotFound";
 
-const initialCategories = [
-  { id: 1, title: "Flowers", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 2, title: "Wax", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 3, title: "Hats", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 4, title: "Glasswear", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 5, title: "Apparel", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 6, title: "Pipes", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 7, title: "Bongs", imageUrl: "https://images.pexels.com/photos/8326748/pexels-photo-8326748.jpeg?auto=compress&cs=tinysrgb&w=600" },
-  { id: 8, title: "Trays", imageUrl: "https://images.pexels.com/photos/3536257/pexels-photo-3536257.jpeg?auto=compress&cs=tinysrgb&w=600" },
-];
+
+
+
 
 export default function CategoryList() {
-  const [categories, setCategories] = useState(initialCategories);
+  // const [categories, setCategories] = useState(initialCategories);
   const [currentPage, setCurrentPage] = useState(1);
+ 
 
-  // Function to delete a category
-  const handleDelete = (id: number) => {
-    setCategories((prevCategories) => prevCategories.filter((category) => category.id !== id));
-  };
+
+  const { data, isLoading, isError } = useQuery<categoryDataResponse>({
+    queryKey: ["allcategory"],
+    queryFn: async (): Promise<categoryDataResponse> =>
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`, {
+        method: "GET",
+      
+      }).then((res) => res.json() as Promise<categoryDataResponse>),
+    
+  });
+  console.log(data);
+  let content;
+  if (isLoading) {
+    content = (
+      <div className="w-full h-[400px] flex justify-center items-center flex-col">
+        <Loader2 className="animate-spin opacity-80" />
+        <p>Loading your data...</p>
+      </div>
+    );
+  } else if (isError) {
+    content = <p>Error:</p>;
+  } else if (data && data.data && data.data.length === 0) {
+    content = (
+      <div className="mt-7">
+        <NotFound message="No found your data" />
+      </div>
+    )
+  }
+  else {
+    content = (
+     
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {data?.data.map((category) => (
+            <CategoryCard
+              key={category._id}
+              title={category.categoryName}
+              imageUrl={category.image}
+            />
+          ))}
+        </div>
+   
+    );
+  }
+  
+
+
 
   return (
     <div>
@@ -30,21 +70,14 @@ export default function CategoryList() {
           <div className="mb-6 rounded-t-3xl bg-primary p-4">
             <h1 className="text-[28px] font-semibold text-white">Category List</h1>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => (
-              <CategoryCard
-                key={category.id}
-                title={category.title}
-                imageUrl={category.imageUrl}
-                onDelete={() => handleDelete(category.id)} // Call handleDelete
-              />
-            ))}
-          </div>
+          <div>
+            {content}
+            </div>
         </div>
       </div>
       <div className="mt-[40px] flex justify-between">
         <div className="text-[#444444] font-normal text-[16px]">
-          Showing 1 to {categories.length} entries
+          Showing 1 to  entries
         </div>
         <div className="w-[400px]">
           <PacificPagination
