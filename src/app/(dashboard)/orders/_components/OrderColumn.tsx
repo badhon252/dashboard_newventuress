@@ -16,10 +16,14 @@ export const OrderColumn = ({
   setIsOpen,
   setSelectedRow,
   deleteOrder,
+  acceptOrder,
+  // setAceptOrder,
 }: {
   setIsOpen: (value: boolean) => void;
-  setSelectedRow: (row: orderDataType | null) => void;
-  deleteOrder: (orderId: string) => void;
+    setSelectedRow: (row: orderDataType | null) => void;
+    // setAceptOrder: (processing: string) => void;
+    deleteOrder: (orderId: string) => void;
+    acceptOrder: (orderId: string) => void;
 }): ColumnDef<orderDataType>[] => [
     {
       id: "select",
@@ -132,7 +136,13 @@ export const OrderColumn = ({
                 className="bg-white h-auto w-[110px] rounded-lg shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D] cursor-pointer"
               >
                 {status === "pending" && (
-                  <DropdownMenuItem className="p-[8px] hover:bg-[#E6EEF6] rounded-t-[8px] focus:outline-none cursor-pointer">
+                  <DropdownMenuItem
+                    
+                    onClick={() => {
+                      acceptOrder(row.original._id ?? "");
+                      // setAceptOrder("processing");
+                    }}
+                    className="p-[8px] hover:bg-[#E6EEF6] rounded-t-[8px] focus:outline-none cursor-pointer">
                     Accept
                   </DropdownMenuItem>
                 )}

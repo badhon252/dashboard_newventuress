@@ -8,6 +8,9 @@ function VendorOrderContainer() {
   const [isOpen, setIsOpen] = useState(false);
   const [deletedid, setDeletedid] = useState('');
   const [selectedRow, setSelectedRow] = useState<orderDataType | null>(null);
+  const [acceptOder, ] = useState<string>("processing");
+
+ 
   const session = useSession();
   const token = session.data?.user?.token;
 
@@ -30,7 +33,6 @@ function VendorOrderContainer() {
 
 
   const queryClient = useQueryClient();
- 
   const { mutate } = useMutation({
     mutationKey: ["deleteOrder"],
     mutationFn: async (orderId: string): Promise<void> => {
@@ -53,6 +55,42 @@ function VendorOrderContainer() {
       queryClient.invalidateQueries({ queryKey: ["order"] });
     },
   });
+
+
+
+  const acceptOrder = async (orderId: string) => {
+    try {
+      if (!token) {
+        throw new Error("Authorization token is missing");
+      }
+
+      if (!acceptOder) {
+        throw new Error("Order status value is missing");
+      }
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ orderStatus: acceptOder }), // Sending updated data from state
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to update order");
+      }
+
+      if (data.success) {
+        queryClient.invalidateQueries({ queryKey: ["order"] }); // Refresh orders
+      }
+    } catch (error) {
+      console.error("Error updating order:", error);
+    }
+  };
+
 
 
   const deleteOrder = (orderId: string) => {
@@ -85,7 +123,7 @@ function VendorOrderContainer() {
       <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto  rounded-[24px] bg-white">
         <TableContainer
           data={data?.data ?? []}
-          columns={OrderColumn({ setIsOpen, setSelectedRow, deleteOrder }) as ColumnDef<orderDataType>[]}
+          columns={OrderColumn({ setIsOpen, setSelectedRow, deleteOrder, acceptOrder,  }) as ColumnDef<orderDataType>[]}
         />
       </div>
     );
