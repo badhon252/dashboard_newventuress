@@ -37,7 +37,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData }) => {
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         const formData = {
             ...data,
-            images: fileNames,
+            image: fileNames,
         }
         console.log("Form Data:", formData)
     }

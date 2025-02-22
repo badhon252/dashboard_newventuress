@@ -2,11 +2,12 @@
 
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { BlogManagementColumn } from "./BlogManagementColumn";
+import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
 
 const BlogManagementContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, isError } = useQuery<blogsDataResponse>({
+  const { data, isLoading, isError, error } = useQuery<blogsDataResponse>({
     queryKey: ["blog", currentPage],
     queryFn: () =>
       fetch(
@@ -19,16 +20,21 @@ const BlogManagementContainer = () => {
   let content;
   if (isLoading) {
     content = (
-      <div className="w-full h-[400px] flex justify-center items-center flex-col">
-        <Loader2 className="animate-spin opacity-80" />
-        <p>Loading your data...</p>
+      <div className="w-full p-4">
+        <TableSkeletonWrapper count={5} width="100%" height="120px" className="bg-black/10" />
       </div>
     );
   } else if (isError) {
-    content = <p>Error: { }</p>;
+    content = (
+      <div className="w-full h-[400px]">
+        <ErrorContainer message={error?.message || "Something went Wrong"} />
+      </div>
+    );
+  } else if (data && data.data && data.data.length === 0) {
+    content = <NotFound message="No found your data" />;
   } else {
     content = (
-      <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto  rounded-[24px] bg-white">
+      <div className="w-full">
         <TableContainer data={data?.data ?? []} columns={BlogManagementColumn} />
       </div>
     );
@@ -63,7 +69,9 @@ import PacificPagination from "@/components/ui/PacificPagination";
 import { useState } from "react";
 import { blogsDataResponse, blogsDataType } from "@/data/blogsManagementData";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
+import NotFound from "@/components/shared/NotFound/NotFound";
+
 
 
 
