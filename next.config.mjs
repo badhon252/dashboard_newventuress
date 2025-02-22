@@ -2,12 +2,12 @@
 const nextConfig = {
   images: {
     domains: [
-      "images.pexels.com", 
-      "i.ibb.co", 
-      "s3-alpha-sig.figma.com", // Add the domain here
+      "images.pexels.com",
+      "i.ibb.co",
+      "s3-alpha-sig.figma.com",
+      "www.vecteezy.com",
     ],
   },
 };
 
 export default nextConfig;
-
