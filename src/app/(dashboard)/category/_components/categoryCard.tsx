@@ -11,16 +11,18 @@ interface CategoryCardProps {
   // id: number;
   title: string;
   imageUrl: string;
-  // onDelete: () => void; // Accept delete function
+  description: string;
+  slug: string,
+  onDelete: () => void; 
 }
 
-export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
+export function CategoryCard({ title, imageUrl, onDelete, description, slug }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   const handleModal = () => setIsOpen(true);
   const handleCategoryEditModal = () => setIsOpenEditModal(true);
-  console.log(imageUrl);
+  // console.log(description);
   
   return (
     <div>
@@ -28,7 +30,7 @@ export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
         <CardContent className="pt-4">
           <div className="aspect-square relative mb-3">
             <Image
-              src={  "/assets/img/canbis.png"}
+              src={imageUrl }
               alt={imageUrl}
               fill
               className="object-cover w-[306px] h-[270px]"
@@ -37,7 +39,7 @@ export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
           <h3 className="text-center text-lg font-medium">{title}</h3>
         </CardContent>
         <CardFooter className="grid grid-cols-2 gap-2">
-          <Button
+          <Button 
             onClick={handleCategoryEditModal}
             variant="default"
             className="w-full bg-[#1a237e] hover:bg-[#0d47a1]"
@@ -56,7 +58,7 @@ export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
 
       {/* Delete Confirmation Modal */}
       {isOpen && (
-        <Modal>
+        <Modal >
           <div className="flex justify-center pt-[24px]">
             <Image
               src="/assets/img/logo.png"
@@ -78,7 +80,7 @@ export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
           <div className="flex justify-center mt-[50px]">
             <button
               onClick={() => {
-                // onDelete(); // Call delete function
+                onDelete(); // Call delete function
                 setIsOpen(false);
               }}
               className="w-full border-[1px] border-[#4857BD] py-[18px] text-base text-gradient font-semibold rounded-[8px]"
@@ -110,7 +112,7 @@ export function CategoryCard({ title, imageUrl,  }: CategoryCardProps) {
           >
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
             <div className="relative z-10">
-              <EditCategory title={title} imageUrl={imageUrl} />
+              <EditCategory title={title} imageUrl={imageUrl} description={description} slug={slug} />
             </div>
           </div>
         </section>

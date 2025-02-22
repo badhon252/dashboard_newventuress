@@ -3,30 +3,61 @@ import { useState } from "react";
 import PacificPagination from "@/components/ui/PacificPagination";
 import { CategoryCard } from "./categoryCard";
 import { categoryDataResponse } from "@/data/categoryDatatype";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import NotFound from "@/components/shared/NotFound/NotFound";
+import { useSession } from "next-auth/react";
 
 
 
 
 
 export default function CategoryList() {
-  // const [categories, setCategories] = useState(initialCategories);
   const [currentPage, setCurrentPage] = useState(1);
- 
+  const session = useSession();
+  const token = session.data?.user?.token;
 
 
   const { data, isLoading, isError } = useQuery<categoryDataResponse>({
-    queryKey: ["allcategory"],
+    queryKey: ["allcategory", currentPage],
     queryFn: async (): Promise<categoryDataResponse> =>
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories`, {
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories?page=${currentPage}&limit=${8}`, {
         method: "GET",
-      
+
       }).then((res) => res.json() as Promise<categoryDataResponse>),
-    
+
   });
   console.log(data);
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationKey: ["deletecategory"],
+    mutationFn: async (orderId: string): Promise<void> => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/${orderId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!res.ok) {
+        throw new Error("Failed to delete category");
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["allcategory"] });
+    },
+  });
+
+  const handleDelete = (id: string) => {
+    mutate(id);
+
+  }
+
+
   let content;
   if (isLoading) {
     content = (
@@ -46,20 +77,23 @@ export default function CategoryList() {
   }
   else {
     content = (
-     
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {data?.data.map((category) => (
-            <CategoryCard
-              key={category._id}
-              title={category.categoryName}
-              imageUrl={category.image}
-            />
-          ))}
-        </div>
-   
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {data?.data.map((category) => (
+          <CategoryCard
+            key={category._id}
+            title={category.categoryName}
+            imageUrl={category.image}
+            description={category.shortDescription}
+            slug={category.slug}
+            onDelete={() => handleDelete(category._id)}
+          />
+        ))}
+      </div>
+
     );
   }
-  
+
 
 
 
@@ -72,18 +106,18 @@ export default function CategoryList() {
           </div>
           <div>
             {content}
-            </div>
+          </div>
         </div>
       </div>
       <div className="mt-[40px] flex justify-between">
         <div className="text-[#444444] font-normal text-[16px]">
-          Showing 1 to  entries
+          Showing {currentPage} to {data?.pagination?.totalPages} in first entries
         </div>
         <div className="w-[400px]">
           <PacificPagination
             currentPage={currentPage}
             onPageChange={(page) => setCurrentPage(page)}
-            totalPages={10}
+            totalPages={data?.pagination?.totalPages ? data.pagination.totalPages : 0}
           />
         </div>
       </div>
