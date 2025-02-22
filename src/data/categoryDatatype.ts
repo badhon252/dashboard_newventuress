@@ -17,4 +17,7 @@ export interface categoryDataResponse {
   success: boolean;
   message: string;
   data: categoryDataType[];
+  pagination: {
+    totalPages: number;
+  };
 }

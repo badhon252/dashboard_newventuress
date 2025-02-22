@@ -125,7 +125,7 @@ export const sidebarContents = [
     href: "/financial-management"
   },
   {
-    id: 10,
+    id: 11,
     name: "Marketing & Promotions",
     icon: (
       <Image
@@ -139,13 +139,13 @@ export const sidebarContents = [
   },
 
   {
-    id: 11,
+    id: 12,
     name: "Cupons",
     icon: <Gift className="h-[16px] w-[16px]" />,
     href: "/cupons"
   },
   {
-    id: 12,
+    id: 13,
     name: "Blogs Management",
     icon: (
       <Image
@@ -158,7 +158,7 @@ export const sidebarContents = [
     href: "/blogs-management"
   },
   {
-    id: 13,
+    id: 14,
     name: "Content Management",
     icon: (
       <Image
@@ -171,7 +171,7 @@ export const sidebarContents = [
     href: "/content-management"
   },
   {
-    id: 14,
+    id: 15,
     name: "Reports",
     // icon: Icons.reports,
     icon: (
@@ -185,25 +185,25 @@ export const sidebarContents = [
     href: "/reports"
   },
   {
-    id: 15,
+    id: 16,
     name: "Reviews",
     icon: <MessageSquare className="h-[16px] w-[16px]" />,
     href: "/reviews"
   },
   {
-    id: 16,
+    id: 17,
     name: "Settings",
     icon: <Settings className="h-[16px] w-[16px]" />,
     href: "/settings"
   },
   {
-    id: 17,
+    id: 18,
     name: "Membership",
     icon: <UserPlus className="h-[16px] w-[16px]" />,
     href: "/membership"
   },
   {
-    id: 16,
+    id: 19,
     name: "Help & Support",
     icon: <ShieldQuestion className="h-[16px] w-[16px]" />,
     href: "/help-support"

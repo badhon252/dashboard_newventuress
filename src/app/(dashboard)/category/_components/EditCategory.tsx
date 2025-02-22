@@ -9,22 +9,28 @@ import Image from "next/image";
 import { TiEdit } from "react-icons/ti";
 import { Checkbox } from '@/components/ui/checkbox';
 
+
+
 interface CategoryCardProps {
   title: string;
   imageUrl: string;
+  description: string;
+  slug: string;
 }
 
-export default function EditCategory({ title, imageUrl }: CategoryCardProps) {
+
+
+export default function EditCategory({ title, imageUrl, description, slug }: CategoryCardProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
-    categoryName: "",
+    categoryName: title,
     subCategory: "",
-    description: "",
-    slug: "",
+    description: description,
+    slug: slug,
   });
 
   const [fileName, setFileName] = useState<string | null>(null);
@@ -95,7 +101,7 @@ export default function EditCategory({ title, imageUrl }: CategoryCardProps) {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="categoryName">Category Name <span className="text-red-500">*</span></Label>
-                  <Input id="categoryName" value={title} onChange={(e) => setFormData({ ...formData, categoryName: e.target.value })} required className="h-[51px] border border-[#B0B0B0]" />
+                  <Input id="categoryName" value={formData.categoryName} onChange={(e) => setFormData({ ...formData, categoryName: e.target.value })} required className="h-[51px] border border-[#B0B0B0]" />
                 </div>
 
                 <div className="space-y-2">
