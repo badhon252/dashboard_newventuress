@@ -15,9 +15,9 @@ export interface orderDataType {
   email: string;
   phoneNumber: string;
   cartDetail: string;
-  paymentMethod: "cod" | "online" | string; // Adjust based on possible values
+  paymentMethod: "cod" | "online" | string; 
   couponDetail: string;
-  orderStatus: "processing" | "shipped" | "delivered" | "canceled" | string; // Adjust based on possible values
+  orderStatus: "processing" | "shipped" | "delivered" | "canceled" | string; 
   __v: number;
   oderStatement: oderStatement[];
 }
