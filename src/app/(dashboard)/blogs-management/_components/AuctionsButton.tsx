@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import EditBlogForm from "./EditBlogForm";
 
 
@@ -28,6 +29,40 @@ const AuctionsButton = ({ row }: any) => {
       console.log(selectedRow);
     }
   }, [selectedRow]); 
+
+  
+
+  const session = useSession();
+
+  const handleDelete = async () => {
+    if (!row?.original?._id) return; // Ensure there's a valid ID
+  
+    const token = session.data?.user?.token; // Getting the token from session
+  
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/delete-blog/${row.original._id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include the token in the header
+        },
+      });
+  
+      if (response.ok) {
+        alert("Blog deleted successfully!");
+        // Optionally, refresh data or update state
+        
+
+      } else {
+        alert("Failed to delete blog.");
+      }
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      alert("An error occurred while deleting.");
+    }
+  };
+  
+  
+  
   return (
     <div>
       <DropdownMenu>
@@ -57,6 +92,7 @@ const AuctionsButton = ({ row }: any) => {
 
           <DropdownMenuItem
             className="p-[8px] text-red-600 cursor-pointer hover:bg-[#E6EEF6] rounded-b-[8px] focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+            onClick={handleDelete}
           >
             Delete
           </DropdownMenuItem>

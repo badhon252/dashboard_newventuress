@@ -5,7 +5,8 @@ const nextConfig = {
       "images.pexels.com",
       "i.ibb.co",
       "s3-alpha-sig.figma.com",
-      "res.cloudinary.com",
+      "www.vecteezy.com",
+    "res.cloudinary.com",
     ],
   },
 };

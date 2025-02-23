@@ -7,9 +7,7 @@ import { Trash2, ImageIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
-// type BlogGalleryProps = {
-//   setFiles: React.Dispatch<React.SetStateAction<string[]>>
-// }
+
 
 interface BlogGalleryProps {
   setFiles: (files: string[]) => void;
@@ -25,30 +23,35 @@ export default function BlogGallery({ setFiles, image }: BlogGalleryProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    const droppedFile = e.dataTransfer.files[0] // Get only the first file
-
+    e.preventDefault();
+    const droppedFile = e.dataTransfer.files[0];
+  
     if (droppedFile && (droppedFile.type.startsWith("image/jpeg") || droppedFile.type.startsWith("image/png"))) {
-      const previewURL = URL.createObjectURL(droppedFile)
-      setFileName(droppedFile.name)
-      setFilePreview(previewURL)
-      setFiles([previewURL]) // Store the preview URL instead of just the name
+      const previewURL = URL.createObjectURL(droppedFile);
+      setFileName(droppedFile.name);
+      setFilePreview(previewURL);
+      setFiles([previewURL]);
+  
+      console.log(droppedFile.name); // Logs only the image file name
     }
-  }
+  };
   console.log(fileName)
-
+  
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      const selectedFile = e.target.files[0]
-
+      const selectedFile = e.target.files[0];
+  
       if (selectedFile && (selectedFile.type.startsWith("image/jpeg") || selectedFile.type.startsWith("image/png"))) {
-        const previewURL = URL.createObjectURL(selectedFile)
-        setFileName(selectedFile.name)
-        setFilePreview(previewURL)
-        setFiles([previewURL])
+        const previewURL = URL.createObjectURL(selectedFile);
+        setFileName(selectedFile.name);
+        setFilePreview(previewURL);
+        setFiles([previewURL]);
+  
+        console.log(selectedFile.name); // Logs only the image file name
       }
     }
-  }
+  };
+  
 
   const removeImage = () => {
     setFileName(null)
@@ -67,8 +70,8 @@ export default function BlogGallery({ setFiles, image }: BlogGalleryProps) {
         onDrop={handleDrop}
       >
         {filePreview ? (
-          <div className="relative group w-[270px] 2xl:w-[470px]">
-            <div className="w-[270px] 2xl:w-full h-24 bg-gray-300 flex items-center justify-center rounded-lg">
+          <div className="relative group w-[270px] 2xl:w-[360px]">
+            <div className="w-[260px] 2xl:w-[360px] h-24 bg-gray-300 flex items-center justify-center rounded-lg">
               <Image
                 src={filePreview}
                 alt="Preview"
