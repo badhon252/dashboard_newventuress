@@ -8,7 +8,7 @@ const BlogManagementContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError, error } = useQuery<blogsDataResponse>({
-    queryKey: ["blog", currentPage],
+    queryKey: ["blogs", currentPage],
     queryFn: () =>
       fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/get-blog?page=${currentPage}&limit=${5}`
