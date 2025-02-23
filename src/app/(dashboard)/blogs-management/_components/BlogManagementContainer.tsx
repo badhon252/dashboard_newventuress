@@ -1,23 +1,33 @@
 "use client";
 
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { ColumnDef, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { BlogManagementColumn } from "./BlogManagementColumn";
 import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
+import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
+import NotFound from "@/components/shared/NotFound/NotFound";
+import PacificPagination from "@/components/ui/PacificPagination";
+import { DataTable } from "@/components/ui/data-table";
+import { blogsDataType } from "@/data/blogsManagementData";
 
-const BlogManagementContainer = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const { data, isLoading, isError, error } = useQuery<blogsDataResponse>({
-    queryKey: ["blogs", currentPage],
-    queryFn: () =>
-      fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/get-blog?page=${currentPage}&limit=${5}`
-      ).then((res) => res.json()),
-  });
-
-
-
+const BlogManagementContainer = ({
+  blogs,
+  isLoading,
+  isError,
+  error,
+  setPage,
+  currentPage,
+  totalPages, // You need to pass totalPages from the parent if available
+}: {
+  blogs: blogsDataType[];
+  isLoading: boolean;
+  isError: boolean;
+  error: any;
+  setPage: (page: number) => void;
+  currentPage: number;
+  totalPages: number; // New prop to get the total pages
+}) => {
   let content;
+
   if (isLoading) {
     content = (
       <div className="w-full p-4">
@@ -27,34 +37,33 @@ const BlogManagementContainer = () => {
   } else if (isError) {
     content = (
       <div className="w-full h-[400px]">
-        <ErrorContainer message={error?.message || "Something went Wrong"} />
+        <ErrorContainer message={error?.message || "Something went wrong"} />
       </div>
     );
-  } else if (data && data.data && data.data.length === 0) {
-    content = <NotFound message="No found your data" />;
+  } else if (blogs.length === 0) {
+    content = <NotFound message="No data found" />;
   } else {
     content = (
       <div className="w-full">
-        <TableContainer data={data?.data ?? []} columns={BlogManagementColumn} />
+        <TableContainer data={blogs} columns={BlogManagementColumn} />
       </div>
     );
   }
 
   return (
     <section className="w-full">
-      <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto  rounded-[24px] bg-white">
-        {/* <TableContainer data={blogsManagementData} columns={BlogManagementColumn} /> */}
+      <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto rounded-[24px] bg-white">
         {content}
       </div>
-      <div className="mt-[30px] mb-[208px] w-full  flex justify-between">
+      <div className="mt-[30px] mb-[208px] w-full flex justify-between">
         <p className="font-normal text-[16px] leading-[19.2px] text-[#444444]">
-          Showing {currentPage} to {data?.meta?.totalPages} in first entries
+          Showing page {currentPage} of {totalPages} {/* Use totalPages prop */}
         </p>
         <div>
           <PacificPagination
             currentPage={currentPage}
-            totalPages={data?.meta?.totalPages ? data.meta.totalPages : 0}
-            onPageChange={(page) => setCurrentPage(page)}
+            totalPages={totalPages }  
+            onPageChange={setPage}
           />
         </div>
       </div>
@@ -63,24 +72,13 @@ const BlogManagementContainer = () => {
 };
 
 export default BlogManagementContainer;
-import { DataTable } from "@/components/ui/data-table";
-import { ColumnDef } from "@tanstack/react-table";
-import PacificPagination from "@/components/ui/PacificPagination";
-import { useState } from "react";
-import { blogsDataResponse, blogsDataType } from "@/data/blogsManagementData";
-import { useQuery } from "@tanstack/react-query";
-import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
-import NotFound from "@/components/shared/NotFound/NotFound";
 
-
-
-
-
+// TableContainer Component
 const TableContainer = ({
   data,
   columns,
 }: {
-  data: any[];
+  data: blogsDataType[];
   columns: ColumnDef<blogsDataType>[];
 }) => {
   const table = useReactTable({
@@ -89,10 +87,5 @@ const TableContainer = ({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  console.log(data, "data");
-  return (
-    <>
-      <DataTable table={table} columns={columns} title="Blogs List" />
-    </>
-  );
+  return <DataTable table={table} columns={columns} title="Blogs List" />;
 };

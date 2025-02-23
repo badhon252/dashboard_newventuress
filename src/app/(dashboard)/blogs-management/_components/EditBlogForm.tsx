@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import {  useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import {  useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
@@ -154,7 +154,9 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                     {filePreview ? (
                                         <div className="relative w-full h-full">
                                             <Image
-                                                src={filePreview}
+                                                src={filePreview?.startsWith('http') ? filePreview : `/${filePreview}`}
+                                                width={400}
+                                                height={300}
                                                 alt="Uploaded preview"
                                                 className="w-full h-full object-cover rounded-lg"
                                             />

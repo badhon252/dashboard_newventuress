@@ -14,23 +14,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useSession } from "next-auth/react";
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Dispatch, SetStateAction, useState } from "react";
 import AddBlogImage from "./AddBlogImage";
+import { AlertDialog } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string(),
 });
 
+interface Props {
+  setAddBlogForm: Dispatch<SetStateAction<boolean>>;
+}
 
-const AddBlogForm: React.FC = () => {
+const AddBlogForm = ({ setAddBlogForm }: Props) => {
+  // Initialize hooks before checking for token
   const session = useSession();
   const token = session?.data?.user?.token;
-  console.log({ token });
-
-  // ✅ Manage Image State
+  const queryClient = useQueryClient();
   const [image, setImage] = useState<File | null>(null);
+  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
+
 
   const { mutate } = useMutation({
     mutationKey: ["addBlog"],
@@ -47,6 +53,35 @@ const AddBlogForm: React.FC = () => {
       );
       return response.json();
     },
+    onSuccess: (data) => {
+      if (!data.status) {
+        toast.error(data.message, {
+          position: "top-right",
+          richColors: true,
+        });
+        return;
+      }
+
+      // ✅ Reset the form
+      form.reset();
+      setImage(null);
+
+      toast.success(data.message, {
+        position: "top-right",
+        richColors: true,
+      });
+
+      // ✅ Refresh the blog list
+      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      setAddBlogForm(false);
+    },
+    onError: () => {
+      // ❌ Show error message
+      setMessage({ text: "Failed to add blog. Please try again.", type: "error" });
+
+      // Auto-hide message after 3 seconds
+      setTimeout(() => setMessage(null), 3000);
+    },
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,6 +91,8 @@ const AddBlogForm: React.FC = () => {
       description: "",
     },
   });
+  // Return early if no token is found
+  if (!token) return null;
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const formData = new FormData();
@@ -117,9 +154,12 @@ const AddBlogForm: React.FC = () => {
               />
             </div>
             <div className="md:col-span-2">
-              <AddBlogImage onImageSelect={setImage}  />
+              <AddBlogImage onImageSelect={setImage} />
             </div>
           </div>
+          {/* ✅ Show Success/Error Message */}
+          {message && <AlertDialog>{message.text}</AlertDialog>}
+
           <div className="flex justify-end -mt-10">
             <Button type="submit" className="py-[12px] px-[24px]">
               Post
