@@ -13,16 +13,42 @@ import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
+import { useSession } from "next-auth/react";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import BlogGallery from "./BlogGallery";
+import AddBlogImage from "./AddBlogImage";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string(),
 });
 
+
 const AddBlogForm: React.FC = () => {
+  const session = useSession();
+  const token = session?.data?.user?.token;
+  console.log({ token });
+
+  // ✅ Manage Image State
+  const [image, setImage] = useState<File | null>(null);
+
+  const { mutate } = useMutation({
+    mutationKey: ["addBlog"],
+    mutationFn: async (data: FormData) => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/create-blog`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: data, // Do not set "Content-Type" manually
+        }
+      );
+      return response.json();
+    },
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,37 +57,32 @@ const AddBlogForm: React.FC = () => {
     },
   });
 
-  // Add a state to handle the file names
-  const [fileNames, setFileNames] = useState<string[]>([]);
-
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    // Combine the form data and the file names (paths)
-    const formData = {
-      ...data,
-      images: fileNames, // Pass the file names (path names) as part of the form data
-    };
-    console.log(formData); // Log the complete data, including file names (path names)
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    if (image) {
+      formData.append("image", image);
+    }
+
+    mutate(formData);
   };
 
   return (
-    <div className="bg-white rounded-[24px] p-[32px] mb-[60px] ">
-      <div
-        className={
-          "bg-primary px-4 py-3 mb- rounded-t-lg text-white text-[32px] leading-[38px] font-semibold"
-        }
-      >
+    <div className="bg-white rounded-[24px] p-[32px] mb-[60px]">
+      <div className="bg-primary px-4 py-3 mb-4 rounded-t-lg text-white text-[32px] leading-[38px] font-semibold">
         Add Blogs
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex gap-[54px]">
-            <div className="w-[58%] space-y-[16px] mt-[60px]">
+          <div className="grid grid-cols-5 gap-[54px] ">
+            <div className="md:col-span-3 space-y-4">
               <FormField
                 control={form.control}
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="text-base font-normal text-[#444444] leading-[19px]">
                       Title<span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
@@ -71,7 +92,6 @@ const AddBlogForm: React.FC = () => {
                         {...field}
                       />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -82,7 +102,7 @@ const AddBlogForm: React.FC = () => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Short Description</FormLabel>
+                    <FormLabel className="text-base font-normal text-[#444444] leading-[19px]">Short Description</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Type Description Here"
@@ -91,18 +111,17 @@ const AddBlogForm: React.FC = () => {
                         {...field}
                       />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            <div className="w-[42%] h-full mt-[16px] border border-[#9C9C9C] rounded-lg">
-              <BlogGallery setFiles={setFileNames} />
+            <div className="md:col-span-2">
+              <AddBlogImage onImageSelect={setImage}  />
             </div>
           </div>
-          <div className="flex justify-end pt-[60px] ">
-            <Button type="submit" className="py-[12px] px-[24px] ">
+          <div className="flex justify-end -mt-10">
+            <Button type="submit" className="py-[12px] px-[24px]">
               Post
             </Button>
           </div>

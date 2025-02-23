@@ -31,6 +31,7 @@ const formSchema = z.object({
 });
 
 export default function EmailSendingForm() {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,6 +48,8 @@ export default function EmailSendingForm() {
     } catch (error) {
       console.error("Form submission error", error);
     }
+
+    
   }
 
   return (

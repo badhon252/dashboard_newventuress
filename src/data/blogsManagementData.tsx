@@ -5,9 +5,12 @@ export type HighlightedStatement = {
   };
 
 export interface blogsDataType {
+    id: any;
     _id: string;
     image: string;
     title: string;
+    author: string;
+    views: number;
     description: string;
     createdAt: string;
     updatedAt: string;
