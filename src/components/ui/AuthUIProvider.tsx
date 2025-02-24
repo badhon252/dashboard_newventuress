@@ -7,6 +7,7 @@ import { ReactNode } from "react";
 // Local imports
 import { cn } from "@/lib/utils";
 import LoginBackButton from "./login-back-button";
+import logo from '../../../public/assets/img/logo.png'
 
 interface AuthUIProviderProps {
   children: ReactNode;
@@ -35,7 +36,7 @@ const AuthUIProvider = async ({
             <Link href="/">
               <div className="flex items-center gap-1">
                 <Image
-                  src="/assets/img/logo.png"
+                  src={logo}
                   alt="Pacific Rim Fusion"
                   width={60}
                   height={60}
