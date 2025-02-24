@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -19,6 +18,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import AddBlogImage from "./AddBlogImage";
 import { AlertDialog } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import { AddTiptapEditor } from "./AddTiptapEditor";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -100,9 +100,11 @@ const AddBlogForm = ({ setAddBlogForm }: Props) => {
     formData.append("description", data.description);
     if (image) {
       formData.append("image", image);
+      console.log(image);
     }
 
     mutate(formData);
+    console.log(formData);
   };
 
   return (
@@ -141,12 +143,14 @@ const AddBlogForm = ({ setAddBlogForm }: Props) => {
                   <FormItem>
                     <FormLabel className="text-base font-normal text-[#444444] leading-[19px]">Short Description</FormLabel>
                     <FormControl>
-                      <Textarea
+                      {/* <Textarea
                         placeholder="Type Description Here"
                         className="resize-none border-[#9C9C9C] h-[192px]"
                         rows={12}
                         {...field}
-                      />
+                      /> */}
+
+                      <AddTiptapEditor value={field.value} onChange={(newValue) => field.onChange(newValue)} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

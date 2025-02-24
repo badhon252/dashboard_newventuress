@@ -1,22 +1,22 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { TiptapEditor } from "./EditorToolbar";
 
 const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
     description: z.string(),
-    image: z.string().optional(),
+    image: z.union([z.string(), z.instanceof(File)]).optional(), // Allow File
 });
 
 interface EditBlogProps {
@@ -48,7 +48,9 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
             const previewUrl = URL.createObjectURL(file);
             setFilePreview(previewUrl);
             setFileName(file.name);
-            form.setValue("image", file.name);
+            
+            // Instead of storing just the name, store the file itself
+            form.setValue("image", file); 
         }
     };
 
@@ -67,36 +69,47 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
 
     const mutation = useMutation({
         mutationFn: async (updatedData: z.infer<typeof formSchema>) => {
-            const response = await fetch(
-                `http://localhost:8001/api/update-blog/${blogData?.original?._id}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`, // Include token
-                    },
-                    body: JSON.stringify(updatedData),
-                }
-            );
-            if (!response.ok) {
-                throw new Error("Failed to update blog");
+            const formData = new FormData();
+            formData.append("title", updatedData.title);
+            formData.append("description", updatedData.description);
+            
+            if (updatedData.image instanceof File) {
+                formData.append("image", updatedData.image);
             }
+    
+            const response = await fetch(`http://localhost:8001/api/update-blog/${blogData?.original?._id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`, // Only set Authorization, no Content-Type!
+                },
+                body: formData, // Use FormData instead of JSON.stringify
+            });
+    
+            if (!response.ok) throw new Error("Failed to update blog");
             return response.json();
         },
         onSuccess: () => {
-
-            setIsOpen(false); // Close the modal after a successful update
-            form.reset(); // Reset the form fields after submission
-            queryClient.invalidateQueries({ queryKey: ["blogs"] }); // Refresh the blog list (or any relevant data)
+            setIsOpen(false);
+            form.reset();
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
         },
         onError: (error) => {
             console.error("Error updating blog:", error);
         },
     });
+    
+    
 
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         mutation.mutate(data);
+        console.log(data);
     };
+
+    useEffect(() => {
+        return () => {
+            if (filePreview) URL.revokeObjectURL(filePreview);
+        };
+    }, [filePreview]);
 
     return (
         <div className="bg-white rounded-[24px] text-start">
@@ -129,11 +142,12 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                     <FormItem>
                                         <FormLabel>Short Description</FormLabel>
                                         <FormControl>
-                                            <Textarea
+                                            {/* <Textarea
                                                 className="resize-none border-[#9C9C9C] h-[192px]"
                                                 rows={12}
                                                 {...field}
-                                            />
+                                            /> */}
+                                            <TiptapEditor value={field.value || ""} onChange={field.onChange} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -154,7 +168,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                     {filePreview ? (
                                         <div className="relative w-full h-full">
                                             <Image
-                                                src={filePreview?.startsWith('http') ? filePreview : `/${filePreview}`}
+                                                src={filePreview}
                                                 width={400}
                                                 height={300}
                                                 alt="Uploaded preview"
