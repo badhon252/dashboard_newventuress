@@ -17,7 +17,6 @@ export default function CategoryList() {
   const session = useSession();
   const token = session.data?.user?.token;
 
-
   const { data, isLoading, isError } = useQuery<categoryDataResponse>({
     queryKey: ["allcategory", currentPage],
     queryFn: async (): Promise<categoryDataResponse> =>
@@ -27,7 +26,7 @@ export default function CategoryList() {
       }).then((res) => res.json() as Promise<categoryDataResponse>),
 
   });
-  console.log(data);
+  // console.log(data);
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
@@ -86,6 +85,7 @@ export default function CategoryList() {
             imageUrl={category.image}
             description={category.shortDescription}
             slug={category.slug}
+            categoryId={category._id}
             onDelete={() => handleDelete(category._id)}
           />
         ))}
