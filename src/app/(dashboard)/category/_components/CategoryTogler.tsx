@@ -14,7 +14,7 @@ function CategoryTogler() {
         <CategoryHeader setShowCategory={setShowCategory} showcategory={showcategory}/>
           <CategoryFilter />
         {
-            showcategory ? <AddnewCategory/> : <CategoryList />
+        showcategory ? <AddnewCategory setShowCategory={setShowCategory} /> : <CategoryList />
         }
        
     </div>

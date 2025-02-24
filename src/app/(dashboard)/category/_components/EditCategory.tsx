@@ -8,27 +8,32 @@ import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { TiEdit } from "react-icons/ti";
 import { Checkbox } from '@/components/ui/checkbox';
-
-
+import { useSession } from 'next-auth/react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { SubCategoryDataResponse } from '@/data/subCategory';
 
 interface CategoryCardProps {
   title: string;
   imageUrl: string;
   description: string;
   slug: string;
+  categoryId: string
+  setIsOpenEditModal: (data: boolean) => void;
 }
 
-
-
-export default function EditCategory({ title, imageUrl, description, slug }: CategoryCardProps) {
+export default function EditCategory({ title, imageUrl, description, slug, categoryId, setIsOpenEditModal }: CategoryCardProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const session = useSession();
+  const token = session.data?.user?.token;
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [id, setId] = useState("");
 
   const [formData, setFormData] = useState({
     categoryName: title,
-    subCategory: "",
     description: description,
     slug: slug,
   });
@@ -74,18 +79,74 @@ export default function EditCategory({ title, imageUrl, description, slug }: Cat
     };
     reader.onload = (e) => {
       setImagePreview(e.target?.result as string);
-      setFileName(file.name); // Capture the file name
+      setFileName(file.name);
       setUploadProgress(100);
     };
     reader.readAsDataURL(file);
   };
 
-  const handleButtonClick = (e: React.MouseEvent, buttonType: "update" | "confirm") => {
+  const queryClient = useQueryClient();
+
+  const handleButtonClick = async (e: React.MouseEvent, buttonType: "update" | "confirm") => {
     e.preventDefault();
-    console.log(buttonType, {
-      ...formData,
-      image: fileName, // Log the file name (or file path if you had it available)
-    });
+
+    // Create a FormData object
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append("categoryName", formData.categoryName);
+    formDataToSubmit.append("shortDescription", id);
+    formDataToSubmit.append("slug", formData.slug);
+
+    if (fileName) {
+      formDataToSubmit.append("image", fileName); // Ensure fileName is a File object, not a string
+    }
+
+    console.log("Sending data:", formDataToSubmit);
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/${categoryId}`, {
+        method: buttonType === "update" ? "PUT" : "POST", // Change method based on buttonType
+        headers: {
+          "Authorization": `Bearer ${token}`, // Authorization header is okay
+          // DO NOT set "Content-Type" manually when using FormData
+        },
+        body: formDataToSubmit, // Pass FormData directly
+      });
+
+      // Handle the response
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("Data updated successfully:", responseData);
+        queryClient.invalidateQueries({ queryKey: ["allcategory"] });
+        alert("Category updated successfully!");
+        setIsOpenEditModal(false);
+      } else {
+        const errorData = await response.json();
+        console.error("Error:", errorData);
+        alert(`Failed to update category: ${errorData.message || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Network error, please try again later.");
+    }
+  };
+
+  const { data } = useQuery<SubCategoryDataResponse>({
+    queryKey: ["allcategory"],
+    queryFn: async (): Promise<SubCategoryDataResponse> =>
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subcategories`, {
+        method: "GET",
+      }).then((res) => res.json() as Promise<SubCategoryDataResponse>),
+  });
+
+  const handleSelect = (item: string, id: string) => {
+    setSelectedItem(item);
+    setIsOpen(false);
+    setId(id);
+  };
+
+  const handleFileButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    fileInputRef.current?.click();
   };
 
   return (
@@ -97,7 +158,6 @@ export default function EditCategory({ title, imageUrl, description, slug }: Cat
         <CardContent className="p-6">
           <form className="grid gap-6">
             <div className="grid md:grid-cols-2 gap-6">
-              {/* Left Section */}
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="categoryName">Category Name <span className="text-red-500">*</span></Label>
@@ -105,8 +165,35 @@ export default function EditCategory({ title, imageUrl, description, slug }: Cat
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subCategory">Sub-category <span className="text-red-500">*</span></Label>
-                  <Input id="subCategory" value={formData.subCategory} onChange={(e) => setFormData({ ...formData, subCategory: e.target.value })} required className="h-[51px] border border-[#B0B0B0]" />
+                  <div className="relative inline-block text-left w-full border-[1px] border-[#B0B0B0] py-2 rounded-[8px]">
+                    <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      className="font-medium rounded-lg text-sm text-[#444444] px-2 py-2.5 text-center inline-flex justify-between items-center w-full"
+                      type="button"
+                    >
+                      {selectedItem || "Sub Category"}
+                      <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                      </svg>
+                    </button>
+
+                    {isOpen && (
+                      <div className="absolute z-10 mt-2 bg-white divide-y divide-gray-100 rounded-lg w-full shadow-md">
+                        <ul className="py-2 text-sm text-gray-700">
+                          {data?.data.map((item) => (
+                            <li key={item._id}>
+                              <p
+                                onClick={() => handleSelect(item.subCategoryName, item._id)}
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                              >
+                                {item.subCategoryName}
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -120,7 +207,6 @@ export default function EditCategory({ title, imageUrl, description, slug }: Cat
                 </div>
               </div>
 
-              {/* Right Section (Image Upload) */}
               <div className="space-y-4">
                 <div>
                   <Label>Category Image</Label>
@@ -130,7 +216,7 @@ export default function EditCategory({ title, imageUrl, description, slug }: Cat
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
-                    onClick={() => fileInputRef.current?.click()}
+                    onClick={handleFileButtonClick} // Ensure the file input is triggered when clicked
                   >
                     <Input
                       type="file"
@@ -149,7 +235,7 @@ export default function EditCategory({ title, imageUrl, description, slug }: Cat
                         />
                         <button
                           onClick={(e) => {
-                            e.stopPropagation();
+                            e.preventDefault();
                             fileInputRef.current?.click();
                           }}
                           className="absolute top-2 right-2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 transition"
