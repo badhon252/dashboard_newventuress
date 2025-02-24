@@ -76,7 +76,7 @@ const AddBlogForm = ({ setAddBlogForm }: Props) => {
       setAddBlogForm(false);
     },
     onError: () => {
-      // ❌ Show error message
+      // ❌ Show error message xxxxxx
       setMessage({ text: "Failed to add blog. Please try again.", type: "error" });
 
       // Auto-hide message after 3 seconds
