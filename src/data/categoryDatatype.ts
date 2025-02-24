@@ -8,6 +8,7 @@ export interface categoryDataType {
   categoryName: string;
   image: string;
   slug: string;
+  subCategory: number;
   shortDescription: string;
   __v: number;
   categoryStatement: categoryStatement[];
