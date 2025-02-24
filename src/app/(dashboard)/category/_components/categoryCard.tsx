@@ -8,15 +8,16 @@ import EditCategory from "./EditCategory";
 
 
 interface CategoryCardProps {
-  // id: number;
+  categoryId: string;
   title: string;
   imageUrl: string;
   description: string;
   slug: string,
+  // subCategory: number
   onDelete: () => void; 
 }
 
-export function CategoryCard({ title, imageUrl, onDelete, description, slug }: CategoryCardProps) {
+export function CategoryCard({ title, imageUrl, onDelete, description, slug, categoryId  }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
@@ -112,7 +113,7 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug }: C
           >
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
             <div className="relative z-10">
-              <EditCategory title={title} imageUrl={imageUrl} description={description} slug={slug} />
+              <EditCategory title={title} imageUrl={imageUrl} description={description} slug={slug} categoryId={categoryId} setIsOpenEditModal={setIsOpenEditModal} />
             </div>
           </div>
         </section>
