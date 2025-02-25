@@ -66,7 +66,9 @@ export default function CategoryList() {
       </div>
     );
   } else if (isError) {
-    content = <p>Error:</p>;
+    content = (
+      <NotFound message="No found your data" />
+    )
   } else if (data && data.data && data.data.length === 0) {
     content = (
       <div className="mt-7">
