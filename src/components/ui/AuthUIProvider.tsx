@@ -23,8 +23,8 @@ const AuthUIProvider = async ({
   backButton = true,
 }: AuthUIProviderProps) => {
   // generating a blur data url
-  const buffer = await fetch(sidebarImage, { cache: "no-store" }).then(
-    async (res) => Buffer.from(await res.arrayBuffer())
+  const buffer = await fetch(sidebarImage).then(async (res) =>
+    Buffer.from(await res.arrayBuffer())
   );
 
   const { base64 } = await getPlaiceholder(buffer);
