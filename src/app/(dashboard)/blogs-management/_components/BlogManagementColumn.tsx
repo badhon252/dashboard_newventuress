@@ -20,20 +20,35 @@ export const BlogManagementColumn: ColumnDef<blogsDataType>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value) => {
+          // Log all row ids when "Select all" is clicked
+          if (value) {
+            table.getRowModel().rows.forEach(row => {
+              console.log("Row ID (Select all):", row.original._id);  // Log all row _id when select all is checked
+            });
+          }
+          table.toggleAllPageRowsSelected(!!value);
+        }}
         aria-label="Select all"
       />
     ),
+    
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value) => {
+          console.log("Row ID:", row.original._id);  // Log the row _id when checkbox for that row is clicked
+          row.toggleSelected(!!value);
+        }}
         aria-label="Select row"
       />
     ),
+    
     enableSorting: false,
     enableHiding: false,
   },
+  
+  
 
   {
     id: "title",

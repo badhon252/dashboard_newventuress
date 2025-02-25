@@ -4,21 +4,20 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "react-toastify";
-import { Table as TanStackTable, Row } from "@tanstack/react-table";
+import { Table as TanStackTable } from "@tanstack/react-table";
 import { blogsDataType } from "@/data/blogsManagementData";
 import { useSession } from "next-auth/react";
 
 export default function BlogManagementFilter({ table }: { table: TanStackTable<blogsDataType> }) {
+
   const queryClient = useQueryClient();
-
-
   const session = useSession();
   const token = session.data?.user?.token;
   console.log({ token });
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (selectedIds: string[]) => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/delete-blog`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/delete-multiple-blogs`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -48,11 +47,13 @@ export default function BlogManagementFilter({ table }: { table: TanStackTable<b
       return;
     }
   
-    console.log("Table instance:", table);  // Log the entire table instance
-    const selectedRows = table.getSelectedRowModel()?.rows ?? [];
+    console.log("Table instance:", table);
+  
+    // Get selected rows using the updated table API
+    const selectedRows = table.getSelectedRowModel().rows ?? [];
     console.log("Selected Rows:", selectedRows);
   
-    const selectedIds = selectedRows.map((row: Row<blogsDataType>) => row.original._id);
+    const selectedIds = selectedRows.map((row) => row.original._id); // Make sure _id exists
     console.log("Selected IDs:", selectedIds);
   
     if (selectedIds.length === 0) {
@@ -60,8 +61,10 @@ export default function BlogManagementFilter({ table }: { table: TanStackTable<b
       return;
     }
   
-    mutate(selectedIds);
+    mutate(selectedIds);  // Perform the mutation for bulk delete
   };
+  
+  
   
   
   

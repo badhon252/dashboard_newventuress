@@ -14,8 +14,6 @@ import { useReactTable, getCoreRowModel } from '@tanstack/react-table';
 const TableAndFormToggler = () => {
     const [addBlogForm, setAddBlogForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-
-
     const { data, isLoading, isError, error } = useQuery<blogsDataResponse>({
         queryKey: ["blogs", currentPage],
         queryFn: () =>
@@ -32,7 +30,7 @@ const TableAndFormToggler = () => {
     const table = useReactTable({
         data: data?.data ?? [],
         columns: [], // define your columns here
-        getCoreRowModel: getCoreRowModel(),
+        getCoreRowModel: getCoreRowModel()
       });
 
 
