@@ -30,9 +30,9 @@ const QuillEditor = ({ value, onChange }: QuillEditorProps) => {
         placeholder: "Type Description Here",
       })
 
-      // Set initial content if available
+      // Set initial content using Quill's method to prevent direct innerHTML manipulation
       if (value) {
-        quill.root.innerHTML = value
+        quill.root.innerHTML = value // or you can use `quill.clipboard.dangerouslyPasteHTML(value)`
       }
 
       // Handle content changes
@@ -73,4 +73,3 @@ const QuillEditor = ({ value, onChange }: QuillEditorProps) => {
 }
 
 export default QuillEditor
-

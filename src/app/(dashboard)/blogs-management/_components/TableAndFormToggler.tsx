@@ -7,6 +7,7 @@ import BlogManagementFilter from "./BlogManagementFilter";
 import AddBlogForm from "./AddBlogForm";
 import BlogManagementContainer from "./BlogManagementContainer";
 import { blogsDataResponse } from "@/data/blogsManagementData";
+import { useReactTable, getCoreRowModel } from '@tanstack/react-table';
 
 
 
@@ -28,11 +29,17 @@ const TableAndFormToggler = () => {
         setCurrentPage(page); // Update the current page when pagination changes
     };
 
+    const table = useReactTable({
+        data: data?.data ?? [],
+        columns: [], // define your columns here
+        getCoreRowModel: getCoreRowModel(),
+      });
+
 
     return (
         <div>
             <BlogManagementHeader addBlogForm={addBlogForm} setAddBlogForm={setAddBlogForm} meta={data?.meta ?? []}/>
-            <BlogManagementFilter />
+            <BlogManagementFilter table={table}/>
             {addBlogForm ? (
                 <AddBlogForm setAddBlogForm={setAddBlogForm} />
             ) : (

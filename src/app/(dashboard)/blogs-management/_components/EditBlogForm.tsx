@@ -65,6 +65,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
 
     const session = useSession();
     const token = session?.data?.user?.token;
+    console.log(token);
 
 
     const mutation = useMutation({
@@ -73,16 +74,17 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
             formData.append("title", updatedData.title);
             formData.append("description", updatedData.description);
             
+            // Only append image if it exists
             if (updatedData.image instanceof File) {
                 formData.append("image", updatedData.image);
             }
     
-            const response = await fetch(`http://localhost:8001/api/update-blog/${blogData?.original?._id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/update-blog/${blogData?.original?._id}`, {
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`, // Only set Authorization, no Content-Type!
+                    Authorization: `Bearer ${token}`, // Ensure token is valid
                 },
-                body: formData, // Use FormData instead of JSON.stringify
+                body: formData, // Using FormData to submit image along with other data
             });
     
             if (!response.ok) throw new Error("Failed to update blog");
@@ -97,6 +99,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
             console.error("Error updating blog:", error);
         },
     });
+    
     
     
 
