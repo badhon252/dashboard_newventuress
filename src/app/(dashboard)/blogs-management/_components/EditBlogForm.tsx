@@ -11,7 +11,7 @@ import * as z from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { TiptapEditor } from "./EditorToolbar";
+import QuillEditor from "./AddTiptapEditor";
 
 const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -147,7 +147,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                                 rows={12}
                                                 {...field}
                                             /> */}
-                                            <TiptapEditor value={field.value || ""} onChange={field.onChange} />
+                                            <QuillEditor value={field.value || ""} onChange={field.onChange} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
