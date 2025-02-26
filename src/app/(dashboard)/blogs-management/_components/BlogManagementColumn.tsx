@@ -5,50 +5,32 @@ import { ColumnDef } from "@tanstack/react-table";
 import AuctionsButton from "./AuctionsButton";
 import { Checkbox } from "@/components/ui/checkbox";
 
-
-
-
-
-
-export const BlogManagementColumn: ColumnDef<blogsDataType>[] = [
+export const BlogManagementColumn = (handleSelectRow: (row: blogsDataType) => void): ColumnDef<blogsDataType>[] => [
   {
     id: "select",
-    
     header: ({ table }) => (
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => {
-          // Log all row ids when "Select all" is clicked
-          if (value) {
-            table.getRowModel().rows.forEach(row => {
-              console.log("Row ID (Select all):", row.original._id);  // Log all row _id when select all is checked
-            });
-          }
-          table.toggleAllPageRowsSelected(!!value);
-        }}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
-    
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => {
-          console.log("Row ID:", row.original._id);  // Log the row _id when checkbox for that row is clicked
-          row.toggleSelected(!!value);
+          row.toggleSelected(!!value); // Toggle row selection
+          handleSelectRow(row.original); // Pass row.original to handleSelectRow
         }}
         aria-label="Select row"
       />
     ),
-    
     enableSorting: false,
     enableHiding: false,
   },
-  
-  
 
   {
     id: "title",
@@ -93,13 +75,13 @@ export const BlogManagementColumn: ColumnDef<blogsDataType>[] = [
     },
   },
   {
-    header: "Actions", 
+    header: "Actions",
     cell: ({ row }) => {
 
       return (
         <div className="  ">
-          
-          <AuctionsButton row={ row }/>
+
+          <AuctionsButton row={row} />
         </div>
       );
     },

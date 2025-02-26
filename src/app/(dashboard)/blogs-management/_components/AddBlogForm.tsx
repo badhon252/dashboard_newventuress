@@ -5,13 +5,13 @@ import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { useSession } from "next-auth/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { type Dispatch, type SetStateAction, useState } from "react"
 import AddBlogImage from "./AddBlogImage"
 import { AlertDialog } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
 import QuillEditor from "./AddTiptapEditor"
+import { Loader2 } from "lucide-react"
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -20,17 +20,18 @@ const formSchema = z.object({
 
 interface Props {
   setAddBlogForm: Dispatch<SetStateAction<boolean>>
+  token: string
 }
 
-const AddBlogForm = ({ setAddBlogForm }: Props) => {
+const AddBlogForm = ({ setAddBlogForm, token }: Props) => {
   // Initialize hooks before checking for token
-  const session = useSession()
-  const token = session?.data?.user?.token
+  // const session = useSession()
+  // const token = session?.data?.user?.token
   const queryClient = useQueryClient()
   const [image, setImage] = useState<File | null>(null)
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null)
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["addBlog"],
     mutationFn: async (data: FormData) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/create-blog`, {
@@ -72,6 +73,8 @@ const AddBlogForm = ({ setAddBlogForm }: Props) => {
       setTimeout(() => setMessage(null), 3000)
     },
   })
+
+  console.log(token);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -146,7 +149,13 @@ const AddBlogForm = ({ setAddBlogForm }: Props) => {
 
           <div className="flex justify-end -mt-10">
             <Button type="submit" className="py-[12px] px-[24px]">
-              Post
+              {isPending ? (
+                <p className="flex">
+                  Posting... <Loader2 className="animate-spin text-white" />
+                </p>
+              ) : (
+                "Post"
+              )}
             </Button>
           </div>
         </form>

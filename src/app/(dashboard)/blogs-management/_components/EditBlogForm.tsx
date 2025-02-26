@@ -32,6 +32,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
     const [fileName, setFileName] = useState<string | null>(blogData?.original?.image || null);
     const queryClient = useQueryClient();
 
+    console.log(fileName)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -60,12 +61,9 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
         setFileName(null);
         form.setValue("image", "");
     };
-    console.log(fileName);
-
-
+   
     const session = useSession();
     const token = session?.data?.user?.token;
-    console.log(token);
 
 
     const mutation = useMutation({
@@ -132,7 +130,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                             Title<span className="text-red-500">*</span>
                                         </FormLabel>
                                         <FormControl>
-                                            <Input className="h-[51px] border-[#9C9C9C]" {...field} />
+                                            <Input className="h-[51px] pl-2 border-[#9C9C9C]" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -209,13 +207,14 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-end pt-[60px]">
+                    <div className="flex justify-end ">
                         <Button type="submit" className="py-[12px] px-[24px]" >
                             Post
                         </Button>
                     </div>
                 </form>
             </Form>
+            
         </div>
     );
 };

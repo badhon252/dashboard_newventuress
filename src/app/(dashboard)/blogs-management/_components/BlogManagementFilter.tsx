@@ -1,75 +1,16 @@
 "use client";
-
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "react-toastify";
-import { Table as TanStackTable } from "@tanstack/react-table";
-import { blogsDataType } from "@/data/blogsManagementData";
-import { useSession } from "next-auth/react";
 
-export default function BlogManagementFilter({ table }: { table: TanStackTable<blogsDataType> }) {
+interface BlogManagementFilterProps {
+  selectedRows: any[]; // The selected rows to perform bulk delete on
+  handleBulkDelete: () => void; // The function to call when bulk delete is triggered
+}
 
-  const queryClient = useQueryClient();
-  const session = useSession();
-  const token = session.data?.user?.token;
-  console.log({ token });
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (selectedIds: string[]) => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/delete-multiple-blogs`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Include token in Authorization header
-        },
-        body: JSON.stringify({ ids: selectedIds }),
-      });
-  
-      if (!response.ok) throw new Error("Failed to delete blogs");
-      return response.json();
-    },
-    onSuccess: () => {
-      toast.success("Blogs deleted successfully!");
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
-    },
-    onError: () => {
-      toast.error("Failed to delete blogs. Please try again.");
-    },
-  });
-  
-  
-
-  const handleBulkDelete = () => {
-    if (!table) {
-      console.error("Table instance is undefined.");
-      toast.error("Error: Table instance not available.");
-      return;
-    }
-  
-    console.log("Table instance:", table);
-  
-    // Get selected rows using the updated table API
-    const selectedRows = table.getSelectedRowModel().rows ?? [];
-    console.log("Selected Rows:", selectedRows);
-  
-    const selectedIds = selectedRows.map((row) => row.original._id); // Make sure _id exists
-    console.log("Selected IDs:", selectedIds);
-  
-    if (selectedIds.length === 0) {
-      toast.warn("No blogs selected for deletion.");
-      return;
-    }
-  
-    mutate(selectedIds);  // Perform the mutation for bulk delete
-  };
-  
-  
-  
-  
-  
-  
-
+export default function BlogManagementFilter({
+  selectedRows,
+  handleBulkDelete,
+}: BlogManagementFilterProps) {
   return (
     <div className="flex items-center bg-white mb-[30px] gap-4 p-4 w-full rounded-[12px]">
       <div className="flex items-center gap-2">
@@ -88,12 +29,12 @@ export default function BlogManagementFilter({ table }: { table: TanStackTable<b
 
       <div className="flex items-center gap-2">
         <Select>
-          <SelectTrigger className="py-[9px] px-[10px] bg-primary text-white border-0 [&>svg]:text-white">
+          <SelectTrigger className="py-[9px] px-[10px] bg-primary text-white border-0  [&>svg]:text-white">
             <SelectValue placeholder="Filter" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="published">Published</SelectItem>
-            <SelectItem value="draft">Draft</SelectItem>
+            <SelectItem value="store1">Published</SelectItem>
+            <SelectItem value="store2">Draft</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -101,11 +42,11 @@ export default function BlogManagementFilter({ table }: { table: TanStackTable<b
       <div className="ml-auto">
         <Button
           variant="default"
-          className="bg-red-600 text-white"
+          className="bg-primary text-white"
           onClick={handleBulkDelete}
-          disabled={isPending}
+          disabled={selectedRows.length === 0} // Disable button if no rows are selected
         >
-          {isPending ? "Deleting..." : "Bulk Delete"}
+          Bulk Delete
         </Button>
       </div>
     </div>

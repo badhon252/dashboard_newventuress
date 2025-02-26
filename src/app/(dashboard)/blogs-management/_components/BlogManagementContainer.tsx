@@ -16,7 +16,9 @@ const BlogManagementContainer = ({
   error,
   setPage,
   currentPage,
-  totalPages, // You need to pass totalPages from the parent if available
+  totalPages,
+  selectedRows,
+  handleSelectRow,
 }: {
   blogs: blogsDataType[];
   isLoading: boolean;
@@ -24,8 +26,15 @@ const BlogManagementContainer = ({
   error: any;
   setPage: (page: number) => void;
   currentPage: number;
-  totalPages: number; // New prop to get the total pages
+  totalPages: number;
+  selectedRows: blogsDataType[];
+  handleSelectRow: (row: blogsDataType) => void;
 }) => {
+  if (selectedRows.length > 0) {
+    console.log("Rows selected:", selectedRows);
+    // or display a message to the user
+  }
+  
   let content;
 
   if (isLoading) {
@@ -45,7 +54,7 @@ const BlogManagementContainer = ({
   } else {
     content = (
       <div className="w-full">
-        <TableContainer data={blogs} columns={BlogManagementColumn} />
+        <TableContainer data={blogs} columns={BlogManagementColumn(handleSelectRow)} />
       </div>
     );
   }
@@ -57,12 +66,12 @@ const BlogManagementContainer = ({
       </div>
       <div className="mt-[30px] mb-[208px] w-full flex justify-between">
         <p className="font-normal text-[16px] leading-[19.2px] text-[#444444]">
-          Showing page {currentPage} of {totalPages} {/* Use totalPages prop */}
+          Showing page {currentPage} of {totalPages}
         </p>
         <div>
           <PacificPagination
             currentPage={currentPage}
-            totalPages={totalPages }  
+            totalPages={totalPages}
             onPageChange={setPage}
           />
         </div>
@@ -72,6 +81,7 @@ const BlogManagementContainer = ({
 };
 
 export default BlogManagementContainer;
+
 
 // TableContainer Component
 const TableContainer = ({

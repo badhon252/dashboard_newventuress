@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import Quill from "quill"
 import "quill/dist/quill.snow.css"
+import { ScrollArea } from "@radix-ui/react-scroll-area"
 
 interface QuillEditorProps {
   value: string
@@ -54,18 +55,26 @@ const QuillEditor = ({ value, onChange }: QuillEditorProps) => {
 
   return (
     <div className="quill-editor-container">
+      <ScrollArea className="max-h-[500px] overflow-y-auto">
       <div ref={editorRef} className="min-h-[192px]" />
+      </ScrollArea>
       <style jsx global>{`
         .quill-editor-container .ql-container {
           border-color: #9C9C9C;
           border-bottom-left-radius: 0.375rem;
           border-bottom-right-radius: 0.375rem;
           min-height: 160px;
+          position: relative;
         }
         .quill-editor-container .ql-toolbar {
           border-color: #9C9C9C;
+          height: 50px;
           border-top-left-radius: 0.375rem;
           border-top-right-radius: 0.375rem;
+          position: sticky;
+          top: 0;
+          background: white;
+          z-index: 50; /* Ensures the toolbar stays above the editor */
         }
       `}</style>
     </div>
