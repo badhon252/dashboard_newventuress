@@ -9,10 +9,17 @@ function VendorOrderContainer() {
   const [deletedid, setDeletedid] = useState('');
   const [selectedRow, setSelectedRow] = useState<orderDataType | null>(null);
   const [acceptOder, ] = useState<string>("processing");
-
- 
   const session = useSession();
   const token = session.data?.user?.token;
+
+  const deleteOrder = (orderId: string) => {
+    setDeletedid(orderId);
+    setIsDeleteModalOpen(true);
+  };
+  const finalDelete = () => {
+    mutate(deletedid);
+    setIsDeleteModalOpen(false);
+  }
 
   const { data, isLoading, isError, } = useQuery<orderDataResponse>({
     queryKey: ["order"],
@@ -27,7 +34,7 @@ function VendorOrderContainer() {
     enabled: !!token,
     
   });
-  // console.log(data, "data");
+  console.log(data, "data");
 
 
 
@@ -46,14 +53,14 @@ function VendorOrderContainer() {
           },
         }
       );
-
+      if (res.ok) {
+        queryClient.invalidateQueries({ queryKey: ["order"] });
+      }
       if (!res.ok) {
         throw new Error("Failed to delete order");
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["order"] });
-    },
+   
   });
 
 
@@ -93,14 +100,7 @@ function VendorOrderContainer() {
 
 
 
-  const deleteOrder = (orderId: string) => {
-    setDeletedid(orderId);
-    setIsDeleteModalOpen(true);
-  };
-  const finalDelete = () => { 
-    mutate(deletedid);
-    setIsDeleteModalOpen(false);
-  }
+ 
 
   let content;
   if (isLoading) {
