@@ -5,15 +5,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import AuctionsButton from "./AuctionsButton";
 import { Checkbox } from "@/components/ui/checkbox";
 
-
-
-
-
-
-export const BlogManagementColumn: ColumnDef<blogsDataType>[] = [
+export const BlogManagementColumn = (handleSelectRow: (row: blogsDataType) => void): ColumnDef<blogsDataType>[] => [
   {
     id: "select",
-    
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -27,7 +21,10 @@ export const BlogManagementColumn: ColumnDef<blogsDataType>[] = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value) => {
+          row.toggleSelected(!!value); // Toggle row selection
+          handleSelectRow(row.original); // Pass row.original to handleSelectRow
+        }}
         aria-label="Select row"
       />
     ),
@@ -78,13 +75,13 @@ export const BlogManagementColumn: ColumnDef<blogsDataType>[] = [
     },
   },
   {
-    header: "Actions", 
+    header: "Actions",
     cell: ({ row }) => {
 
       return (
         <div className="  ">
-          
-          <AuctionsButton row={ row }/>
+
+          <AuctionsButton row={row} />
         </div>
       );
     },

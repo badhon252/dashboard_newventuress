@@ -1,10 +1,16 @@
 import React from 'react';
 import TableAndFormToggler from './_components/TableAndFormToggler';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
-const page = () => {
+const page = async () => {
+    const currentUser = await auth();
+
+    if (!currentUser) redirect("/");
+
     return (
         <div>
-            <TableAndFormToggler/>
+            <TableAndFormToggler token={currentUser.user.token} />
         </div>
     );
 };

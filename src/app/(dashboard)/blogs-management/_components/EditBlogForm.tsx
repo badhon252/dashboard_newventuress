@@ -11,7 +11,7 @@ import * as z from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { TiptapEditor } from "./EditorToolbar";
+import QuillEditor from "./AddTiptapEditor";
 
 const formSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -32,6 +32,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
     const [fileName, setFileName] = useState<string | null>(blogData?.original?.image || null);
     const queryClient = useQueryClient();
 
+    console.log(fileName)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -60,9 +61,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
         setFileName(null);
         form.setValue("image", "");
     };
-    console.log(fileName);
-
-
+   
     const session = useSession();
     const token = session?.data?.user?.token;
 
@@ -73,16 +72,17 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
             formData.append("title", updatedData.title);
             formData.append("description", updatedData.description);
             
+            // Only append image if it exists
             if (updatedData.image instanceof File) {
                 formData.append("image", updatedData.image);
             }
     
-            const response = await fetch(`http://localhost:8001/api/update-blog/${blogData?.original?._id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/update-blog/${blogData?.original?._id}`, {
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`, // Only set Authorization, no Content-Type!
+                    Authorization: `Bearer ${token}`, // Ensure token is valid
                 },
-                body: formData, // Use FormData instead of JSON.stringify
+                body: formData, // Using FormData to submit image along with other data
             });
     
             if (!response.ok) throw new Error("Failed to update blog");
@@ -97,6 +97,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
             console.error("Error updating blog:", error);
         },
     });
+    
     
     
 
@@ -129,7 +130,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                             Title<span className="text-red-500">*</span>
                                         </FormLabel>
                                         <FormControl>
-                                            <Input className="h-[51px] border-[#9C9C9C]" {...field} />
+                                            <Input className="h-[51px] pl-2 border-[#9C9C9C]" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -147,7 +148,7 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                                                 rows={12}
                                                 {...field}
                                             /> */}
-                                            <TiptapEditor value={field.value || ""} onChange={field.onChange} />
+                                            <QuillEditor value={field.value || ""} onChange={field.onChange} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -206,13 +207,14 @@ const EditBlogForm: React.FC<EditBlogProps> = ({ blogData, setIsOpen }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-end pt-[60px]">
+                    <div className="flex justify-end ">
                         <Button type="submit" className="py-[12px] px-[24px]" >
                             Post
                         </Button>
                     </div>
                 </form>
             </Form>
+            
         </div>
     );
 };
