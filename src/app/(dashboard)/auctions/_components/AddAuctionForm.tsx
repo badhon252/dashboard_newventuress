@@ -14,6 +14,8 @@ import ProductGallery from "./ProductGallery"
 import { enUS } from "date-fns/locale"
 
 import { DateTimePicker } from "@/components/ui/datetime-picker"
+import { useMutation } from "@tanstack/react-query"
+import { useSession } from "next-auth/react"
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -60,14 +62,48 @@ export default function AddAuctionForm() {
     form.setValue("images", images)
   }, [images, form])
 
+  const session = useSession();
+  const token = session?.data?.user?.token;
+  console.log(token)
+
+  const { mutate } = useMutation<any, unknown, FormData>({
+    mutationKey : ["create-auction"],
+    mutationFn : (formData) => fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vendor/auction/create`, {
+      method : "POST",
+      headers : {
+        Authorization : `Bearer ${token}`
+      },
+      body : formData,
+      
+    }).then((res)=>res.json()),
+
+    onSuccess: (data) => {
+      console.log("Auction Created Successfully:", data);
+    },
+    onError: (err) => {
+      console.error("Auction Creation Failed:", err);
+    },
+  })
+  // data: z.infer<typeof formSchema>
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    const formData = {
-      ...data,
-      images: images.map((file) => file.name), // Map File objects to their names
-      startingTime: date24,
-      endingTime: date24,
-    }
-    console.log(formData)
+    const formData = new FormData();
+
+  // Append text fields
+  formData.append("title", data.title);
+  formData.append("description", data.description);
+  formData.append("productType", JSON.stringify(data.productType));
+  formData.append("startingPrice", data.startingPrice);
+  formData.append("startingTime", JSON.stringify(data.startingTime));
+  formData.append("endingTime", JSON.stringify(data.endingTime));
+  formData.append("sku", JSON.stringify(data.sku));
+  formData.append("stockQuantity", JSON.stringify(Number(data.stockQuantity)));
+  formData.append("tags", JSON.stringify(data.tags))
+  if (images.length > 0) {
+    images.map((image) => {
+      formData.append("images", image);
+    });
+  }
+    mutate(formData)
   }
 
   return (
