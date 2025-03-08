@@ -10,6 +10,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { CustomerListColumn } from "./CustomerListColumn";
 
@@ -28,10 +29,16 @@ const CustomerContainer = () => {
   let content;
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <div className="flex items-center gap-x-3 justify-center h-[400px]">
+        <Loader2 className="animate-spin" /> <span>Loading Data...</span>
+      </div>
+    );
   } else if (isError) {
     content = (
-      <ErrorContainer message={error.message ?? "Failed to load verdor data"} />
+      <ErrorContainer
+        message={error?.message ?? "Failed to load verdor data"}
+      />
     );
   } else if (data) {
     content = (
