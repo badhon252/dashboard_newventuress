@@ -88,7 +88,7 @@ export const CustomerListColumn: ColumnDef<User>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <VendorAction row={row} />
+          <VendorAction user={row.original} />
         </div>
       );
     },

@@ -1,23 +1,10 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-
-interface VendorDetailsProps {
-  id: string;
-  userName: string;
-  email: string;
-  storeName: string;
-  phone: string;
-  joiningDate: string;
-  avatarUrl: string;
-}
+import { User } from "@/types/admin";
 
 interface DeleteVendorModalProps {
-  // isOpen: boolean
-  // onClose: () => void
-  // onConfirm: () => void
-  vendorDetails: VendorDetailsProps;
+  vendorDetails: User;
   setIsOpen: (open: boolean) => void;
 }
 
@@ -40,59 +27,58 @@ export function DeleteVendorModal({
 
         <div className="">
           <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-[#444444] font-medium ">
-              User Name
-            </span>
-            <div className="flex items-center gap-2">
+            <span className="text-[#444444] font-medium ">User Name</span>
+            {/* <div className="flex items-center gap-2">
               <Avatar className="h-7 w-7">
                 <AvatarImage src={vendorDetails.avatarUrl} />
                 <AvatarFallback>AG</AvatarFallback>
-              </Avatar>
-              <span className="text-gradient">{vendorDetails.userName}</span>
-            </div>
+              </Avatar> */}
+            <span className="text-gradient">{vendorDetails.fullName}</span>
           </div>
+        </div>
 
-          <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
+        {/* <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
             <span className="text-[#444444]">Store Name</span>
             <span className="text-black">{vendorDetails.storeName}</span>
-          </div>
+          </div> */}
 
-          <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-[#444444]">ID</span>
-            <span className="text-black">{vendorDetails.id}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-[#444444]">Email</span>
-            <span>{vendorDetails.email}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
-            <span className="text-[#444444]">Phone</span>
-            <span>{vendorDetails.phone}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-4 border-y-[1px] border-[#C5C5C5]">
-            <span className="text-[#444444]">Joining Date</span>
-            <span>{vendorDetails.joiningDate}</span>
-          </div>
+        <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
+          <span className="text-[#444444]">ID</span>
+          <span className="text-black">{vendorDetails._id}</span>
         </div>
 
-        <div className="mt-6 space-y-3">
-          <Button
-            variant="outline"
-            className="w-full border-gradient text-gradient  hover:text-blue-500 border-[#121D42] cursor-pointer py-[18px]"
-            onClick={() => setIsOpen(false)}
-          >
-            Yes
-          </Button>
-          <Button
-            className="w-full bg-[#1a237e] hover:bg-[#1a237e]/90 py-[18px]"
-            onClick={() => setIsOpen(false)}
-          >
-            No
-          </Button>
+        <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
+          <span className="text-[#444444]">Email</span>
+          <span>{vendorDetails.email}</span>
         </div>
+
+        <div className="flex items-center justify-between py-4 border-t-[1px] border-[#C5C5C5]">
+          <span className="text-[#444444]">Industry</span>
+          <span>
+            {vendorDetails.industry[0]}, {vendorDetails.industry[1]}
+          </span>
+        </div>
+
+        <div className="flex items-center justify-between py-4 border-y-[1px] border-[#C5C5C5]">
+          <span className="text-[#444444]">Joining Date</span>
+          <span>{vendorDetails.createdAt}</span>
+        </div>
+      </div>
+
+      <div className="mt-6 space-y-3 px-[68px]">
+        <Button
+          variant="outline"
+          className="w-full border-gradient text-primary h-[40px] hover:bg-[#121D42]/10 border-[#121D42]/50 cursor-pointer py-[18px]"
+          onClick={() => setIsOpen(false)}
+        >
+          Yes
+        </Button>
+        <Button
+          className="w-full bg-[#1a237e] hover:bg-[#1a237e]/90 h-[40px] py-[18px]"
+          onClick={() => setIsOpen(false)}
+        >
+          No
+        </Button>
       </div>
     </div>
   );
