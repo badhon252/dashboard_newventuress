@@ -10,8 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AlertCircle, CheckCircle, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { DeleteVendorModal } from "./delete-vendor";
 // import EditeCupon from "./EditeCupon";
 
@@ -23,6 +25,60 @@ const VendorAction = ({ user }: Props) => {
   //   const [showModal, setShowModal] = useState(false); // Modal visibility state
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [loading, setLoading] = useState("");
+
+  const queryClient = useQueryClient();
+
+  const { mutate: approveLicense } = useMutation({
+    mutationKey: ["license-approve"],
+    mutationFn: (body: any) =>
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/verify-license`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }).then((res) => res.json()),
+
+    onSuccess: (data) => {
+      setLoading("");
+      if (!data.status) {
+        toast.error(data.message ?? "Failed to approve license", {
+          position: "top-right",
+          richColors: true,
+        });
+
+        return;
+      }
+
+      // handle success
+      toast.success("license approved ✅");
+      queryClient.invalidateQueries({ queryKey: ["vendor-management"] });
+    },
+    onError: (err) => {
+      toast.error(err?.message ?? "Failed to approve license", {
+        position: "top-right",
+        richColors: true,
+      });
+    },
+  });
+
+  type LicenseType = "businessLicense" | "cannabisLicense" | "metrcLicense";
+
+  const handleApproveLicense = (
+    licenseType: LicenseType,
+    licenseId: string
+  ) => {
+    setLoading(licenseId);
+    const data = {
+      licenseId,
+      licenseType,
+      userId: user._id,
+    };
+
+    // api call
+    approveLicense(data);
+  };
 
   return (
     <>
@@ -59,7 +115,7 @@ const VendorAction = ({ user }: Props) => {
 
       <VeganModal open={isEditOpen} onOpenChange={setIsEditOpen} className="">
         <ScrollArea className="h-[70vh] w-full">
-          <div className="space-y-6 py-4">
+          <div className="space-y-6 ">
             {/* User Information */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -204,11 +260,17 @@ const VendorAction = ({ user }: Props) => {
                                     {!license.isVerified && (
                                       <Button
                                         size="sm"
-                                        // onClick={() => handleApprove("businessLicense", license.license)}
-                                        // disabled={loading[`businessLicense-${license.license}`]}
+                                        onClick={() =>
+                                          handleApproveLicense(
+                                            "businessLicense",
+                                            license._id
+                                          )
+                                        }
+                                        disabled={license._id === loading}
                                       >
-                                        {/* {loading[`businessLicense-${license.license}`] ? "Processing..." : "Approve"} */}
-                                        Approve
+                                        {license._id === loading
+                                          ? "Processing..."
+                                          : "Approve"}
                                       </Button>
                                     )}
                                   </div>
@@ -252,11 +314,17 @@ const VendorAction = ({ user }: Props) => {
                                     {!license.isVerified && (
                                       <Button
                                         size="sm"
-                                        // onClick={() => handleApprove("cannabisLicense", license.license)}
-                                        // disabled={loading[`cannabisLicense-${license.license}`]}
+                                        onClick={() =>
+                                          handleApproveLicense(
+                                            "cannabisLicense",
+                                            license._id
+                                          )
+                                        }
+                                        disabled={license._id === loading}
                                       >
-                                        {/* {loading[`cannabisLicense-${license.license}`] ? "Processing..." : "Approve"} */}
-                                        Approve
+                                        {license._id === loading
+                                          ? "Processing..."
+                                          : "Approve"}
                                       </Button>
                                     )}
                                   </div>
@@ -299,11 +367,17 @@ const VendorAction = ({ user }: Props) => {
                                   {!license.isVerified && (
                                     <Button
                                       size="sm"
-                                      // onClick={() => handleApprove("metrcLicense", license.license)}
-                                      // disabled={loading[`metrcLicense-${license.license}`]}
+                                      onClick={() =>
+                                        handleApproveLicense(
+                                          "metrcLicense",
+                                          license._id
+                                        )
+                                      }
+                                      disabled={license._id === loading}
                                     >
-                                      {/* {loading[`metrcLicense-${license.license}`] ? "Processing..." : "Approve"} */}
-                                      Approve
+                                      {license._id === loading
+                                        ? "Processing..."
+                                        : "Approve"}
                                     </Button>
                                   )}
                                 </div>

@@ -1,8 +1,8 @@
 export type License = {
   name: string;
-  businessLicense: { license: string; isVerified: boolean }[];
-  cannabisLicense: { license: string; isVerified: boolean }[];
-  metrcLicense: { license: string; isVerified: boolean }[];
+  businessLicense: { license: string; isVerified: boolean; _id: string }[];
+  cannabisLicense: { license: string; isVerified: boolean; _id: string }[];
+  metrcLicense: { license: string; isVerified: boolean; _id: string }[];
   accept: string[];
   _id: string;
 };
