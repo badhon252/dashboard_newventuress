@@ -1,6 +1,4 @@
 "use client";
-
-import { VendorAllAuctionData, DemoTableItemsType } from "@/data/VendorAllAuctionData";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import {ActionColumn} from "./AuctionColumn"
 
@@ -8,8 +6,8 @@ const VendorAuctionContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError, error } = useQuery<AuctionListingDataResponse>({
-    queryKey: ["all-auctionsListing"],
-    queryFn: () => fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vendor/auctions`, {
+    queryKey: ["all-auctionsListing", currentPage],
+    queryFn: () => fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vendor/auctions?page=${currentPage}&limit=6`, {
       method: "GET",
       // headers: {
       //   "content-type": "application/json",
@@ -56,11 +54,13 @@ const VendorAuctionContainer = () => {
         Showing 1 to 25 in first entries
       </p>
       <div>
-        <PacificPagination
-          currentPage={currentPage}
-          totalPages={10}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+          {data?.pagination && data?.pagination?.totalPages > 1 && (
+            <PacificPagination
+              currentPage={currentPage}
+              totalPages={data?.pagination?.totalPages}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          )}
       </div>
     </div>
   </section>
