@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DemoTableItemsType } from "@/data/VendorAllAuctionData";
+import { Product } from "@/types/auctionData/listing";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { Check, MoreHorizontal } from "lucide-react";
@@ -12,7 +12,7 @@ import Image from "next/image";
 
 
 
-export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
+export const ActionColumn: ColumnDef<Product>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -42,7 +42,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
         <div className="flex items-center gap-4">
           <div>
             <Image
-              src={row.original.image}
+              src={row.original.images[0]}
               height={142}
               width={110}
               alt="img"
@@ -50,7 +50,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
             />
           </div>
           <div>
-            <h4 className="text-[18px] text-gradient font-semibold">{row.original.name}</h4>
+            <h4 className="text-[18px] text-gradient font-semibold">{row.original.title}</h4>
             <div className="flex items-center w-[90px] h-[22px] text-[12px] mt-3 p-[10px] border border-[#9E9E9E] rounded-[24px] shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]">
               <Check className="w-[12px] h-[12px] text-[#6E6E6E] mr-2" /> 
               In stock 
@@ -65,7 +65,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">#{row.original.SKU}</span>
+          <span className="text-[16px] text-[#444444] font-normal">#{row.original.sku}</span>
         </div>
       );
     },
@@ -75,7 +75,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">{row.original.stock}</span>
+          <span className="text-[16px] text-[#444444] font-normal">{row.original.sku}</span>
         </div>
       );
     },
@@ -85,7 +85,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#E10E0E] font-normal">{row.original.Status}</span>
+          <span className="text-[16px] text-[#E10E0E] font-normal">{row.original.sku}</span>
         </div>
       );
     },
@@ -95,7 +95,7 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">${row.original.Price}</span>
+          <span className="text-[16px] text-[#444444] font-normal">${row.original.sku || "10"}</span>
         </div>
       );
     },
@@ -105,7 +105,16 @@ export const ActionColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span className="text-[16px] text-[#444444] font-normal">{row.original.Date}</span>
+          <span className="text-[16px] text-[#444444] font-normal">
+            {new Date(row.original.createdAt).toLocaleString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              // hour: "2-digit",
+              // minute: "2-digit",
+              // second: "2-digit",
+            })}
+          </span>
         </div>
       );
     },

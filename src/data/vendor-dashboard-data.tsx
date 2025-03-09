@@ -47,6 +47,19 @@ export const sidebarContents = [
     href: "/category"
   },
   {
+    id: 33,
+    name: "Subcategory",
+    icon: (
+      <Image
+        src="/assets/img/category.png"
+        alt="category"
+        width={16}
+        height={16}
+      />
+    ),
+    href: "/sub-category"
+  },
+  {
     id: 4,
     name: "Vendor Management",
     icon: (
