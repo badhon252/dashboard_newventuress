@@ -4,6 +4,7 @@ export type categoryStatement = {
   _id: string;
 };
 export interface categoryDataType {
+  subCategoryName: string;
   _id: string;
   categoryName: string;
   image: string;
@@ -20,10 +21,11 @@ export type metaPagination = {
   itemsPerPage: number;
   totalItems: number;
 }
-
 export interface categoryDataResponse {
   success: boolean;
   message: string;
   data: categoryDataType[];
   meta: metaPagination;
 }
+
+

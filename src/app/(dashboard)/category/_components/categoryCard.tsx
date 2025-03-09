@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
-import EditCategory from "./EditCategory";
+// import EditSubCategory from "../../sub-category/_components/EditSubCategory";
 
 interface CategoryCardProps {
   categoryId: string;
@@ -75,7 +76,7 @@ export function CategoryCard({
             PACIFIC RIM FUSION
           </h2>
           <h3 className="text-[32px] text-gradient font-bold text-center mt-3">
-            Are You Sure To Delete this Category?
+            Are You Sure To Delete this ?
           </h3>
           <p className="text-[26px] text-[#102011] font-normal text-center mt-3">
             Keep shopping with Rim Fusion.
