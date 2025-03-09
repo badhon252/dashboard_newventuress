@@ -6,6 +6,6 @@ interface ShowIndustryState {
 }
 
 export const useIndustryShow = create<ShowIndustryState>((set) => ({
-  show: "all",
+  show: "industry",
   setShow: (value) => set({ show: value }),
 }));

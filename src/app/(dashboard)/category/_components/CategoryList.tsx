@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { useSession } from "next-auth/react";
 
-export default function CategoryList({show}:any) {
+export default function CategoryList({ show }: any) {
   const [currentPage, setCurrentPage] = useState(1);
   const session = useSession();
   const token = session.data?.user?.token;
@@ -19,7 +19,9 @@ export default function CategoryList({show}:any) {
       fetch(
         `${
           process.env.NEXT_PUBLIC_BACKEND_URL
-        }/api/categories?page=${currentPage}&limit=${8}&industry=${show == "all" ? "" : show}`,
+        }/api/categories?page=${currentPage}&limit=${8}&industry=${
+          show == "industry" ? "" : show
+        }`,
         {
           method: "GET",
         }
@@ -101,8 +103,7 @@ export default function CategoryList({show}:any) {
       </div>
       <div className="mt-[40px] flex justify-between">
         <div className="text-[#444444] font-normal text-[16px]">
-          Showing {currentPage} to {data?.meta?.totalPages} in first
-          entries
+          Showing {currentPage} to {data?.meta?.totalPages} in first entries
         </div>
         <div className="w-[400px]">
           {data && data?.meta && data?.meta?.totalPages > 1 && (
