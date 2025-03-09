@@ -27,3 +27,5 @@ export interface categoryDataResponse {
   data: categoryDataType[];
   meta: metaPagination;
 }
+
+

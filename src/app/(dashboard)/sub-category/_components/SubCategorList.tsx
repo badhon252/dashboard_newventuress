@@ -2,7 +2,7 @@
 import { useState } from "react";
 import PacificPagination from "@/components/ui/PacificPagination";
 
-import { categoryDataResponse } from "@/data/categoryDatatype";
+import { categoryDataType } from "@/data/categoryDatatype";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import NotFound from "@/components/shared/NotFound/NotFound";
@@ -18,13 +18,13 @@ export default function SubCategorList() {
   const session = useSession();
   const token = session.data?.user?.token;
 
-  const { data, isLoading, isError } = useQuery<categoryDataResponse>({
-    queryKey: ["allcategory", currentPage],
-    queryFn: async (): Promise<categoryDataResponse> =>
+  const { data, isLoading, isError } = useQuery<any>({
+    queryKey: ["subcategory", currentPage],
+    queryFn: async (): Promise<any> =>
       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subcategories?page=${currentPage}&limit=${8}`, {
         method: "GET",
 
-      }).then((res) => res.json() as Promise<categoryDataResponse>),
+      }).then((res) => res.json() as Promise<any>),
 
   });
   // console.log(data);
@@ -81,7 +81,7 @@ export default function SubCategorList() {
     content = (
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {data?.data.map((category) => (
+        {data?.data.map((category : categoryDataType) => (
           <CategoryCard
             key={category._id}
             title={category.subCategoryName}
