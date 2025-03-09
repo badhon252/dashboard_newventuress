@@ -21,7 +21,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 100,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -33,7 +33,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 120,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Pending",
   },
   {
@@ -45,7 +45,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 100,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -57,7 +57,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 100,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Pending",
   },
   {
@@ -69,7 +69,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 1500,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -81,7 +81,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 500,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -93,7 +93,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 1500,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -105,7 +105,7 @@ export const FinanceListData: DemoTableItemsType[] = [
     vendorRevenue: 1500,
     paidFees: 1000,
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
 ];
