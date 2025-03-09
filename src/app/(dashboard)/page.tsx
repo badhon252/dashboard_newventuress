@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import OngoingContainer from "@/components/shared/OngoinOder/OngoinContainer";
 import ReadyAprovalContainer from "@/components/shared/ReadyFOrAproval.tsx/ReadyAprovalContainer";
 import TopVendorContainer from "@/components/shared/TopVendors/TopVendorContainer";
@@ -14,9 +13,6 @@ const AnalyticsChart = dynamic(() => import("./_components/analytics-chart"), {
 });
 
 const Dashboard = async () => {
-  const session = await auth();
-
-  console.log(session);
   return (
     <div className="w-full">
       {/* Profile Completion Section */}

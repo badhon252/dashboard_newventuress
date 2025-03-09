@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { DemoTableItemsType } from "@/data/VendorListData";
-
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { User } from "@/types/admin";
 import { ColumnDef } from "@tanstack/react-table";
 import VendorAction from "./VendorAction";
 
@@ -25,30 +24,28 @@ import VendorAction from "./VendorAction";
 //   );
 // };
 
-export const CustomerListColumn: ColumnDef<DemoTableItemsType>[] = [
+export const CustomerListColumn: ColumnDef<User>[] = [
   {
     header: "Vendor",
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-center gap-4">
           <div>
-            <Image
-              src={row.original.image}
-              height={120}
-              width={120}
-              alt="img"
-              className="h-[120px] w-[120px] rounded-full object-cover"
-            />
+            <Avatar>
+              <AvatarFallback className="text-[30px]">
+                {row.original.fullName.split("")[0]}
+              </AvatarFallback>
+            </Avatar>
           </div>
           <div className="w-[250px] text-left">
             <h4 className="text-gradient text-[18px] font-semibold">
-              {row.original.name}
+              {row.original.fullName}
             </h4>
             <h5 className="text-gradient py-2 text-[16px] font-normal">
-              <span className="text-[#444444]"> {row.original.userEmail}</span>
+              <span className="text-[#444444]"> {row.original.email}</span>
             </h5>
             <p className="text-wrap text-[16px] font-normal text-[#444444]">
-              {row.original.userInfo}
+              {row.original.profession}
             </p>
           </div>
         </div>
@@ -58,65 +55,26 @@ export const CustomerListColumn: ColumnDef<DemoTableItemsType>[] = [
 
   {
     header: "Store",
-    cell: ({ row }) => {
+    cell: () => {
       return (
-        <div className="text-gradient text-[18px] font-semibold">
-          {row.original.store}
-        </div>
+        <div className="text-gradient text-[18px] font-semibold">store 10</div>
       );
     },
   },
-  {
-    header: "Total Orders",
-    cell: ({ row }) => {
-      return (
-        <div>
-          <span className="text-[16px] font-normal text-[#444444]">
-            {row.original.status === "Approved" ? row.original.totalOder : "-"}
-          </span>
-        </div>
-      );
-    },
-  },
-  {
-    header: "Money Spent",
-    cell: ({ row }) => {
-      return (
-        <div>
-          <span className="text-[16px] font-normal text-[#444444]">
-            {row.original.status === "Approved"
-              ? `$${row.original.moneySpent}`
-              : "-"}
-          </span>
-        </div>
-      );
-    },
-  },
-  {
-    header: "Last Order",
-    cell: ({ row }) => {
-      return (
-        <div>
-          <span className="text-[16px] font-normal text-[#444444]">
-            {row.original.status === "Approved" ? row.original.lastOrder : "-"}
-          </span>
-        </div>
-      );
-    },
-  },
+
   {
     header: "Status",
     cell: ({ row }) => {
       return (
         <div>
           <span className="text-[16px] font-normal text-[#444444]">
-            {row.original.status === "Approved" ? (
+            {row.original.isVerified ? (
               <span className="text-white bg-[#2A6C2D] text-[12px] font-semibold py-[6px] px-[17px] rounded-md fle">
-                {row.original.status}
+                Approved
               </span>
             ) : (
               <span className="text-white bg-[#00417E] text-[12px] font-semibold py-[6px] px-[17px] rounded-md fle">
-                {row.original.status}
+                Pending
               </span>
             )}
           </span>
@@ -129,7 +87,7 @@ export const CustomerListColumn: ColumnDef<DemoTableItemsType>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <VendorAction row={row} />
+          <VendorAction user={row.original} />
         </div>
       );
     },
