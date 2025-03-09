@@ -4,6 +4,7 @@ export type categoryStatement = {
   _id: string;
 };
 export interface categoryDataType {
+  subCategoryName: string;
   _id: string;
   categoryName: string;
   image: string;
@@ -13,6 +14,7 @@ export interface categoryDataType {
   __v: number;
   categoryStatement: categoryStatement[];
 }
+
 
 export interface categoryDataResponse {
   success: boolean;
