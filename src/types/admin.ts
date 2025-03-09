@@ -30,8 +30,16 @@ export type User = {
   __v: number;
 };
 
+type MetaData = {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+};
+
 export type VendorManagementResponse = {
   status: boolean;
   message: string;
   data?: User[];
+  meta : MetaData;
 };

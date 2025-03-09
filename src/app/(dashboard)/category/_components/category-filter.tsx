@@ -1,17 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import PacificDropdownSelector from "@/components/ui/PacificDropdownSelector";
-import { useState } from "react";
 
 // Demo lists for the dropdowns
 const showList = [
   { id: 1, name: "All", value: "all" },
-  { id: 2, name: "Live", value: "live" },
-  { id: 3, name: "Expired", value: "expired" },
+  { id: 2, name: "CBD/HEMP", value: "cbd/hemp" },
+  { id: 3, name: "Recreational", value: "recreational" },
 ];
 
-const CategoryFilter = () => {
-  const [show, setShow] = useState<string>("all"); // Default to "all"
+const CategoryFilter = ({show, setShow}:any) => {
 
   return (
     <div className="h-[60px] p-[8px] bg-white w-full flex justify-between items-center rounded-lg">
@@ -24,11 +22,9 @@ const CategoryFilter = () => {
         <PacificDropdownSelector
           list={showList}
           selectedValue={show}
-          onValueChange={setShow}
+          onValueChange={(value)=>setShow(value)}
         />
-      </div>
-      {/* Dropdown for "Entries" */}
-   
+      </div> 
     
      
     </div >
