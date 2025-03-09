@@ -1,11 +1,11 @@
-import MembershipContainer from "./_components/membership-container";
-import MembershipFilter from "./_components/membership-filter";
+import Membership from "./_components/Membership";
+
 
 const Page = () => {
+  
   return (
     <div className="space-y-[30px]">
-      <MembershipFilter />
-      <MembershipContainer />
+     <Membership/>
     </div>
   );
 };
