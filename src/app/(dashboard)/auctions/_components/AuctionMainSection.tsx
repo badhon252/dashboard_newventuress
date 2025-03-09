@@ -3,7 +3,7 @@ import type React from "react"
 import { useState } from "react"
 import AuctionsHeader from "./auctions_header"
 import AuctionsFilter from "./auctions_filter"
-import AddAuctionForm from "./AddAuctionForm"
+// import AddAuctionForm from "./AddAuctionForm"
 import AuctionListingContainer from "./auctions_listing_container"
 import AjaxBidding from "./AjaxBidding"
 
@@ -20,7 +20,7 @@ const AuctionMainSection: React.FC = () => {
         setShowAddBids={setShowAddBids}
       />
       <AuctionsFilter />
-      {showAddBids ? showAddAuction ? <AddAuctionForm /> : <AuctionListingContainer /> : <AjaxBidding />}
+      {showAddBids ?  <AuctionListingContainer /> : <AjaxBidding />}
     </div>
   )
 }

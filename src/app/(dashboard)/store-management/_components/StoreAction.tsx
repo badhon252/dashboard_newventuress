@@ -21,7 +21,7 @@ const StoreAction = ({ row }: any) => {
 
   const storeManagementDetails = {
     id: "#127 - 007Euro",
-    userName: " Adrian Jordan",
+    userName: " Test User",
     email: "alinaulag@gmail.com",
     storeName: "Shaken Not Stirred",
     phone: "+478 5556578",
