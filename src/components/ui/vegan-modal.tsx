@@ -51,7 +51,7 @@ export default function VeganModal({
         >
           <motion.div
             className={cn(
-              "relative mt-5 w-full max-w-[90%] rounded-2xl bg-white p-4 shadow-xl sm:max-w-[600px] md:max-w-[700px] md:p-6",
+              "relative mt-5 w-full max-w-[90%] rounded-2xl bg-white p-4 shadow-xl sm:max-w-[600px] md:max-w-[700px] md:p-6  ",
               className
             )}
             variants={modalVariants}
@@ -61,13 +61,13 @@ export default function VeganModal({
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute right-3 top-3 rounded-full p-2 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-200"
+              className="absolute right-4 top-3 rounded-full p-2  hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-200 z-50"
               onClick={() => onOpenChange(false)}
               aria-label="Close Modal"
             >
               <X className="h-5 w-5" />
             </button>
-            {children}
+            <div className="">{children}</div>
           </motion.div>
         </motion.div>
       )}

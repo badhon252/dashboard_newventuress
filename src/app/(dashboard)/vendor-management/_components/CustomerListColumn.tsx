@@ -1,5 +1,6 @@
 "use client";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { User } from "@/types/admin";
 import { ColumnDef } from "@tanstack/react-table";
 import VendorAction from "./VendorAction";
@@ -30,13 +31,11 @@ export const CustomerListColumn: ColumnDef<User>[] = [
       return (
         <div className="flex items-center justify-center gap-4">
           <div>
-            {/* <Image
-              src={row.original.}
-              height={120}
-              width={120}
-              alt="img"
-              className="h-[120px] w-[120px] rounded-full object-cover"
-            /> */}
+            <Avatar>
+              <AvatarFallback className="text-[30px]">
+                {row.original.fullName.split("")[0]}
+              </AvatarFallback>
+            </Avatar>
           </div>
           <div className="w-[250px] text-left">
             <h4 className="text-gradient text-[18px] font-semibold">

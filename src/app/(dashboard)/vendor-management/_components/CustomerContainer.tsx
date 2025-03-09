@@ -10,30 +10,40 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { CustomerListColumn } from "./CustomerListColumn";
+import { useDebounce } from "@/hooks/useDebounce";
 
-const CustomerContainer = () => {
+const CustomerContainer = ({ searchQuery }:any) => {
   const [currentPage, setCurrentPage] = useState(1);
+  
+  const delay = 500;
+
+  const debounceValue = useDebounce(searchQuery, delay);
 
   const { isLoading, data, isError, error } =
     useQuery<VendorManagementResponse>({
-      queryKey: ["vendor-management"],
+      queryKey: ["vendor-management", currentPage, debounceValue],
       queryFn: () =>
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/all`).then(
-          (res) => res.json()
-        ),
+        fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/all?page=${currentPage}&limit=6&email=${debounceValue}`
+        ).then((res) => res.json()),
     });
-
-  console.log(data);
 
   let content;
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <div className="flex items-center gap-x-3 justify-center h-[400px]">
+        <Loader2 className="animate-spin" /> <span>Loading Data...</span>
+      </div>
+    );
   } else if (isError) {
     content = (
-      <ErrorContainer message={error.message ?? "Failed to load verdor data"} />
+      <ErrorContainer
+        message={error?.message ?? "Failed to load verdor data"}
+      />
     );
   } else if (data) {
     content = (
@@ -49,11 +59,13 @@ const CustomerContainer = () => {
             Showing 1 to 25 in first entries
           </p>
           <div>
-            <PacificPagination
-              currentPage={currentPage}
-              totalPages={10}
-              onPageChange={(page) => setCurrentPage(page)}
-            />
+            {data?.meta && data?.meta?.totalPages > 1 && (
+              <PacificPagination
+                currentPage={currentPage}
+                totalPages={data?.meta?.totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            )}
           </div>
         </div>
       </section>

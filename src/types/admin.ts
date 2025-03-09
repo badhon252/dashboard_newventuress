@@ -1,8 +1,8 @@
 export type License = {
   name: string;
-  businessLicense: { license: string; isVerified: boolean }[];
-  cannabisLicense: { license: string; isVerified: boolean }[];
-  metrcLicense: { license: string; isVerified: boolean }[];
+  businessLicense: { license: string; isVerified: boolean; _id: string }[];
+  cannabisLicense: { license: string; isVerified: boolean; _id: string }[];
+  metrcLicense: { license: string; isVerified: boolean; _id: string }[];
   accept: string[];
   _id: string;
 };
@@ -30,8 +30,16 @@ export type User = {
   __v: number;
 };
 
+type MetaData = {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+};
+
 export type VendorManagementResponse = {
   status: boolean;
   message: string;
   data?: User[];
+  meta : MetaData;
 };

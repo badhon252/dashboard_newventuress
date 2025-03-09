@@ -9,7 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!credentials) return null;
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/login`,
           {
             method: "POST",
             headers: {
