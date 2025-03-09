@@ -22,7 +22,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 0,
     lastOrder: "2 October 2024",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -35,7 +35,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 0,
     lastOrder: "",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Pending",
   },
   {
@@ -48,7 +48,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 1500,
     lastOrder: "2 October 2024",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -61,7 +61,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 0,
     lastOrder: "",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Pending",
   },
   {
@@ -74,7 +74,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 1500,
     lastOrder: "2 October 2024",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -87,7 +87,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 1500,
     lastOrder: "2 October 2024",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -100,7 +100,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 1500,
     lastOrder: "2 October 2024",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
   {
@@ -113,7 +113,7 @@ export const VendorListData: DemoTableItemsType[] = [
     moneySpent: 1500,
     lastOrder: "2 October 2024",
     userEmail: "johndoe@gmail.com",
-    userInfo: "Shaken Not Stirred - Adrian Jordan (#127 - 007Euro)",
+    userInfo: "Shaken Not Stirred - Test User (#127 - 007Euro)",
     status: "Approved",
   },
 ];

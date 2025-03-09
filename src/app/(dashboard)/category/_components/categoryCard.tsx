@@ -1,37 +1,46 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
-import EditCategory from "./EditCategory";
-
+import { EditCategory } from "./EditCategory";
+// import EditSubCategory from "../../sub-category/_components/EditSubCategory";
 
 interface CategoryCardProps {
   categoryId: string;
   title: string;
   imageUrl: string;
   description: string;
-  slug: string,
+  slug: string;
   // subCategory: number
-  onDelete: () => void; 
+  onDelete: () => void;
 }
 
-export function CategoryCard({ title, imageUrl, onDelete, description, slug, categoryId  }: CategoryCardProps) {
+export function CategoryCard({
+  title,
+  imageUrl,
+  onDelete,
+  description,
+  categoryId,
+}: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   const handleModal = () => setIsOpen(true);
   const handleCategoryEditModal = () => setIsOpenEditModal(true);
   // console.log(description);
-  
+
   return (
     <div>
       <Card>
         <CardContent className="pt-4">
           <div className="aspect-square relative mb-3">
             <Image
-              src={imageUrl }
+              src={imageUrl}
               alt={imageUrl}
               fill
               className="object-cover w-[306px] h-[270px]"
@@ -40,18 +49,14 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
           <h3 className="text-center text-lg font-medium">{title}</h3>
         </CardContent>
         <CardFooter className="grid grid-cols-2 gap-2">
-          <Button 
+          <Button
             onClick={handleCategoryEditModal}
             variant="default"
             className="w-full bg-[#1a237e] hover:bg-[#0d47a1]"
           >
             Edit
           </Button>
-          <Button
-            onClick={handleModal}
-            variant="outline"
-            className="w-full"
-          >
+          <Button onClick={handleModal} variant="outline" className="w-full">
             Delete
           </Button>
         </CardFooter>
@@ -59,7 +64,7 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
 
       {/* Delete Confirmation Modal */}
       {isOpen && (
-        <Modal >
+        <Modal>
           <div className="flex justify-center pt-[24px]">
             <Image
               src="/assets/img/logo.png"
@@ -73,7 +78,7 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
             PACIFIC RIM FUSION
           </h2>
           <h3 className="text-[32px] text-gradient font-bold text-center mt-3">
-            Are You Sure To Delete this Category?
+            Are You Sure To Delete this ?
           </h3>
           <p className="text-[26px] text-[#102011] font-normal text-center mt-3">
             Keep shopping with Rim Fusion.
@@ -113,7 +118,14 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
           >
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
             <div className="relative z-10">
-              <EditCategory title={title} imageUrl={imageUrl} description={description} slug={slug} categoryId={categoryId} setIsOpenEditModal={setIsOpenEditModal} />
+              <EditCategory
+                title={title}
+                imageUrl={imageUrl}
+                description={description}
+                industry={""}
+                categoryId={categoryId}
+                setIsOpenEditModal={setIsOpenEditModal}
+              />
             </div>
           </div>
         </section>
@@ -121,4 +133,3 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
     </div>
   );
 }
-
