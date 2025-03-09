@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
-import EditCategory from "./EditCategory";
+import { EditCategory } from "./EditCategory";
 // import EditSubCategory from "../../sub-category/_components/EditSubCategory";
 
 interface CategoryCardProps {
@@ -122,7 +122,7 @@ export function CategoryCard({
                 title={title}
                 imageUrl={imageUrl}
                 description={description}
-                industry={"recreational"}
+                industry={""}
                 categoryId={categoryId}
                 setIsOpenEditModal={setIsOpenEditModal}
               />

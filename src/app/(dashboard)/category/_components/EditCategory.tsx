@@ -27,7 +27,7 @@ interface CategoryCardProps {
   setIsOpenEditModal: (data: boolean) => void;
 }
 
-export default function EditCategory({
+export function EditCategory({
   title,
   imageUrl,
   description,
