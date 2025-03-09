@@ -12,7 +12,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AlertCircle, CheckCircle, MoreHorizontal } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { DeleteVendorModal } from "./delete-vendor";
 // import EditeCupon from "./EditeCupon";
@@ -62,6 +62,25 @@ const VendorAction = ({ user }: Props) => {
       });
     },
   });
+
+  const userData = useMemo(() => {
+    user.businessInfo.forEach((business) => {
+      business.license.forEach((licenseType) => {
+        // Filter out empty licenses
+        if (licenseType.metrcLicense) {
+          licenseType.metrcLicense = licenseType.metrcLicense.filter(
+            (license) => license.license !== ""
+          );
+        }
+        if (licenseType.cannabisLicense) {
+          licenseType.cannabisLicense = licenseType.cannabisLicense.filter(
+            (license) => license.license !== ""
+          );
+        }
+      });
+    });
+    return user;
+  }, [user]);
 
   type LicenseType = "businessLicense" | "cannabisLicense" | "metrcLicense";
 
@@ -190,7 +209,7 @@ const VendorAction = ({ user }: Props) => {
             </div>
 
             {/* Business Information */}
-            {user.businessInfo.map((business, index) => (
+            {userData.businessInfo.map((business, index) => (
               <div key={index} className="border rounded-lg p-4">
                 <h3 className="font-semibold text-lg mb-3">
                   Business Information
