@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import Image from "next/image";
@@ -6,6 +7,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
+import EditCategory from "./EditCategory";
 // import EditSubCategory from "../../sub-category/_components/EditSubCategory";
 
 interface CategoryCardProps {
