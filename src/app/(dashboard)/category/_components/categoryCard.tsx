@@ -1,10 +1,11 @@
+'use client'
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
-import EditCategory from "./EditCategory";
+import EditSubCategory from "../../sub-category/_components/EditSubCategory";
 
 
 interface CategoryCardProps {
@@ -20,6 +21,9 @@ interface CategoryCardProps {
 export function CategoryCard({ title, imageUrl, onDelete, description, slug, categoryId  }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
+
+
 
   const handleModal = () => setIsOpen(true);
   const handleCategoryEditModal = () => setIsOpenEditModal(true);
@@ -73,7 +77,7 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
             PACIFIC RIM FUSION
           </h2>
           <h3 className="text-[32px] text-gradient font-bold text-center mt-3">
-            Are You Sure To Delete this Category?
+            Are You Sure To Delete this ?
           </h3>
           <p className="text-[26px] text-[#102011] font-normal text-center mt-3">
             Keep shopping with Rim Fusion.
@@ -113,7 +117,7 @@ export function CategoryCard({ title, imageUrl, onDelete, description, slug, cat
           >
             <div className="absolute inset-0 z-0 bg-[url('/assets/img/modalbg.png')] bg-no-repeat bg-cover rounded-[16px] opacity-50" />
             <div className="relative z-10">
-              <EditCategory title={title} imageUrl={imageUrl} description={description} slug={slug} categoryId={categoryId} setIsOpenEditModal={setIsOpenEditModal} />
+              <EditSubCategory title={title} imageUrl={imageUrl} description={description} slug={slug} categoryId={categoryId} setIsOpenEditModal={setIsOpenEditModal} />
             </div>
           </div>
         </section>

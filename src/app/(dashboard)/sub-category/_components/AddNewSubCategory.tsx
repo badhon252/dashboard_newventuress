@@ -90,7 +90,7 @@ export default function AddNewSubCategory({ setShowCategory }: { setShowCategory
         <form className="grid gap-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <Label htmlFor="subCategoryName">Subcategory Name *</Label>
-            <Input id="subCategoryName" name="subCategoryName" required value={formData.subCategoryName} onChange={handleInputChange} />
+            <Input className="h-10" id="subCategoryName" name="subCategoryName" required value={formData.subCategoryName} onChange={handleInputChange} />
             <Label htmlFor="shortDescription">Short Description</Label>
             <Textarea id="shortDescription" name="shortDescription" value={formData.shortDescription} onChange={handleInputChange} />
           </div>
