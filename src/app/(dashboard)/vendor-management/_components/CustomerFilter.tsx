@@ -2,7 +2,6 @@
 
 import { Input } from "@/components/ui/input";
 import PacificDropdownSelector from "@/components/ui/PacificDropdownSelector";
-import { useVendorManagementFilter } from "@/zustand/features/vendor-management/useFilterForVendorManagement";
 import { useState } from "react";
 
 // Demo lists for the dropdowns
@@ -12,10 +11,8 @@ const showList = [
   { id: 3, name: "Expired", value: "expired" },
 ];
 
-function CustomerFilter() {
+function CustomerFilter({searchQuery, setSearchQuery}: any) {
   const [show, setShow] = useState<string>("all");
-
-  const { searchQuery, setSearchQuery } = useVendorManagementFilter();
 
   return (
     <div className="my-[30px] flex h-[60px] w-full items-center justify-between rounded-[12px] bg-white p-[8px]">
