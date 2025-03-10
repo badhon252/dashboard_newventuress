@@ -13,9 +13,9 @@ const SubCategoryHeader = ({
       <div className="pr-2">
         <Button
           onClick={() => setShowCategory((prev) => !prev)}
-          className="w-[135px] h-[43px] px-[24px] py-[12px] text-[16px] font-medium leading-[19.2px]"
+          className="h-[43px] px-[24px] py-[12px] text-[16px] font-medium leading-[19.2px]"
         >
-          {showcategory ? "Category List" : "Add New"} <Box />
+          {showcategory ? "Subcategory List" : "Add New"} <Box />
         </Button>
       </div>
     </div>
