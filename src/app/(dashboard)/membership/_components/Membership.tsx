@@ -6,14 +6,21 @@ import MembershipFilter from "./membership-filter";
 
 const Membership = () => {
   const [showMembership, setShowMembership] = useState(false);
+  const [showAdditionalMembership, setShowAdditionalMembership] =
+    useState(false);
   return (
     <div className="space-y-[30px]">
       <MembershipFilter
         showMembership={showMembership}
         setShowMembership={setShowMembership}
+        showAdditionalMembership={showAdditionalMembership}
+        setShowAdditionalMembership={setShowAdditionalMembership}
       />
       {showMembership ? (
-        <AddNewMembership setShowMembership={setShowMembership} />
+        <AddNewMembership
+          setShowMembership={setShowMembership}
+          // setShowAdditionalMembership={setShowAdditionalMembership}
+        />
       ) : (
         <MembershipContainer />
       )}
