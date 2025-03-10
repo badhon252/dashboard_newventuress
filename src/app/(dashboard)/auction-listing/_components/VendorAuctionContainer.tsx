@@ -1,18 +1,15 @@
 "use client";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import {ActionColumn} from "./AuctionColumn"
+import { ActionColumn } from "./AuctionColumn"
 
-const VendorAuctionContainer = () => {
+const VendorAuctionContainer = ({ show }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError, error } = useQuery<AuctionListingDataResponse>({
-    queryKey: ["all-auctionsListing", currentPage],
-    queryFn: () => fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vendor/auctions?page=${currentPage}&limit=6`, {
+    queryKey: ["all-auctionsListing", currentPage, show],
+    queryFn: () => fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vendor/auctions?page=${currentPage}&limit=6&productType=${show == "industry" ? "" : show}`, {
       method: "GET",
-      // headers: {
-      //   "content-type": "application/json",
-      //   Authorization: `Bearer ${token}`,
-      // }
+
     })
       .then((res) => res.json())
   })
@@ -41,19 +38,19 @@ const VendorAuctionContainer = () => {
       columns={ActionColumn}
     />
   }
-  
-  
+
+
   return (
     <section className="w-full">
-    {/* <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto  rounded-[24px] bg-white">
+      {/* <div className="w-full shadow-[0px_0px_22px_8px_#C1C9E4] h-auto  rounded-[24px] bg-white">
         <TableContainer data={data?.data || []} columns={ActionColumn} />
     </div> */}
-    {content}
-    <div className="my-[40px] w-full  flex justify-between">
-      <p className="font-normal text-[16px] leading-[19.2px] text-[#444444]">
-        Showing 1 to 25 in first entries
-      </p>
-      <div>
+      {content}
+      <div className="my-[40px] w-full  flex justify-between">
+        <p className="font-normal text-[16px] leading-[19.2px] text-[#444444]">
+          Showing {currentPage} to {data?.pagination?.totalPages} in first entries
+        </p>
+        <div>
           {data?.pagination && data?.pagination?.totalPages > 1 && (
             <PacificPagination
               currentPage={currentPage}
@@ -61,9 +58,9 @@ const VendorAuctionContainer = () => {
               onPageChange={(page) => setCurrentPage(page)}
             />
           )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 };
 
@@ -83,7 +80,7 @@ const TableContainer = ({
   columns,
 }: {
   data: any[];
-    columns: ColumnDef<Product>[];
+  columns: ColumnDef<Product>[];
 }) => {
   const table = useReactTable({
     data,
