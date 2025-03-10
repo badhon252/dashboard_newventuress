@@ -7,33 +7,33 @@ import MembershipAction from "./membership-auction";
 import { MembershipPlan } from "@/types/membership";
 
 export const MembershipColumns: ColumnDef<MembershipPlan>[] = [
-  {
-    header: "Profile",
+  // {
+  //   header: "Profile",
 
-    cell: ({ row }) => {
-      return (
-        <div className="flex items-center gap-[12px] w-fit mx-auto ">
-          <Image
-            src={row.original.profileImage || "/assets/img/profile_img.png"}
-            alt="Profile"
-            height={100}
-            width={100}
-            className="rounded-full object-covers h-[80px] w-[80px]"
-            placeholder="blur"
-            blurDataURL={blurDataUrl}
-          />
-          <div className="space-y-[8px]">
-            <h4 className="font-semibold text-[18px] leading-[21.6px] text-gradient">
-              Monir Hossain
-            </h4>
-            <p className="text-[#444444] text-[16px] leading-[19.2px] font-normal">
-              test@gmail.com
-            </p>
-          </div>
-        </div>
-      );
-    },
-  },
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="flex items-center gap-[12px] w-fit mx-auto ">
+  //         <Image
+  //           src={row.original.profileImage || "/assets/img/profile_img.png"}
+  //           alt="Profile"
+  //           height={100}
+  //           width={100}
+  //           className="rounded-full object-covers h-[80px] w-[80px]"
+  //           placeholder="blur"
+  //           blurDataURL={blurDataUrl}
+  //         />
+  //         <div className="space-y-[8px]">
+  //           <h4 className="font-semibold text-[18px] leading-[21.6px] text-gradient">
+  //             Monir Hossain
+  //           </h4>
+  //           <p className="text-[#444444] text-[16px] leading-[19.2px] font-normal">
+  //             test@gmail.com
+  //           </p>
+  //         </div>
+  //       </div>
+  //     );
+  //   },
+  // },
   {
     header: "Plan",
     cell: ({ row }) => {
