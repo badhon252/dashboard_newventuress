@@ -15,9 +15,9 @@ import { useState } from "react";
 import { CustomerListColumn } from "./CustomerListColumn";
 import { useDebounce } from "@/hooks/useDebounce";
 
-const CustomerContainer = ({ searchQuery }:any) => {
+const CustomerContainer = ({ searchQuery }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const delay = 500;
 
   const debounceValue = useDebounce(searchQuery, delay);
