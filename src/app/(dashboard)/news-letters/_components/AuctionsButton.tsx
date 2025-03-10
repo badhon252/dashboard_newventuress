@@ -12,8 +12,10 @@ import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import SendNewsLetter from "./SendNewsLetter";
 const AuctionsButton = ({ row }: any) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const session = useSession();
   const token = session?.data?.user?.token;
@@ -65,8 +67,14 @@ const AuctionsButton = ({ row }: any) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
-          className="bg-white h-auto w-[110px] rounded-lg shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]"
+          className="bg-white h-auto w-[160px] rounded-lg shadow-[4px_4px_8px_0px_#0000000D,-4px_-4px_8px_0px_#0000000D]"
         >
+          <DropdownMenuItem
+            onClick={()=>setIsOpen(true)}
+            className="p-[8px] text-green-600 hover:bg-[#E6EEF6] rounded-b-[8px] focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 cursor-pointer"
+          >
+            Send News Letter   
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={handleDeleteNewsLetter}
             className="p-[8px] text-red-600 hover:bg-[#E6EEF6] rounded-b-[8px] focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 cursor-pointer"
@@ -82,6 +90,11 @@ const AuctionsButton = ({ row }: any) => {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={deleteNewsLetter}
       />
+
+      {/* send news letter modal  */}
+      <div>
+        <SendNewsLetter open={isOpen} onOpenChange={setIsOpen}/>
+      </div>
     </div>
   );
 };

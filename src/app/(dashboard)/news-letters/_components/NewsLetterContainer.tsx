@@ -63,7 +63,7 @@ const NewsLetterContainer = () => {
       </div>
       <div className="mt-[30px]  w-full pb-[208px]  flex justify-between">
         <p className="font-normal text-[16px] leading-[19.2px] text-[#444444]">
-          Showing 1 to 25 in first entries
+          Showing {currentPage} to {data?.meta?.totalPages} in first entries
         </p>
         <div>
           {data && data?.meta && data?.meta.totalPages > 0 && (
