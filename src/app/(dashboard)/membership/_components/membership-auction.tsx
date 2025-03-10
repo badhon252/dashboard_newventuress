@@ -22,6 +22,7 @@ import { MoreHorizontal, MoveRight, Trash2, Edit } from "lucide-react";
 import EmailSendingForm from "./email-sending-form";
 import { useSession } from "next-auth/react";
 import EditMembershipForm from "./EditMembershipForm";
+import { toast } from "sonner";
 
 const MembershipAction = ({
   id,
@@ -33,7 +34,6 @@ const MembershipAction = ({
   const [emailOpen, setEmailOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [formData, setFormData] = useState(initialData);
 
   const queryClient = useQueryClient();
   const { data: session } = useSession();
@@ -59,6 +59,7 @@ const MembershipAction = ({
   const deleteMutation = useMutation({
     mutationFn: deleteMembership,
     onSuccess: () => {
+      toast.success("Membership plan deleted successfully!");
       queryClient.invalidateQueries({ queryKey: ["membership"] });
       setDeleteOpen(false);
     },
@@ -99,6 +100,7 @@ const MembershipAction = ({
   });
 
   const handleEditSubmit = (updatedData: any) => {
+    toast.success("Membership plan updated successfully!");
     editMutation.mutate(updatedData);
   };
 

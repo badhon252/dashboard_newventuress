@@ -1,8 +1,6 @@
 "use client";
 
-import { blurDataUrl } from "@/data/blur-data.url";
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
 import MembershipAction from "./membership-auction";
 import { MembershipPlan } from "@/types/membership";
 
