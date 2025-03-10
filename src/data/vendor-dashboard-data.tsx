@@ -74,7 +74,7 @@ export const sidebarContents = [
   },
   {
     id: 5,
-    name: "Auction/listing",
+    name: "Auction/Listing",
     icon: <Box className="h-[16px] w-[16px]" />,
     href: "/auction-listing"
   },

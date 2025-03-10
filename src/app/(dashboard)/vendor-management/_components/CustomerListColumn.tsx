@@ -25,8 +25,8 @@ export const CustomerListColumn: ColumnDef<User>[] = [
             <h5 className="text-gradient py-2 text-[16px] font-normal">
               <span className="text-[#444444]"> {row.original.email}</span>
             </h5>
-            <p className="text-wrap text-[16px] font-normal text-[#444444]">
-              {row.original.profession}
+            <p className="text-wrap text-[14px] font-normal text-[#44444491]">
+              {row.original.profession.map((prof) => prof + ", ")}
             </p>
           </div>
         </div>
