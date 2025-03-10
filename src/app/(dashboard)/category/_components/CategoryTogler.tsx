@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import CategoryHeader from "./CategoryHeader";
 import AddnewCategory from "./AddnewCategory";
 import CategoryList from "./CategoryList";
 import CategoryFilter from "./category-filter";
@@ -11,11 +10,12 @@ function CategoryTogler() {
 
   return (
     <div className="space-y-[30px] mb-[30px]">
-      <CategoryHeader
+      <CategoryFilter
+        show={show}
+        setShow={setShow}
         setShowCategory={setShowCategory}
         showcategory={showcategory}
       />
-      <CategoryFilter show={show} setShow={setShow} />
       {showcategory ? (
         <AddnewCategory setShowCategory={setShowCategory} />
       ) : (

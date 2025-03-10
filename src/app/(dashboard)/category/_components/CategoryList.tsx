@@ -83,6 +83,7 @@ export default function CategoryList({ show }: any) {
             slug={category.slug}
             categoryId={category._id}
             onDelete={() => handleDelete(category._id)}
+            industry={category.industry}
           />
         ))}
       </div>
