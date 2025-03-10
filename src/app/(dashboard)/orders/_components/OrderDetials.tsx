@@ -40,9 +40,9 @@ export default function OrderDetails({
     orderId: String(rowData?.OrderID) || "#4152", // Ensure it's always a string
     paymentMethod: "Paypal",
     summaryItems: [
-      { label: "Subtotal", value: "₿7,000.00" },
-      { label: "Shipping Estimate", value: "₿7,800.00" },
-      { label: "Tax Estimate", value: "₿50.00" },
+      { label: "Subtotal", value: "7,000.00" },
+      { label: "Shipping Estimate", value: "7,800.00" },
+      { label: "Tax Estimate", value: "50.00" },
       { label: "Total Item", value: "3" },
     ],
     total: "₿48,000.00",

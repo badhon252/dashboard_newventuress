@@ -161,7 +161,7 @@ export default function AddNewMembership({
                       <SelectValue placeholder="Select plan type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="diamond">Basic</SelectItem>
+                      <SelectItem value="basic">Basic</SelectItem>
                       <SelectItem value="standard">Standard</SelectItem>
                       <SelectItem value="premium">Premium</SelectItem>
                     </SelectContent>
