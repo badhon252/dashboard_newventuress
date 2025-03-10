@@ -14,7 +14,12 @@ const showList = [
   { id: 3, name: "Expired", value: "expired" },
 ];
 
-const MembershipFilter = ({showMembership, setShowMembership} : any) => {
+const MembershipFilter = ({
+  showMembership,
+  setShowMembership,
+  showAdditionalMembership,
+  setShowAdditionalMembership,
+}: any) => {
   const [show, setShow] = useState<string>("all"); // Default to "all"
   const [date, setDate] = useState<DateRange | undefined>();
 
@@ -80,12 +85,24 @@ const MembershipFilter = ({showMembership, setShowMembership} : any) => {
           />
         </div>
       </div>
-      <Button
-        onClick={() => setShowMembership((prev:any) => !prev)}
-        className=" h-[43px] px-[24px] py-[12px] text-[16px] font-medium leading-[19.2px]"
-      >
-        {showMembership ? "Membership List" : "Add New"}
-      </Button>
+      <div>
+        <div className="flex gap-x-[12px]">
+          <Button
+            onClick={() => setShowAdditionalMembership((prev: any) => !prev)}
+            className=" h-[43px] px-[24px] py-[12px] text-[16px] font-medium leading-[19.2px]"
+          >
+            {showAdditionalMembership
+              ? "Add Additional List"
+              : "Add Additional"}
+          </Button>
+          <Button
+            onClick={() => setShowMembership((prev: any) => !prev)}
+            className=" h-[43px] px-[24px] py-[12px] text-[16px] font-medium leading-[19.2px]"
+          >
+            {showMembership ? "Add New Membership List" : "New Membership List"}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

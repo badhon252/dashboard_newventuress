@@ -5,9 +5,9 @@ import { useState } from "react";
 
 // Demo lists for the dropdowns
 const showList = [
-  { id: 1, name: "All", value: "all" },
-  { id: 2, name: "Live", value: "live" },
-  { id: 3, name: "Expired", value: "expired" },
+  { id: 1, name: "INDUSTRY", value: "industry" },
+  { id: 2, name: "HEMP/CBD", value: "cbd" },
+  { id: 3, name: "RECREATIONAL", value: "recreational" },
 ];
 
 const ChoseStoresList = [
@@ -26,51 +26,50 @@ const AllProductTypesList = [
   { id: 3, name: "Rentals", value: "rentals" },
 ];
 
-function AuctionFilter() {
-    const [show, setShow] = useState<string>("all"); // Default to "all"
-      const [stores, setStores] = useState<string>("Chose stores"); // Default to "auctions"
-      const [ctegorys, setCtegorys] = useState<string>("Filter By category"); // Default to "auctions"
-      const [products, setProducts] = useState<string>("All Product Types"); // Default to "auctions"
+function AuctionFilter({ show, setShow }: any) {
+  const [stores, setStores] = useState<string>("Chose stores"); // Default to "auctions"
+  const [ctegorys, setCtegorys] = useState<string>("Filter By category"); // Default to "auctions"
+  const [products, setProducts] = useState<string>("All Product Types"); // Default to "auctions"
   return (
     <div className="h-[60px] p-[8px] bg-white w-full flex items-center justify-between rounded-[12px]">
       {/* Dropdown for "Show" */}
       <div className="flex gap-x-[28px]">
         <div className="h-full flex items-center gap-x-[9px] w-fit">
-            <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
+          <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
             Show
-            </span>
-            <PacificDropdownSelector
+          </span>
+          <PacificDropdownSelector
             list={showList}
             selectedValue={show}
-            onValueChange={setShow}
-            />
+            onValueChange={(value) => setShow(value)}
+          />
         </div>
         {/* Dropdown for "Categories" */}
         <div className="h-full flex items-center gap-2">
-            <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
+          <span className="text-[16px] font-medium leading-[19.2px] text-[#444444]">
             Entries
-            </span>
-            <PacificDropdownSelector
+          </span>
+          <PacificDropdownSelector
             list={ChoseStoresList}
             selectedValue={stores}
             onValueChange={setStores}
-            />
+          />
         </div>
         <div className="h-full flex items-center gap-2">
-            
-            <PacificDropdownSelector
+
+          <PacificDropdownSelector
             list={FilterByCtegoryList}
             selectedValue={ctegorys}
             onValueChange={setCtegorys}
-            />
+          />
         </div>
         <div className="h-full flex items-center gap-2">
-            
-            <PacificDropdownSelector
+
+          <PacificDropdownSelector
             list={AllProductTypesList}
             selectedValue={products}
             onValueChange={setProducts}
-            />
+          />
         </div>
       </div>
       <div>
