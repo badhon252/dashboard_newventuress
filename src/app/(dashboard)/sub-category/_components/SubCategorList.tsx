@@ -9,10 +9,6 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 import { useSession } from "next-auth/react";
 import { CategoryCard } from "../../category/_components/categoryCard";
 
-
-
-
-
 export default function SubCategorList() {
   const [currentPage, setCurrentPage] = useState(1);
   const session = useSession();
@@ -21,11 +17,14 @@ export default function SubCategorList() {
   const { data, isLoading, isError } = useQuery<any>({
     queryKey: ["subcategory", currentPage],
     queryFn: async (): Promise<any> =>
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subcategories?page=${currentPage}&limit=${8}`, {
-        method: "GET",
-
-      }).then((res) => res.json() as Promise<any>),
-
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/api/subcategories?page=${currentPage}&limit=${8}`,
+        {
+          method: "GET",
+        }
+      ).then((res) => res.json() as Promise<any>),
   });
   // console.log(data);
 
@@ -54,9 +53,7 @@ export default function SubCategorList() {
 
   const handleDelete = (id: string) => {
     mutate(id);
-
-  }
-
+  };
 
   let content;
   if (isLoading) {
@@ -67,21 +64,17 @@ export default function SubCategorList() {
       </div>
     );
   } else if (isError) {
-    content = (
-      <NotFound message="No found your data" />
-    )
+    content = <NotFound message="No found your data" />;
   } else if (data && data.data && data.data.length === 0) {
     content = (
       <div className="mt-7">
         <NotFound message="No found your data" />
       </div>
-    )
-  }
-  else {
+    );
+  } else {
     content = (
-
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {data?.data.map((category : categoryDataType) => (
+        {data?.data.map((category: categoryDataType) => (
           <CategoryCard
             key={category._id}
             title={category.subCategoryName}
@@ -93,35 +86,34 @@ export default function SubCategorList() {
           />
         ))}
       </div>
-
     );
   }
-
-
-
 
   return (
     <div>
       <div className="min-h-screen max-w-[1506px] p-4 md:p-6 bg-white rounded-[12px]">
         <div className="mx-auto">
           <div className="mb-6 rounded-t-3xl bg-primary p-4">
-            <h1 className="text-[28px] font-semibold text-white">Category List</h1>
+            <h1 className="text-[28px] font-semibold text-white">
+              Sub Category List
+            </h1>
           </div>
-          <div>
-            {content}
-          </div>
+          <div>{content}</div>
         </div>
       </div>
       <div className="mt-[40px] flex justify-between">
         <div className="text-[#444444] font-normal text-[16px]">
-          Showing {currentPage} to {data?.pagination?.totalPages} in first entries
+          Showing {currentPage} to {data?.pagination?.totalPages} in first
+          entries
         </div>
         <div className="w-[400px]">
-          <PacificPagination
-            currentPage={currentPage}
-            onPageChange={(page) => setCurrentPage(page)}
-            totalPages={data?.pagination?.totalPages ? data.pagination.totalPages : 0}
-          />
+          {data && data?.meta && data?.meta?.totalPages > 1 && (
+            <PacificPagination
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+              totalPages={data?.meta?.totalPages}
+            />
+          )}
         </div>
       </div>
     </div>

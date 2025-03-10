@@ -11,6 +11,7 @@ export interface categoryDataType {
   slug: string;
   subCategory: number;
   shortDescription: string;
+  industry: string;
   __v: number;
   categoryStatement: categoryStatement[];
 }
@@ -20,12 +21,10 @@ export type metaPagination = {
   currentPage: number;
   itemsPerPage: number;
   totalItems: number;
-}
+};
 export interface categoryDataResponse {
   success: boolean;
   message: string;
   data: categoryDataType[];
   meta: metaPagination;
 }
-
-
