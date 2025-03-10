@@ -35,7 +35,7 @@ export default function AddCategoryForm({
     categoryName: "",
     subCategory: "",
     description: "",
-    industry: "cbd/hemp", // Default to CBD/HEMP
+    industry: "",
   });
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -155,7 +155,7 @@ export default function AddCategoryForm({
     formDataToSubmit.append("categoryName", formData.categoryName);
     formDataToSubmit.append("subCategory", id);
     formDataToSubmit.append("description", formData.description);
-    formDataToSubmit.append("industry", "cbd/hemp");
+    formDataToSubmit.append("industry", formData.industry);
 
     if (imageFile) {
       formDataToSubmit.append("image", imageFile);
