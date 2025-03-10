@@ -8,6 +8,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useState } from "react";
 import Modal from "@/components/shared/modal/modal";
 import { EditCategory } from "./EditCategory";
+import { Badge } from "@/components/ui/badge";
 // import EditSubCategory from "../../sub-category/_components/EditSubCategory";
 
 interface CategoryCardProps {
@@ -16,6 +17,7 @@ interface CategoryCardProps {
   imageUrl: string;
   description: string;
   slug: string;
+  industry?: string;
   // subCategory: number
   onDelete: () => void;
 }
@@ -26,6 +28,7 @@ export function CategoryCard({
   onDelete,
   description,
   categoryId,
+  industry,
 }: CategoryCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
@@ -36,15 +39,21 @@ export function CategoryCard({
 
   return (
     <div>
-      <Card>
+      <Card className="hover:shadow-lg duration-500">
         <CardContent className="pt-4">
           <div className="aspect-square relative mb-3">
             <Image
               src={imageUrl}
               alt={imageUrl}
               fill
-              className="object-cover w-[306px] h-[270px]"
+              className="object-cover w-[306px] h-[270px] rounded-xl"
             />
+           {
+            industry &&
+             <Badge variant="default" className="absolute -top-6 -right-6">
+              {industry }
+            </Badge>
+            }
           </div>
           <h3 className="text-center text-lg font-medium">{title}</h3>
         </CardContent>
