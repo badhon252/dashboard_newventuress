@@ -30,14 +30,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { X } from "lucide-react";
-import { Textarea } from "@/components/ui/textarea";
 import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import JoditInput from "@/components/ui/JoditInput";
 
 const SendNewsLetter = ({
   open,
-  onOpenChange
+  onOpenChange,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -100,7 +100,7 @@ const SendNewsLetter = ({
             </DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="subject"
@@ -119,14 +119,14 @@ const SendNewsLetter = ({
                 name="text"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Text</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Enter Your Text ....." {...field} />
-                    </FormControl>
+                    <FormLabel>Message</FormLabel>
+                    <JoditInput control={form.control} name={field.name} placeholder="Start typing..." />
+
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <div className="flex items-center justify-end">
               <Button disabled={isPending} type="submit">{isPending ? "Submitting..." : "Submit"}</Button>
               </div>
