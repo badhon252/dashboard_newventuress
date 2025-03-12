@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { useSession } from "next-auth/react";
-import { CategoryCard } from "../../category/_components/categoryCard";
+import { SubCategoryCard } from "./subCategoryCard";
 
 export default function SubCategorList() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +26,7 @@ export default function SubCategorList() {
         }
       ).then((res) => res.json() as Promise<any>),
   });
-  // console.log(data);
+  console.log(data);
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
@@ -46,8 +46,30 @@ export default function SubCategorList() {
         throw new Error("Failed to delete category");
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["allcategory"] });
+    onMutate: async (orderId: string) => {
+      await queryClient.cancelQueries({ queryKey: ["subcategory"] });
+
+      const previousData = queryClient.getQueryData<any>(["subcategory"]);
+
+      queryClient.setQueryData(["subcategory"], (oldData: any) => {
+        if (!oldData) return oldData;
+        return {
+          ...oldData,
+          data: oldData.data.filter(
+            (item: categoryDataType) => item._id !== orderId
+          ),
+        };
+      });
+
+      return { previousData };
+    },
+    onError: (_err, _orderId, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(["subcategory"], context.previousData);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["subcategory"] });
     },
   });
 
@@ -75,10 +97,14 @@ export default function SubCategorList() {
     content = (
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {data?.data.map((category: categoryDataType) => (
-          <CategoryCard
+          <SubCategoryCard
             key={category._id}
             title={category.subCategoryName}
-            imageUrl={category.image}
+            imageUrl={
+              category.image === ""
+                ? "https://i.ibb.co.com/0pNZVVHX/image.png"
+                : category.image
+            }
             description={category.shortDescription}
             slug={category.slug}
             categoryId={category._id}
